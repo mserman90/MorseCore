@@ -1,0 +1,59 @@
+name: Bug report / Hata bildirimi
+description: Report an application, installation, update or accessibility problem. / Hata bildirin.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        English or Turkish is welcome. / Türkçe veya İngilizce yazabilirsiniz.
+        Security issues: use the [security policy](https://github.com/mustafamertakceylan/MorseCore/security/policy).
+        Do not upload credentials, private audio, contact logs or personal paths. / Sırları ve özel verileri paylaşmayın.
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit / Uygulama sürümü veya commit
+      placeholder: "v1.0.1, installed package or source build / kurulu paket veya kaynak derlemesi"
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: OS, version and CPU / İşletim sistemi, sürümü ve işlemci
+      description: On Linux include distribution and desktop; for accessibility include assistive technology/version. / Linux dağıtımını ve masaüstünü, gerekiyorsa yardımcı teknolojiyi yazın.
+      placeholder: "Windows 11 x64 / macOS 14 arm64 / Debian 13 x64 GNOME"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps / Tekrarlama adımları
+      description: Give the smallest case using example text or synthetic records. / Örnek metin veya sentetik kayıtla en küçük tekrarı yazın.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result / Beklenen sonuç
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result / Gerçek sonuç
+      description: Include safe error text and how often it happens. / Hassas bilgi içermeyen hatayı ve sıklığı yazın.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized logs or screenshots / Özel bilgileri çıkarılmış günlük veya görseller
+      description: Optional; redact private information. / İsteğe bağlıdır; özel bilgileri çıkarın.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting / Göndermeden önce
+      options:
+        - label: I checked existing issues and removed secrets/private data. / Mevcut issue'ları kontrol ettim ve özel verileri çıkardım.
+          required: true
+        - label: I will follow the [Code of Conduct](https://github.com/mustafamertakceylan/MorseCore/blob/main/.github/CODE_OF_CONDUCT.md). / Davranış kurallarına uyacağım.
+          required: true

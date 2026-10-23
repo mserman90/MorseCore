@@ -63,3 +63,5 @@ Choose the cream light theme or the green dark theme in Settings. Gentle backgro
 Thanks to **Canberk Aslan** for [EMA Lightning](https://github.com/canberk7/ema-lightning), **PatientDesk AI** for [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini), and the **Piper** contributors for offline speech.
 
 [Apache 2.0](LICENSE) · [Credits & licenses](NOTICE) · [Release notes](CHANGELOG.md) · [Voice setup](docs/offline-speech.md) · [Build from source](docs/desktop.md)
+
+[Contribute](.github/CONTRIBUTING.md) · [Accessibility](.github/ACCESSIBILITY.md)

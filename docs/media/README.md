@@ -5,6 +5,10 @@
 - `morsecore.gif` is a decorative Morse signal animation, generated locally with `python scripts/generate-readme-banner.py`. It is not an application recording. Regenerating it requires Pillow; viewing the README does not.
 - `wiki/{audio,learning,radio}.{en,tr}.png` are unmodified macOS 0.7.5 SwiftUI render captures from the tested Apple Silicon app, using isolated sample messages and a synthetic station. They illustrate the corresponding Wiki guides; Windows has its own native layout.
 
-Screenshots and animation use MorseCore's cream and green palette. All assets are stored in the repository, without an external animation service.
+Screenshots retain the themes and branding of the versions recorded above.
+The current animation uses the shared white transparent logo on a green banner.
+`morsecore.svg` is generated from the application vector source by
+`python scripts/sync-brand-assets.py`; do not edit this copy separately.
+All assets are stored in the repository, without an external animation service.
 
 The animated banner contains only the language-neutral product name **MorseCore**. Its caption and download badges are localized in each README.

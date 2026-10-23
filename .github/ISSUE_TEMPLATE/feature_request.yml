@@ -1,0 +1,39 @@
+name: Feature request / Özellik önerisi
+description: Suggest an improvement with a concrete use case. / Kullanım örneğiyle iyileştirme önerin.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        English or Turkish is welcome. / Türkçe veya İngilizce yazabilirsiniz.
+        Check existing issues first; do not include personal recordings or contact logs. / Önce mevcut issue'lara bakın; özel veri eklemeyin.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case / Sorun veya kullanım örneği
+      description: What are you trying to do and what makes it difficult? / Ne yapmak istiyorsunuz, nerede zorlanıyorsunuz?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior / Önerilen davranış
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / Alternatifler
+      description: Optional workarounds or other approaches. / Varsa geçici çözümler veya başka yaklaşımlar.
+  - type: input
+    id: platform
+    attributes:
+      label: Relevant platforms / İlgili platformlar
+      placeholder: "Windows / macOS / Linux / all (tümü)"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting / Göndermeden önce
+      options:
+        - label: I checked existing issues and will follow the [Code of Conduct](https://github.com/mustafamertakceylan/MorseCore/blob/main/.github/CODE_OF_CONDUCT.md). / Mevcut issue'lara baktım ve davranış kurallarına uyacağım.
+          required: true

@@ -63,3 +63,5 @@ In den Einstellungen stehen ein helles cremefarbenes und ein dunkelgrünes Desig
 Danke an **Canberk Aslan** für [EMA Lightning](https://github.com/canberk7/ema-lightning), **PatientDesk AI** für [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini) und die **Piper**-Mitwirkenden für die Offline-Sprachausgabe.
 
 [Apache 2.0](LICENSE) · [Danksagung & Lizenzen](NOTICE) · [Versionshinweise](CHANGELOG.md) · [Stimmen einrichten (EN)](docs/offline-speech.md) · [Aus Quellcode bauen (EN)](docs/desktop.md)
+
+[Mitwirken](.github/CONTRIBUTING.md) · [Barrierefreiheit](.github/ACCESSIBILITY.md)

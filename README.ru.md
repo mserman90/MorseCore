@@ -63,3 +63,5 @@ MorseCore — бесплатное приложение для Windows, macOS и
 Спасибо **Canberk Aslan** за [EMA Lightning](https://github.com/canberk7/ema-lightning), **PatientDesk AI** за [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini) и участникам **Piper** за офлайн-озвучивание.
 
 [Apache 2.0](LICENSE) · [Благодарности и лицензии](NOTICE) · [Изменения](CHANGELOG.md) · [Настройка голосов (EN)](docs/offline-speech.md) · [Сборка из исходников (EN)](docs/desktop.md)
+
+[Участие](.github/CONTRIBUTING.md) · [Доступность](.github/ACCESSIBILITY.md)

@@ -1,0 +1,56 @@
+name: Audio or speech issue / Ses veya seslendirme sorunu
+description: Report Morse audio, WAV/microphone decoding or offline speech problems. / Ses sorunlarını bildirin.
+title: "[Audio]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        English or Turkish is welcome. / Türkçe veya İngilizce yazabilirsiniz.
+        Use a small synthetic example you have the right to publish. Do not share private recordings, conversations or logbooks.
+        Yalnız paylaşım hakkınız olan küçük bir sentetik örnek kullanın; özel ses, konuşma veya günlük paylaşmayın.
+        For vulnerabilities, follow the [security policy](https://github.com/mustafamertakceylan/MorseCore/security/policy).
+  - type: input
+    id: version
+    attributes:
+      label: App version and OS/CPU / Uygulama sürümü ve işletim sistemi/işlemci
+    validations:
+      required: true
+  - type: dropdown
+    id: operation
+    attributes:
+      label: Affected operation / Etkilenen işlem
+      options:
+        - Morse playback or WAV export / Morse çalma veya WAV dışa aktarma
+        - WAV decoding / WAV çözümleme
+        - Microphone decoding / Mikrofon çözümleme
+        - Offline speech or voice installation / Çevrimdışı seslendirme veya ses kurulumu
+    validations:
+      required: true
+  - type: textarea
+    id: settings
+    attributes:
+      label: Settings and input / Ayarlar ve girdi
+      description: Include relevant language/voice, WPM, tone, threshold or WAV format; omit unrelated fields. / İlgili dil/ses, hız, ton, eşik veya WAV biçimini yazın.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected and actual result / Adımlar, beklenen ve gerçek sonuç
+      description: Use synthetic text/audio. Include safe error text. / Sentetik metin/ses kullanın; güvenli hata metnini yazın.
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Small synthetic sample or sanitized log / Küçük sentetik örnek veya temizlenmiş günlük
+      description: Optional. State how the sample was generated and its expected content. / İsteğe bağlı; nasıl üretildiğini ve beklenen içeriğini yazın.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting / Göndermeden önce
+      options:
+        - label: Any attachment is synthetic and I may publish it; no private data is included. / Ekler sentetiktir, paylaşım hakkım vardır ve özel veri içermez.
+          required: true
+        - label: I checked existing issues and will follow the [Code of Conduct](https://github.com/mustafamertakceylan/MorseCore/blob/main/.github/CODE_OF_CONDUCT.md). / Mevcut issue'lara baktım ve davranış kurallarına uyacağım.
+          required: true

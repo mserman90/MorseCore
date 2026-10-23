@@ -15,6 +15,10 @@ frontends through the same service contract, with regression checks for each.
 Do not introduce another platform-specific parser or storage schema when a shared
 implementation already exists. OS-specific differences should be narrow and explicit.
 
+The white transparent logo source is `Assets/Brand/morsecore.svg` in the shared
+desktop project. Run `python scripts/sync-brand-assets.py` after changing it;
+this generates the PNG, desktop icon, splash and GitHub SVG. Rendering requires
+Pillow; the CI `--check` mode uses only the Python standard library.
 Run `python scripts/sync-macos-resources.py` after changing shared strings, fonts or
 the logo or ADIF ranges. CI runs the same command with `--check` to detect stale copies.
 Map coordinates are resolved by AppCore `Locator.Position` in the service response;

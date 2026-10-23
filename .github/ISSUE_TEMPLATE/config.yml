@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security reporting / Güvenlik bildirimi
+    url: https://github.com/mustafamertakceylan/MorseCore/security/policy
+    about: Follow the private-reporting instructions; do not post exploit details publicly. / Gizli bildirim yönergelerini izleyin.
+  - name: Installation and documentation / Kurulum ve belgeler
+    url: https://github.com/mustafamertakceylan/MorseCore#readme
+    about: Downloads, supported platforms and guides. / İndirmeler, desteklenen platformlar ve rehberler.

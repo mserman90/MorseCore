@@ -63,3 +63,5 @@ Ayarlar’dan krem açık temayı veya yeşil koyu temayı seç. Yavaş arka pla
 [EMA Lightning](https://github.com/canberk7/ema-lightning) için **Canberk Aslan’a**, [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini) için **PatientDesk AI ekibine** ve çevrimdışı seslendirmeyi sağlayan **Piper** katkıcılarına teşekkür ederiz.
 
 [Apache 2.0](LICENSE) · [Katkılar ve lisanslar](NOTICE) · [Sürüm notları](CHANGELOG.md) · [Ses kurulumu](docs/offline-speech.tr.md) · [Kaynak koddan çalıştırma](docs/desktop.tr.md)
+
+[Katkıda bulun](.github/CONTRIBUTING.md) · [Erişilebilirlik](.github/ACCESSIBILITY.md)

@@ -67,3 +67,5 @@ MorseCore تطبيق مجاني لويندوز وmacOS وLinux لتحويل ال
 [Apache 2.0](LICENSE) · [الشكر وتراخيص المكوّنات](NOTICE) · [سجل التغييرات](CHANGELOG.md) · [إعداد الأصوات بالإنجليزية](docs/offline-speech.md) · [البناء من المصدر بالإنجليزية](docs/desktop.md)
 
 </div>
+
+[المساهمة](.github/CONTRIBUTING.md) · [إمكانية الوصول](.github/ACCESSIBILITY.md)
