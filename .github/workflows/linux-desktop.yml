@@ -42,6 +42,7 @@ jobs:
           sudo apt-get install --no-install-recommends -y clang-18 cmake ninja-build python3 binutils dpkg-dev xvfb xauth libsdl2-2.0-0 libfontconfig1 libgl1 libx11-6 libxext6 libxrandr2 libxi6 libxfixes3 libxcursor1 libice6 libsm6 libicu74 libssl3t64 libgssapi-krb5-2 libbrotli1 dbus-x11 xdg-utils xdg-desktop-portal xdg-desktop-portal-gtk
       - name: Check shared resources, speech and packaging contracts
         run: |
+          python3 scripts/sync-brand-assets.py --check
           python3 scripts/sync-macos-resources.py --check
           python3 packaging/linux/test_packaging.py
           bash packaging/linux/test-native-dependencies.sh
