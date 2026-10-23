@@ -1,7 +1,20 @@
 # Application icon
 
-`icon.svg` embeds the selected bitmap recolor of the existing MorseCore mark and clips it to a rounded tile with transparent outer corners. `icon_foreground.svg` deliberately contains no artwork: an opaque foreground would cover those corners again. Uno Resizetizer builds the Windows icon and executable resource from these sources.
+`../Brand/morsecore.svg` is the shared white vector logo. `icon.svg` copies it
+without a background tile or clipping. `icon_foreground.svg` deliberately has
+no artwork. Uno Resizetizer builds the Windows executable icon from these
+sources; Linux packages use the same SVG. The macOS iconset and in-app logos
+use the transparent PNG rendered from the shared vector.
 
-Artwork was edited with the built-in ImageGen tool, using the existing `../Brand/morsecore.png` as the edit target. Final prompt: preserve the wordless MorseCore mark and geometry; cream mark on olive green; flat, clean colors; no text, shadows or extra shapes. The requested palette was RAW olive `#5E6A42` and cream `#FAF8F2`; generated bitmap colors may vary slightly. The rounded clipping and padding are native SVG code.
+The native SVG preserves the original four contours with white fills and no
+background geometry. PNG copies retain alpha transparency, including the gaps.
 
-The original brand image remains the source for the in-app logo and splash screen.
+After changing the source SVG, regenerate platform copies (Pillow is required
+for PNG rendering):
+
+```sh
+python scripts/sync-brand-assets.py
+python scripts/sync-macos-resources.py
+```
+
+Both scripts accept `--check` to verify generated assets without writing files.

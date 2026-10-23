@@ -1,4 +1,4 @@
-"""Render the self-contained Morse signal animation used in both READMEs."""
+"""Render the shared white logo and Morse animation used in all five READMEs."""
 
 from pathlib import Path
 
@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "docs" / "media" / "morsecore.gif"
-CREAM, GREEN, MUTED, LINE = "#faf8f2", "#5e6a42", "#b4baa6", "#e6e3da"
+WHITE, GREEN, MUTED, LINE = "#ffffff", "#5e6a42", "#b4baa6", "#77835c"
 WIDTH, HEIGHT = 1040, 232
 try:
     font = "C:/Windows/Fonts/georgia.ttf" if Path("C:/Windows/Fonts/georgia.ttf").exists() else "DejaVuSerif.ttf"
@@ -24,16 +24,22 @@ for character in signal:
     x += size + 6
 start = (WIDTH - x) // 2
 frames = []
+logo = Image.open(ROOT / "apps/MorseCore.Desktop/MorseCore.Desktop/Assets/Brand/morsecore.png").convert("RGBA")
+logo = logo.crop(logo.getchannel("A").getbbox())
+logo.thumbnail((80, 80), Image.Resampling.LANCZOS)
+title_width = ImageDraw.Draw(Image.new("RGB", (1, 1))).textlength("MorseCore", font=title)
+brand_x = round((WIDTH - logo.width - 24 - title_width) / 2)
 for active in range(len(segments) + 6):
-    frame = Image.new("RGB", (WIDTH, HEIGHT), CREAM)
+    frame = Image.new("RGB", (WIDTH, HEIGHT), GREEN)
+    frame.paste(logo, (brand_x, 62), logo)
     draw = ImageDraw.Draw(frame)
     draw.line((120, 20, WIDTH - 120, 20), fill=LINE, width=1)
-    draw.text((WIDTH // 2, 102), "MorseCore", font=title, fill=GREEN, anchor="mm")
+    draw.text((brand_x + logo.width + 24, 102), "MorseCore", font=title, fill=WHITE, anchor="lm")
     for index, (position, size) in enumerate(segments):
         draw.rounded_rectangle(
             (start + position, 172, start + position + size, 180),
             radius=4,
-            fill=GREEN if index == active else MUTED,
+            fill=WHITE if index == active else MUTED,
         )
     frames.append(frame)
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)

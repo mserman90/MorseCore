@@ -10,7 +10,7 @@
     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
     <Grid x:Name="TitleDragRegion" Grid.ColumnSpan="3" Background="Transparent">
      <StackPanel x:Name="TitleBrand" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed">
-      <Border Width="36" Height="36" CornerRadius="9" Background="#FAF8F2"><Image x:Name="TitleLogo" Source="ms-appx:///Assets/Brand/morsecore.png" Stretch="Uniform" AutomationProperties.Name="MorseCore"/></Border>
+      <Border Width="36" Height="36"><Image x:Name="TitleLogo" Source="ms-appx:///Assets/Brand/morsecore.png" Stretch="Uniform" AutomationProperties.Name="MorseCore"/></Border>
       <TextBlock Text="MorseCore" FontFamily="{StaticResource DisplayFont}" FontSize="22" VerticalAlignment="Center"/>
      </StackPanel>
     </Grid>
@@ -61,7 +61,7 @@
   </Grid>
   <Grid x:Name="Splash" Grid.Row="1" Background="Transparent">
    <StackPanel Width="330" Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-    <Border Width="144" Height="144" CornerRadius="28" Background="#FAF8F2" HorizontalAlignment="Center"><Image Source="ms-appx:///Assets/Brand/morsecore.png" Stretch="Uniform"/></Border>
+    <Border Width="144" Height="144" HorizontalAlignment="Center"><Image Source="ms-appx:///Assets/Brand/morsecore.png" Stretch="Uniform"/></Border>
     <TextBlock Text="MorseCore" FontSize="54" FontFamily="{StaticResource DisplayFont}" HorizontalAlignment="Center"/>
     <TextBlock x:Name="LoadingTitle" HorizontalAlignment="Center" FontSize="17"/>
     <ProgressBar x:Name="LoadingProgress" Minimum="0" Maximum="100" Value="10" Foreground="{ThemeResource AccentBrush}" Height="4"/>

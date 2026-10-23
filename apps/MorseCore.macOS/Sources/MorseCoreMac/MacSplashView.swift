@@ -61,8 +61,7 @@ struct MacSplashView: View {
                 if let url = MacResources.bundle.url(forResource: "morsecore", withExtension: "png", subdirectory: "Resources"),
                    let image = NSImage(contentsOf: url) {
                     Image(nsImage: image).resizable().scaledToFit().frame(width: 144, height: 144)
-                        .background(Color(hex: 0xFAF8F2))
-                        .clipShape(RoundedRectangle(cornerRadius: 28)).accessibilityHidden(true)
+                        .accessibilityHidden(true)
                 }
                 Text("MorseCore").font(BrandTheme.heading(54))
                 Text(settings.text("loading")).font(BrandTheme.body(17))

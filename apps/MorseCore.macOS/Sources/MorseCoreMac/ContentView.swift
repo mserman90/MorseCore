@@ -59,8 +59,6 @@ struct ContentView: View {
                    let image = NSImage(contentsOf: url) {
                     Image(nsImage: image).resizable().scaledToFit()
                         .frame(width: 24, height: 24)
-                        .background(Color(hex: 0xFAF8F2), in: RoundedRectangle(cornerRadius: 9))
-                        .clipShape(RoundedRectangle(cornerRadius: 9))
                         .accessibilityHidden(true)
                 }
                 Text("MorseCore").font(BrandTheme.heading(20))
