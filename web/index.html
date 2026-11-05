@@ -412,6 +412,64 @@
   <main>
     <!-- TAB 1: CONVERTER & AUDIO TOOLS -->
     <div id="toolsSection" style="display:flex; flex-direction:column; gap:1.75rem;">
+
+    <!-- 4-WAY OMNIDIRECTIONAL TRANSLATION HUB -->
+    <section class="card" id="omniHubCard" style="background: linear-gradient(135deg, var(--bg-card), var(--bg-surface)); border: 2px solid var(--accent-soft);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <h2 class="card-title" style="margin-bottom:0;" id="t-omniTitle">🌐 4 Boyutlu Çok Yönlü Çeviri Matrisi</h2>
+        <span style="font-size:0.8rem; background:var(--accent-soft); color:var(--accent); padding:0.25rem 0.65rem; border-radius:12px; font-weight:600;">12 Yönlü Tam Çapraz Çeviri</span>
+      </div>
+      <p class="card-desc" id="t-omniDesc" style="margin-bottom:1rem;">
+        <strong>Düz Metin</strong>, <strong>Mors Alfabesi Metni</strong>, <strong>Konuşma Sesi</strong> ve <strong>Mors Sesi (CW)</strong> arasında anında ve kayıpsız geçiş yapın:
+      </p>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem;">
+        <!-- Modal 1: Düz Metin -->
+        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">1. 📝 Düz Metin</div>
+          <div style="font-size:0.8rem; color:var(--ink-muted);">Türkçe, İngilizce, Rusça, Arapça</div>
+          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
+            ➔ <strong>Mors Metni:</strong> Anında sembollere dönüştürülür.<br>
+            ➔ <strong>Mors Sesi:</strong> CW radyo tonuyla çalınır & WAV üretilir.<br>
+            ➔ <strong>Konuşma Sesi:</strong> TTS ile insan sesiyle okunur.
+          </div>
+        </div>
+
+        <!-- Modal 2: Mors Metni -->
+        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">2. 📟 Mors Metni (. -)</div>
+          <div style="font-size:0.8rem; color:var(--ink-muted);">ITU-R M.1677-1 / Q-Kodları</div>
+          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
+            ➔ <strong>Düz Metin:</strong> Otomatik deşifre edilir.<br>
+            ➔ <strong>Mors Sesi:</strong> Seçilen WPM ve frekansta çalınır.<br>
+            ➔ <strong>Konuşma Sesi:</strong> Çözülüp doğal sesle seslendirilir.
+          </div>
+        </div>
+
+        <!-- Modal 3: Konuşma Sesi -->
+        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">3. 🎙️ Konuşma Sesi</div>
+          <div style="font-size:0.8rem; color:var(--ink-muted);">Canlı Mikrofon / Ses Dosyası (.wav/.mp3)</div>
+          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
+            ➔ <strong>Düz Metin:</strong> ASR ile anında yazıya dökülür.<br>
+            ➔ <strong>Mors Metni:</strong> Eş zamanlı Mors sembollerine aktarılır.<br>
+            ➔ <strong>Mors Sesi:</strong> Mors tonu dinlenir & WAV indirilir.
+          </div>
+        </div>
+
+        <!-- Modal 4: Mors Sesi -->
+        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">4. 📻 Mors Sesi (CW)</div>
+          <div style="font-size:0.8rem; color:var(--ink-muted);">CW Ses Dosyası (.wav) / Canlı CW Tonu</div>
+          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
+            ➔ <strong>Mors Metni:</strong> Goertzel/Zarf DSP ile nokta-çizgiye çözülür.<br>
+            ➔ <strong>Düz Metin:</strong> Semboller anında anlamlı metne dönüşür.<br>
+            ➔ <strong>Konuşma Sesi:</strong> Çözülen mesaj yapay zeka sesiyle okunur.
+          </div>
+        </div>
+      </div>
+    </section>
+
       <!-- Converter Card -->
     <section class="card">
       <h2 class="card-title" id="t-converter">Mors Kodu Çevirici & Ses Çalar</h2>
@@ -462,6 +520,7 @@
           <button class="btn-primary" id="btnPlay" onclick="playMorse()">▶ Dinle</button>
           <button onclick="stopAudio()" id="btnStop" disabled>■ Durdur</button>
           <button onclick="downloadWav()" id="btnWav">💾 WAV İndir</button>
+          <button onclick="speakInputText()" id="btnSpeakText" title="Düz metni doğal insan sesiyle seslendir">🗣️ Metni Seslendir (TTS)</button>
         </div>
         <div class="group-right">
           <span id="audioStatus" style="font-size:0.85rem; color:var(--ink-muted);">Hazır</span>
@@ -535,6 +594,7 @@
         <div class="group-left">
           <button class="btn-primary" onclick="playSpeechMorse()">🔊 Mors Oynat</button>
           <button onclick="stopSpeechMorse()">⏹️ Durdur</button>
+          <button onclick="downloadSpeechMorseWav()" id="btnDownloadSpeechWav">💾 Mors WAV İndir</button>
           <button onclick="copySpeechMorse()">📋 Mors Kopyala</button>
           <button onclick="copySpeechText()">📋 Metni Kopyala</button>
           <button onclick="clearSpeechToMorse()">🧹 Temizle</button>
@@ -564,6 +624,9 @@
 
           <button class="btn-primary" onclick="speakMorseDecodedText()">🔊 Konuşmayı Dinle</button>
           <button onclick="stopMorseSpeech()">⏹️ Durdur</button>
+          <button class="btn-secondary" id="btnLiveCw" onclick="toggleLiveCwListening()">📻 Canlı Mors Sesi Dinle (Mikrofon CW DSP)</button>
+          <button onclick="playM2sMorseAudio()">🔊 Mors Sesi Çal</button>
+          <button onclick="downloadM2sMorseWav()">💾 Mors WAV İndir</button>
         </div>
         <div class="group-right">
           <span id="m2sStatus" style="font-size:0.85rem; color:var(--ink-muted); font-weight:500;">Hazır</span>
@@ -940,13 +1003,11 @@
       document.getElementById('audioStatus').textContent = 'Hazır';
     }
 
-    // WAV File Generator (Browser in-memory 16-bit PCM WAV)
-    function downloadWav() {
-      const morse = isDecoding ? document.getElementById('inputText').value : document.getElementById('outputText').value;
-      if (!morse.trim()) return;
-
-      const wpm = parseInt(document.getElementById('wpmSlider').value, 10);
-      const freq = parseInt(document.getElementById('pitchSlider').value, 10);
+    // WAV File Generator & Speech Voice
+    function generateMorseWavBlob(morse, wpm, freq) {
+      if (!morse || !morse.trim()) return null;
+      wpm = wpm || parseInt(document.getElementById('wpmSlider') ? document.getElementById('wpmSlider').value : 20, 10);
+      freq = freq || parseInt(document.getElementById('pitchSlider') ? document.getElementById('pitchSlider').value : 700, 10);
       const sampleRate = 8000;
       const unitSamples = Math.round(sampleRate * (1.2 / wpm));
 
@@ -968,7 +1029,6 @@
         else if (ch === '/' || ch === '|' || ch === '#' || ch === '*') { addSilence(unitSamples * 4); }
       }
 
-      // Build RIFF WAV
       const buffer = new ArrayBuffer(44 + samples.length * 2);
       const view = new DataView(buffer);
 
@@ -995,14 +1055,38 @@
         view.setInt16(offset, Math.max(-32768, Math.min(32767, s * 32767)), true);
         offset += 2;
       }
+      return new Blob([buffer], { type: 'audio/wav' });
+    }
 
-      const blob = new Blob([buffer], { type: 'audio/wav' });
+    function downloadWav() {
+      const morse = isDecoding ? document.getElementById('inputText').value : document.getElementById('outputText').value;
+      const blob = generateMorseWavBlob(morse);
+      if (!blob) return;
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'morslab-' + Date.now() + '.wav';
       a.click();
       URL.revokeObjectURL(url);
+    }
+
+    function speakInputText() {
+      const text = isDecoding ? document.getElementById('outputText').value.trim() : document.getElementById('inputText').value.trim();
+      if (!text) {
+        alert('Seslendirilecek metin bulunamadı.');
+        return;
+      }
+      if (!('speechSynthesis' in window)) {
+        alert('Tarayıcınız Web Speech Synthesis desteği sunmuyor.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const langSelect = document.getElementById('langSelect');
+      const lang = langSelect ? langSelect.value : 'tr';
+      const localeMap = { tr: 'tr-TR', en: 'en-US', ru: 'ru-RU', ar: 'ar-SA' };
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = localeMap[lang] || 'tr-TR';
+      window.speechSynthesis.speak(utterance);
     }
 
     // Practice Keyer Logic
@@ -1107,6 +1191,8 @@
       en: {
         tabTools: "⚡ Converter & Audio Tools",
         tabGuide: "📖 Guide & Reference",
+        omniTitle: "🌐 4-Way Omnidirectional Translation Matrix",
+        omniDesc: "Seamless and lossless cross-conversion between Plain Text, Morse Code Text, Speech Audio, and Morse Audio (CW):",
         converter: "Morse Code Converter & Audio Player",
         converterDesc: "Convert text and Morse code bidirectionally, listen with authentic CW tones, or export to WAV.",
         clear: "Clear",
@@ -1136,6 +1222,8 @@
       tr: {
         tabTools: "⚡ Çevirici & Ses Araçları",
         tabGuide: "📖 Rehber & Referans",
+        omniTitle: "🌐 4 Boyutlu Çok Yönlü Çeviri Matrisi",
+        omniDesc: "Düz Metin, Mors Alfabesi Metni, Konuşma Sesi ve Mors Sesi (CW) arasında anında ve kayıpsız geçiş yapın:",
         converter: "Mors Kodu Çevirici & Ses Çalar",
         converterDesc: "Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.",
         clear: "Temizle",
@@ -1165,6 +1253,8 @@
       de: {
         tabTools: "⚡ Konverter & Audiotools",
         tabGuide: "📖 Handbuch & Referenz",
+        omniTitle: "🌐 4-Wege Multidirektionale Übersetzungsmatrix",
+        omniDesc: "Verlustfreie und sofortige Konvertierung zwischen Klartext, Morsecode, Sprache und Morseton (CW):",
         converter: "Morsecode-Konverter & Audioplayer",
         converterDesc: "Konvertieren Sie Text und Morsecode bidirektional, hören Sie authentische CW-Töne oder exportieren Sie WAV.",
         clear: "Löschen",
@@ -1194,6 +1284,8 @@
       ru: {
         tabTools: "⚡ Конвертер и аудиоинструменты",
         tabGuide: "📖 Справочник и руководство",
+        omniTitle: "🌐 4-сторонняя многомерная матрица перевода",
+        omniDesc: "Мгновенный перевод без потерь между обычным текстом, текстом азбуки Морзе, речью и аудио Морзе (CW):",
         converter: "Конвертер азбуки Морзе и аудиоплеер",
         converterDesc: "Двусторонняя конвертация текста и азбуки Морзе, воспроизведение аутентичных тонов CW или экспорт в WAV.",
         clear: "Очистить",
@@ -1223,6 +1315,8 @@
       ar: {
         tabTools: "⚡ أدوات التحويل والصوت",
         tabGuide: "📖 الدليل والمراجع",
+        omniTitle: "🌐 مصفوفة التحويل رباعية الأبعاد ومتعددة الاتجاهات",
+        omniDesc: "تحويل فوري ودقيق بين النص العادي، شفرة مورس، الصوت البشري (الكلام)، ونغمات مورس اللاسلكية (CW):",
         converter: "محول شفرة مورس ومشغل الصوت",
         converterDesc: "تحويل ثنائي الاتجاه بين النص وشفرة مورس، واستماع لنغمات CW واقعية أو تصدير بصيغة WAV.",
         clear: "مسح",
@@ -1271,6 +1365,8 @@
 
       if (document.getElementById('tabBtnTools')) document.getElementById('tabBtnTools').textContent = t.tabTools;
       if (document.getElementById('tabBtnGuide')) document.getElementById('tabBtnGuide').textContent = t.tabGuide;
+      if (document.getElementById('t-omniTitle')) document.getElementById('t-omniTitle').textContent = t.omniTitle;
+      if (document.getElementById('t-omniDesc')) document.getElementById('t-omniDesc').textContent = t.omniDesc;
       document.getElementById('t-converter').textContent = t.converter;
       document.getElementById('t-converterDesc').textContent = t.converterDesc;
       document.getElementById('t-clear').textContent = t.clear;
@@ -1422,6 +1518,25 @@
       status.textContent = `Ses dosyası çalınıyor (${file.name}). Canlı dinlemeyi açarak mikrofondan yakalayabilir veya masaüstü uygulamasında doğrudan offline işleyebilirsiniz.`;
     }
 
+    function downloadSpeechMorseWav() {
+      const morse = document.getElementById('speechMorseOutput').value.trim();
+      if (!morse) {
+        alert('İndirilecek Mors kodu bulunamadı.');
+        return;
+      }
+      const wpm = parseInt(document.getElementById('wpm') ? document.getElementById('wpm').value : 20, 10) || 20;
+      const freq = parseInt(document.getElementById('pitch') ? document.getElementById('pitch').value : 700, 10) || 700;
+      const blob = generateMorseWavBlob(morse, wpm, freq);
+      if (!blob) return;
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'speech_to_morse.wav';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
     function playSpeechMorse() {
       const morse = document.getElementById('speechMorseOutput').value.trim();
       if (!morse) return;
@@ -1533,19 +1648,281 @@
       // User directly edited decoded text; keep as-is
     }
 
-    function handleMorseAudioUpload(fileInput) {
+    // Client-side DSP Morse Audio Demodulation
+    function decodeMorseAudioBuffer(audioBuffer) {
+      const pcm = audioBuffer.getChannelData(0);
+      const sampleRate = audioBuffer.sampleRate;
+      const blockSize = Math.max(1, Math.floor(sampleRate * 0.01)); // 10ms blocks
+      const numBlocks = Math.floor(pcm.length / blockSize);
+      if (numBlocks < 5) return '';
+
+      const energies = new Float32Array(numBlocks);
+      let maxEnergy = 0;
+      let minEnergy = Infinity;
+
+      for (let b = 0; b < numBlocks; b++) {
+        let sum = 0;
+        const start = b * blockSize;
+        for (let i = 0; i < blockSize; i++) {
+          const s = pcm[start + i];
+          sum += s * s;
+        }
+        const rms = Math.sqrt(sum / blockSize);
+        energies[b] = rms;
+        if (rms > maxEnergy) maxEnergy = rms;
+        if (rms < minEnergy) minEnergy = rms;
+      }
+
+      if (maxEnergy < 0.005) {
+        return '';
+      }
+
+      const threshold = minEnergy + (maxEnergy - minEnergy) * 0.28;
+
+      const runs = [];
+      let currentState = energies[0] >= threshold;
+      let currentCount = 0;
+
+      for (let b = 0; b < numBlocks; b++) {
+        const state = energies[b] >= threshold;
+        if (state === currentState) {
+          currentCount++;
+        } else {
+          runs.push({ state: currentState, durationMs: currentCount * 10 });
+          currentState = state;
+          currentCount = 1;
+        }
+      }
+      runs.push({ state: currentState, durationMs: currentCount * 10 });
+
+      // Merge tiny spikes (< 20ms)
+      const filtered = [];
+      for (const r of runs) {
+        if (r.durationMs < 20 && filtered.length > 0) {
+          filtered[filtered.length - 1].durationMs += r.durationMs;
+        } else {
+          filtered.push({ ...r });
+        }
+      }
+
+      const onDurations = filtered.filter(r => r.state && r.durationMs >= 30).map(r => r.durationMs);
+      if (onDurations.length === 0) return '';
+
+      onDurations.sort((a, b) => a - b);
+      const ditEstimate = onDurations[Math.floor(onDurations.length * 0.25)] || 80;
+      const dahThreshold = ditEstimate * 2.0;
+
+      let morse = '';
+      for (let i = 0; i < filtered.length; i++) {
+        const r = filtered[i];
+        if (r.state) {
+          if (r.durationMs >= dahThreshold) {
+            morse += '-';
+          } else {
+            morse += '.';
+          }
+        } else {
+          if (r.durationMs >= ditEstimate * 5.0) {
+            morse += ' / ';
+          } else if (r.durationMs >= ditEstimate * 2.2) {
+            morse += ' ';
+          }
+        }
+      }
+
+      return morse.trim().replace(/\s{2,}/g, ' ');
+    }
+
+    async function handleMorseAudioUpload(fileInput) {
       const file = fileInput.files && fileInput.files[0];
       if (!file) return;
 
       const status = document.getElementById('m2sStatus');
-      status.textContent = 'Mors ses dosyası yüklendi: ' + file.name;
+      status.textContent = 'Ses dosyası inceleniyor: ' + file.name + '...';
 
-      // Play audio preview
-      const audioUrl = URL.createObjectURL(file);
-      const audio = new Audio(audioUrl);
-      audio.play().catch(() => {});
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
 
-      status.textContent = `Ses çalınıyor (${file.name}). Masaüstü uygulamasında doğrudan DSP ile tam çevrimdışı deşifre edebilir veya mors kodunu yukarıya yapıştırıp anında seslendirebilirsiniz.`;
+        const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+        status.textContent = `DSP Çözümleme yapılıyor (${audioBuffer.duration.toFixed(1)} sn)...`;
+
+        const decodedMorse = decodeMorseAudioBuffer(audioBuffer);
+        if (!decodedMorse) {
+          status.textContent = 'Mors tonu ayırt edilemedi veya ses seviyesi çok düşük.';
+          return;
+        }
+
+        document.getElementById('m2sMorseInput').value = decodedMorse;
+        const lang = document.getElementById('m2sLang') ? document.getElementById('m2sLang').value : 'tr-TR';
+        const plainText = morseToTextString(decodedMorse, lang);
+        document.getElementById('m2sDecodedOutput').value = plainText;
+        status.textContent = `Çözüldü: ${file.name} ➔ ${decodedMorse.length} karakter Mors, "${plainText.slice(0, 30)}..."`;
+      } catch (err) {
+        status.textContent = 'Ses deşifre hatası: ' + err.message;
+      }
+    }
+
+    // Play & Export CW for Morse-to-Speech section
+    let m2sAudioPlaying = false;
+    let m2sPlayTimeout = null;
+
+    function playM2sMorseAudio() {
+      const morse = document.getElementById('m2sMorseInput').value.trim();
+      if (!morse) {
+        alert('Çalınacak Mors kodu bulunamadı.');
+        return;
+      }
+      stopM2sMorseAudio();
+      const ctx = getAudioContext();
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const wpm = parseInt(document.getElementById('wpmSlider') ? document.getElementById('wpmSlider').value : 20, 10) || 20;
+      const freq = parseInt(document.getElementById('pitchSlider') ? document.getElementById('pitchSlider').value : 700, 10) || 700;
+      const unitSec = 1.2 / wpm;
+
+      m2sAudioPlaying = true;
+      let time = ctx.currentTime + 0.05;
+
+      for (let i = 0; i < morse.length; i++) {
+        if (!m2sAudioPlaying) break;
+        const sym = morse[i];
+        if (sym === '.') {
+          playTone(ctx, freq, time, unitSec);
+          time += unitSec + unitSec;
+        } else if (sym === '-') {
+          playTone(ctx, freq, time, unitSec * 3);
+          time += unitSec * 3 + unitSec;
+        } else if (sym === ' ') {
+          time += unitSec * 2;
+        } else if (sym === '/' || sym === '|') {
+          time += unitSec * 6;
+        }
+      }
+
+      const status = document.getElementById('m2sStatus');
+      if (status) status.textContent = 'Mors sesi çalınıyor...';
+
+      m2sPlayTimeout = setTimeout(() => {
+        m2sAudioPlaying = false;
+        if (status) status.textContent = 'Hazır';
+      }, (time - ctx.currentTime) * 1000);
+    }
+
+    function stopM2sMorseAudio() {
+      m2sAudioPlaying = false;
+      if (m2sPlayTimeout) clearTimeout(m2sPlayTimeout);
+    }
+
+    function downloadM2sMorseWav() {
+      const morse = document.getElementById('m2sMorseInput').value.trim();
+      if (!morse) {
+        alert('İndirilecek Mors kodu bulunamadı.');
+        return;
+      }
+      const blob = generateMorseWavBlob(morse);
+      if (!blob) return;
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'morse_cw_tone.wav';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Live Microphone CW Audio Decoding (DSP Demodulation)
+    let liveCwStream = null;
+    let liveCwAudioCtx = null;
+    let liveCwAnalyser = null;
+    let liveCwInterval = null;
+    let liveCwActive = false;
+    let liveCwState = false;
+    let liveCwStateStart = 0;
+    let liveCwSilenceTimer = null;
+
+    function toggleLiveCwListening() {
+      const btn = document.getElementById('btnLiveCw');
+      const status = document.getElementById('m2sStatus');
+      if (liveCwActive) {
+        stopLiveCwListening();
+        btn.textContent = '📻 Canlı Mors Sesi Dinle (Mikrofon CW DSP)';
+        btn.classList.remove('btn-primary');
+        status.textContent = 'CW Dinleme durduruldu.';
+        return;
+      }
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('Tarayıcınız mikrofon erişimi desteklemiyor.');
+        return;
+      }
+
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        liveCwStream = stream;
+        liveCwAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = liveCwAudioCtx.createMediaStreamSource(stream);
+        liveCwAnalyser = liveCwAudioCtx.createAnalyser();
+        liveCwAnalyser.fftSize = 512;
+        source.connect(liveCwAnalyser);
+
+        liveCwActive = true;
+        liveCwState = false;
+        liveCwStateStart = Date.now();
+        btn.textContent = '⏹️ CW Dinlemeyi Durdur';
+        btn.classList.add('btn-primary');
+        status.textContent = 'Canlı CW Mors Sinyali Dinleniyor (Gerçek Zamanlı DSP)...';
+
+        const pcmData = new Float32Array(liveCwAnalyser.fftSize);
+        liveCwInterval = setInterval(() => {
+          if (!liveCwActive) return;
+          liveCwAnalyser.getFloatTimeDomainData(pcmData);
+          let sum = 0;
+          for (let i = 0; i < pcmData.length; i++) {
+            sum += pcmData[i] * pcmData[i];
+          }
+          const rms = Math.sqrt(sum / pcmData.length);
+          const isTone = rms > 0.05;
+          const now = Date.now();
+
+          if (isTone !== liveCwState) {
+            const duration = now - liveCwStateStart;
+            if (duration > 35) {
+              if (liveCwState) {
+                const symbol = duration < 180 ? '.' : '-';
+                const mInput = document.getElementById('m2sMorseInput');
+                mInput.value = (mInput.value + symbol);
+                onMorseToSpeechInput(mInput.value);
+                if (liveCwSilenceTimer) clearTimeout(liveCwSilenceTimer);
+                liveCwSilenceTimer = setTimeout(() => {
+                  if (mInput.value && !mInput.value.endsWith(' ')) {
+                    mInput.value += ' ';
+                    onMorseToSpeechInput(mInput.value);
+                  }
+                }, 500);
+              }
+              liveCwState = isTone;
+              liveCwStateStart = now;
+            }
+          }
+        }, 20);
+      }).catch(err => {
+        status.textContent = 'Mikrofon hatası: ' + err.message;
+      });
+    }
+
+    function stopLiveCwListening() {
+      liveCwActive = false;
+      if (liveCwInterval) clearInterval(liveCwInterval);
+      if (liveCwSilenceTimer) clearTimeout(liveCwSilenceTimer);
+      if (liveCwStream) {
+        liveCwStream.getTracks().forEach(t => t.stop());
+        liveCwStream = null;
+      }
+      if (liveCwAudioCtx) {
+        try { liveCwAudioCtx.close(); } catch(e){}
+        liveCwAudioCtx = null;
+      }
     }
 
     function speakMorseDecodedText() {

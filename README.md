@@ -26,6 +26,50 @@ The platform provides complete formal conformance with international telecommuni
 
 ---
 
+## 🌐 Omnidirectional 4-Way Modality Translation Matrix ($4 \times 3 = 12$ Conversions)
+
+MorsLab provides seamless, lossless, and bidirectional translation across all 4 telecommunication modalities: **Plain Text**, **Morse Code Text**, **Speech Voice Audio**, and **Morse Audio (CW)**:
+
+```
+                    ┌────────────────────────┐
+                    │     1. Plain Text      │
+                    │ (EN, TR, RU, AR Script)│
+                    └───────────┬────────────┘
+                         ▲   ▲  │  ▲
+              ┌──────────┘   │  │  └──────────┐
+              │  ┌───────────┘  │             │
+              ▼  ▼              ▼             ▼
+┌────────────────────────┐             ┌────────────────────────┐
+│  2. Morse Text (.-)    │◄───────────►│    3. Speech Voice     │
+│ (ITU-R M.1677-1 Codes) │             │ (Microphone / Neural)  │
+└─────────────┬──────────┘             └──────────────┬─────────┘
+              ▲                                       ▲
+              │                 ▲                     │
+              └───────────┐     │     ┌───────────────┘
+                          ▼     ▼     ▼
+                    ┌────────────────────────┐
+                    │   4. Morse Audio (CW)  │
+                    │ (Goertzel DSP/WAV/Tone)│
+                    └────────────────────────┘
+```
+
+| Source Modality | Target Modality | Protocol & Methodology | Web Client Engine | Desktop (.NET) Engine |
+|:---|:---|:---|:---|:---|
+| **Plain Text** | **Morse Text** | Deterministic ITU-R M.1677-1 Mapping | `convertNow()` | `MorseEncoder.Encode()` |
+| **Plain Text** | **Speech Voice** | Neural / Synthetic Speech (TTS) | Web Speech Synthesis | Piper TTS / OS SAPI |
+| **Plain Text** | **Morse Audio** | PARIS-calibrated CW Tone & WAV Synthesis | Web Audio Oscillator / WAV PCM | `AudioPlayer.cs` / WAV Synthesizer |
+| **Morse Text** | **Plain Text** | Prefix Tree Decoding & Q-Code Expansion | `convertNow()` reverse | `MorseDecoder.Decode()` |
+| **Morse Text** | **Speech Voice** | Symbol Parsing + Text-to-Speech | Web Speech API Utterance | `MorseToSpeechService.cs` |
+| **Morse Text** | **Morse Audio** | Real-time CW Audio Playback & WAV Export | Web Audio API / WAV Blob | `AudioPlayer.cs` / SoundPlayer |
+| **Speech Voice** | **Plain Text** | Automatic Speech Recognition (ASR) | Web Speech Recognition API | OS SpeechRecognizer |
+| **Speech Voice** | **Morse Text** | Real-time ASR ➔ Symbol Transcription | `toggleSpeechRecognition()` | `SpeechToMorseService.cs` |
+| **Speech Voice** | **Morse Audio** | ASR Transcription ➔ CW Tone / WAV | `playSpeechMorse()` & WAV Blob | `SpeechToMorseService.cs` + CW |
+| **Morse Audio** | **Morse Text** | Envelope Follower & Narrowband Goertzel | Web Audio DSP / Live Mic DSP | `StreamingMorseDecoder.cs` / `MorseDecoder.cs` |
+| **Morse Audio** | **Plain Text** | DSP Envelope Demodulation ➔ Text | `handleMorseAudioUpload()` | `MorseDecoder.DecodeWav()` |
+| **Morse Audio** | **Speech Voice** | DSP Demodulation ➔ Neural TTS | DSP + Web Speech Synthesis | Goertzel DSP + Piper TTS |
+
+---
+
 ## 📐 1. Theoretical Foundations & Information Theory
 
 ### 1.1 Entropy and Prefix Coding of Radiotelegraphy

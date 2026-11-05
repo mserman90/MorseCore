@@ -26,6 +26,50 @@ Platform; **ITU-R M.1677-1**, **ITU-R M.1172** ve amatör telsizcilik veri deği
 
 ---
 
+## 🌐 Çok Yönlü 4-Modaliteli Çeviri Matrisi ($4 \times 3 = 12$ Çapraz Çeviri)
+
+MorsLab; **Düz Metin**, **Mors Alfabesi Metni**, **Konuşma Sesi** ve **Mors Sesi (CW)** olmak üzere 4 temel modalite arasında tam geçişli, kayıpsız 12 yönlü çapraz çeviriyi eksiksiz destekler:
+
+```
+                    ┌────────────────────────┐
+                    │      1. Düz Metin      │
+                    │ (TR, EN, RU, AR Metin) │
+                    └───────────┬────────────┘
+                         ▲   ▲  │  ▲
+              ┌──────────┘   │  │  └──────────┐
+              │  ┌───────────┘  │             │
+              ▼  ▼              ▼             ▼
+┌────────────────────────┐             ┌────────────────────────┐
+│  2. Mors Metni (.-)    │◄───────────►│    3. Konuşma Sesi     │
+│ (ITU-R M.1677-1 Kodlar)│             │ (Mikrofon / TTS Nöral) │
+└─────────────┬──────────┘             └──────────────┬─────────┘
+              ▲                                       ▲
+              │                 ▲                     │
+              └───────────┐     │     ┌───────────────┘
+                          ▼     ▼     ▼
+                    ┌────────────────────────┐
+                    │    4. Mors Sesi (CW)   │
+                    │(Goertzel DSP / WAV/Ton)│
+                    └────────────────────────┘
+```
+
+| Kaynak Modalite | Hedef Modalite | Çeviri Yolu & Standart | Web Motoru | Masaüstü (.NET) Motoru |
+|:---|:---|:---|:---|:---|
+| **Düz Metin** | **Mors Metni** | Deterministik ITU-R M.1677-1 Sembol Eşleme | `convertNow()` | `MorseEncoder.Encode()` |
+| **Düz Metin** | **Konuşma Sesi** | Nöral Konuşma Sentezi (TTS) | Web Speech Synthesis | Piper TTS / OS SAPI |
+| **Düz Metin** | **Mors Sesi** | PARIS Zamanlamalı CW Ton Sentezi & WAV | Web Audio Oscillator / WAV PCM | `AudioPlayer.cs` / WAV Sentez |
+| **Mors Metni** | **Düz Metin** | Önek Çözümleme & Q-Kodu Eşleme | `convertNow()` ters yön | `MorseDecoder.Decode()` |
+| **Mors Metni** | **Konuşma Sesi** | Sembol Çözümleme + Sesli Okuma | Web Speech API Utterance | `MorseToSpeechService.cs` |
+| **Mors Metni** | **Mors Sesi** | İstenen WPM & Frekansta CW Üretimi | Web Audio API / WAV Dışa Aktar | `AudioPlayer.cs` / SoundPlayer |
+| **Konuşma Sesi** | **Düz Metin** | Otomatik Konuşma Tanıma (ASR) | Web Speech Recognition API | OS SpeechRecognizer |
+| **Konuşma Sesi** | **Mors Metni** | Gerçek Zamanlı ASR ➔ Sembol Transkripsiyonu | `toggleSpeechRecognition()` | `SpeechToMorseService.cs` |
+| **Konuşma Sesi** | **Mors Sesi** | ASR Transkripsiyonu ➔ CW Tonu / WAV | `playSpeechMorse()` & WAV Blob | `SpeechToMorseService.cs` + CW |
+| **Mors Sesi** | **Mors Metni** | Zarf Takibi & Dar Bant Goertzel DSP | Web Audio DSP / Canlı Mikrofon | `StreamingMorseDecoder.cs` / `MorseDecoder.cs` |
+| **Mors Sesi** | **Düz Metin** | DSP Zarf Çözümleme ➔ Metin Çevirisi | `handleMorseAudioUpload()` | `MorseDecoder.DecodeWav()` |
+| **Mors Sesi** | **Konuşma Sesi** | DSP Demodülasyon ➔ TTS Okuma | DSP + Web Speech Synthesis | Goertzel DSP + Piper TTS |
+
+---
+
 ## 📐 1. Kuramsal Temeller ve Bilgi Kuramı
 
 ### 1.1 Entropi ve Önek Kodlaması (Prefix Coding)
