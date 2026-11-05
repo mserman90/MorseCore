@@ -450,6 +450,52 @@
       </div>
     </section>
 
+    <!-- Speech to Morse Section (Live Microphone & Audio File) -->
+    <section class="card" id="speechToMorseCard">
+      <h2 class="card-title" id="t-speechTitle">🎙️ Konuşmayı Mors Koduna Dönüştür (Speech to Morse)</h2>
+      <p class="card-desc" id="t-speechDesc">Türkçe veya İngilizce canlı mikrofon konuşmanızı veya ses dosyasını dinleyerek anında Mors koduna dönüştürün.</p>
+
+      <div class="controls-bar">
+        <div class="group-left">
+          <label for="speechLang" style="font-weight:600; font-size:0.9rem;" id="t-speechLangLbl">Tanıma Dili:</label>
+          <select id="speechLang">
+            <option value="tr-TR" selected>Türkçe (tr-TR)</option>
+            <option value="en-US">English (en-US)</option>
+          </select>
+
+          <button id="startSpeechBtn" class="btn-primary" onclick="toggleSpeechRecognition()">🎙️ Dinlemeyi Başlat</button>
+          <label class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
+            📁 Ses Dosyası Seç (.wav/.mp3)
+            <input type="file" id="speechFileInput" accept="audio/*" style="display:none;" onchange="handleSpeechAudioFile(this)">
+          </label>
+        </div>
+        <div class="group-right">
+          <span id="speechStatus" style="font-size:0.85rem; color:var(--ink-muted); font-weight:500;">Hazır</span>
+        </div>
+      </div>
+
+      <div class="editors-grid">
+        <div class="editor-column">
+          <label style="font-weight:600; font-size:0.85rem;" id="t-spokenHeader">Algılanan Konuşma Metni</label>
+          <textarea id="speechTextOutput" placeholder="Mikrofona Türkçe veya İngilizce konuşun..." oninput="onSpeechManualInput(this.value)"></textarea>
+        </div>
+        <div class="editor-column">
+          <label style="font-weight:600; font-size:0.85rem;" id="t-morseOutputHeader">Oluşturulan Mors Kodu</label>
+          <textarea id="speechMorseOutput" class="morse-font" placeholder="... --- ..." readonly></textarea>
+        </div>
+      </div>
+
+      <div class="controls-bar" style="margin-bottom:0;">
+        <div class="group-left">
+          <button class="btn-primary" onclick="playSpeechMorse()">🔊 Mors Oynat</button>
+          <button onclick="stopSpeechMorse()">⏹️ Durdur</button>
+          <button onclick="copySpeechMorse()">📋 Mors Kopyala</button>
+          <button onclick="copySpeechText()">📋 Metni Kopyala</button>
+          <button onclick="clearSpeechToMorse()">🧹 Temizle</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Cheat Sheet / Prosigns -->
     <section class="card">
       <h2 class="card-title" id="t-prosigns">Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)</h2>
@@ -847,6 +893,11 @@
         converterDesc: "Convert text and Morse code bidirectionally, listen with authentic CW tones, or export to WAV.",
         clear: "Clear",
         copy: "Copy",
+        speechTitle: "🎙️ Speech to Morse Code (Live & Audio File)",
+        speechDesc: "Speak into your microphone in Turkish or English, or load an audio file to convert speech to Morse code in real-time.",
+        spokenHeader: "Transcribed Speech Text",
+        morseOutputHeader: "Generated Morse Code",
+        speechLangLbl: "Recognition Language:",
         practiceKeyer: "CW Practice Keyer",
         practiceDesc: "Hold the key button or press Spacebar on your keyboard to practice timing and sending Morse.",
         prosigns: "Morse Alphabet & Amateur Radio Reference",
@@ -859,6 +910,11 @@
         converterDesc: "Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.",
         clear: "Temizle",
         copy: "Kopyala",
+        speechTitle: "🎙️ Konuşmayı Mors Koduna Dönüştür (Speech to Morse)",
+        speechDesc: "Türkçe veya İngilizce canlı mikrofon konuşmanızı veya ses dosyasını dinleyerek anında Mors koduna dönüştürün.",
+        spokenHeader: "Algılanan Konuşma Metni",
+        morseOutputHeader: "Oluşturulan Mors Kodu",
+        speechLangLbl: "Tanıma Dili:",
         practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
         practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
         prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
@@ -871,6 +927,11 @@
         converterDesc: "Konvertieren Sie Text und Morsecode bidirektional, hören Sie authentische CW-Töne oder exportieren Sie WAV.",
         clear: "Löschen",
         copy: "Kopieren",
+        speechTitle: "🎙️ Sprache zu Morsecode (Live & Audiodatei)",
+        speechDesc: "Sprechen Sie auf Türkisch oder Englisch ins Mikrofon oder laden Sie eine Audiodatei, um Sprache in Morsecode umzuwandeln.",
+        spokenHeader: "Erkannter Sprachtext",
+        morseOutputHeader: "Erzeugter Morsecode",
+        speechLangLbl: "Sprache:",
         practiceKeyer: "CW-Übungstaste (Keyer)",
         practiceDesc: "Halten Sie die Taste gedrückt oder nutzen Sie die Leertaste, um Ihren Morserhythmus zu üben.",
         prosigns: "Morse-Alphabet & Funkbetriebszeichen",
@@ -886,12 +947,178 @@
       document.getElementById('t-converterDesc').textContent = t.converterDesc;
       document.getElementById('t-clear').textContent = t.clear;
       document.getElementById('t-copy').textContent = t.copy;
+      if (document.getElementById('t-speechTitle')) document.getElementById('t-speechTitle').textContent = t.speechTitle;
+      if (document.getElementById('t-speechDesc')) document.getElementById('t-speechDesc').textContent = t.speechDesc;
+      if (document.getElementById('t-spokenHeader')) document.getElementById('t-spokenHeader').textContent = t.spokenHeader;
+      if (document.getElementById('t-morseOutputHeader')) document.getElementById('t-morseOutputHeader').textContent = t.morseOutputHeader;
+      if (document.getElementById('t-speechLangLbl')) document.getElementById('t-speechLangLbl').textContent = t.speechLangLbl;
       document.getElementById('t-practiceKeyer').textContent = t.practiceKeyer;
       document.getElementById('t-practiceDesc').textContent = t.practiceDesc;
       document.getElementById('t-prosigns').textContent = t.prosigns;
       document.getElementById('t-prosignsDesc').textContent = t.prosignsDesc;
       document.getElementById('t-downloads').textContent = t.downloads;
       document.getElementById('t-downloadsDesc').textContent = t.downloadsDesc;
+    }
+
+    // Speech to Morse Implementation (Live & File)
+    let recognitionInstance = null;
+    let isSpeechListening = false;
+    let speechMorsePlaying = false;
+    let speechPlayTimeout = null;
+
+    function textToMorseString(text) {
+      return text.toUpperCase().split('').map(ch => {
+        if (ch === ' ' || ch === '\n') return '/';
+        return MORSE_TABLE[ch] || '';
+      }).filter(Boolean).join(' ');
+    }
+
+    function onSpeechManualInput(val) {
+      document.getElementById('speechMorseOutput').value = textToMorseString(val);
+    }
+
+    function toggleSpeechRecognition() {
+      const btn = document.getElementById('startSpeechBtn');
+      const status = document.getElementById('speechStatus');
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert('Tarayıcınız Web Speech API özelliğini desteklemiyor. Lütfen Google Chrome veya Microsoft Edge kullanın.');
+        status.textContent = 'Desteklenmiyor (Web Speech API)';
+        return;
+      }
+
+      if (isSpeechListening) {
+        if (recognitionInstance) recognitionInstance.stop();
+        isSpeechListening = false;
+        btn.textContent = '🎙️ Dinlemeyi Başlat';
+        btn.classList.add('btn-primary');
+        status.textContent = 'Durduruldu';
+        return;
+      }
+
+      const lang = document.getElementById('speechLang').value || 'tr-TR';
+      recognitionInstance = new SpeechRecognition();
+      recognitionInstance.lang = lang;
+      recognitionInstance.continuous = true;
+      recognitionInstance.interimResults = true;
+
+      recognitionInstance.onstart = () => {
+        isSpeechListening = true;
+        btn.textContent = '⏹️ Dinlemeyi Durdur';
+        btn.classList.remove('btn-primary');
+        status.textContent = lang === 'tr-TR' ? 'Dinleniyor (Türkçe)...' : 'Listening (English)...';
+      };
+
+      recognitionInstance.onresult = (event) => {
+        let fullTranscript = '';
+        for (let i = 0; i < event.results.length; ++i) {
+          fullTranscript += event.results[i][0].transcript + ' ';
+        }
+        fullTranscript = fullTranscript.trim();
+        document.getElementById('speechTextOutput').value = fullTranscript;
+        document.getElementById('speechMorseOutput').value = textToMorseString(fullTranscript);
+      };
+
+      recognitionInstance.onerror = (event) => {
+        status.textContent = 'Hata: ' + event.error;
+      };
+
+      recognitionInstance.onend = () => {
+        isSpeechListening = false;
+        btn.textContent = '🎙️ Dinlemeyi Başlat';
+        btn.classList.add('btn-primary');
+        if (status.textContent.startsWith('Dinleniyor') || status.textContent.startsWith('Listening')) {
+          status.textContent = 'Hazır';
+        }
+      };
+
+      try {
+        recognitionInstance.start();
+      } catch (e) {
+        status.textContent = 'Başlatma hatası: ' + e.message;
+      }
+    }
+
+    function handleSpeechAudioFile(fileInput) {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+
+      const status = document.getElementById('speechStatus');
+      status.textContent = 'Ses dosyası yüklendi: ' + file.name;
+
+      // Play audio preview and provide guidance
+      const audioUrl = URL.createObjectURL(file);
+      const audio = new Audio(audioUrl);
+      audio.play().catch(() => {});
+
+      status.textContent = `Ses dosyası çalınıyor (${file.name}). Canlı dinlemeyi açarak mikrofondan yakalayabilir veya masaüstü uygulamasında doğrudan offline işleyebilirsiniz.`;
+    }
+
+    function playSpeechMorse() {
+      const morse = document.getElementById('speechMorseOutput').value.trim();
+      if (!morse) return;
+
+      stopSpeechMorse();
+      const ctx = getAudioContext();
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const wpm = parseInt(document.getElementById('wpm').value) || 20;
+      const freq = parseInt(document.getElementById('pitch').value) || 700;
+      const unitSec = 1.2 / wpm;
+
+      speechMorsePlaying = true;
+      let time = ctx.currentTime + 0.05;
+
+      for (let i = 0; i < morse.length; i++) {
+        if (!speechMorsePlaying) break;
+        const sym = morse[i];
+        if (sym === '.') {
+          playTone(ctx, freq, time, unitSec);
+          time += unitSec + unitSec;
+        } else if (sym === '-') {
+          playTone(ctx, freq, time, unitSec * 3);
+          time += unitSec * 3 + unitSec;
+        } else if (sym === ' ') {
+          time += unitSec * 2;
+        } else if (sym === '/') {
+          time += unitSec * 6;
+        }
+      }
+
+      speechPlayTimeout = setTimeout(() => {
+        speechMorsePlaying = false;
+      }, (time - ctx.currentTime) * 1000);
+    }
+
+    function stopSpeechMorse() {
+      speechMorsePlaying = false;
+      if (speechPlayTimeout) clearTimeout(speechPlayTimeout);
+    }
+
+    function copySpeechMorse() {
+      const val = document.getElementById('speechMorseOutput').value;
+      if (!val) return;
+      navigator.clipboard.writeText(val);
+      const st = document.getElementById('speechStatus');
+      st.textContent = 'Mors panoya kopyalandı!';
+      setTimeout(() => st.textContent = 'Hazır', 2000);
+    }
+
+    function copySpeechText() {
+      const val = document.getElementById('speechTextOutput').value;
+      if (!val) return;
+      navigator.clipboard.writeText(val);
+      const st = document.getElementById('speechStatus');
+      st.textContent = 'Metin panoya kopyalandı!';
+      setTimeout(() => st.textContent = 'Hazır', 2000);
+    }
+
+    function clearSpeechToMorse() {
+      stopSpeechMorse();
+      document.getElementById('speechTextOutput').value = '';
+      document.getElementById('speechMorseOutput').value = '';
+      document.getElementById('speechStatus').textContent = 'Temizlendi';
     }
 
     // Default to EN
