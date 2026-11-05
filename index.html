@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MorseCore — Text, Signals and Speech</title>
+  <link rel="icon" type="image/svg+xml" href="morsecore.svg">
+  <meta name="description" content="MorseCore: Free cross-platform tool for converting text to Morse code, listening, practicing and amateur radio tools.">
+  <style>
+    :root {
+      --bg-canvas: #FAF8F2;
+      --bg-surface: #EEEFE5;
+      --bg-card: #FCFBF7;
+      --bg-input: #FFFFFF;
+      --bg-result: #F0F3E8;
+      --ink: #2C2A22;
+      --ink-muted: #78716C;
+      --border: #D5D9C9;
+      --accent: #5E6A42;
+      --accent-hover: #4E5836;
+      --accent-soft: rgba(94, 106, 66, 0.15);
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      --radius: 12px;
+      --shadow: 0 4px 16px rgba(44, 42, 34, 0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg-canvas: #283322;
+      --bg-surface: #2D3A27;
+      --bg-card: #35472C;
+      --bg-input: #23311F;
+      --bg-result: #2A3B24;
+      --ink: #FAF8F2;
+      --ink-muted: #C5CDBC;
+      --border: #4A5E3E;
+      --accent: #7D8F5C;
+      --accent-hover: #93A670;
+      --accent-soft: rgba(125, 143, 92, 0.25);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      transition: background-color 0.2s, color 0.2s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 1.35rem;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    button, select {
+      font-family: inherit;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--ink);
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.05s;
+    }
+
+    button:hover, select:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    button:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: #FFFFFF;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .group-left, .group-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .editors-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .editors-grid { grid-template-columns: 1fr; }
+    }
+
+    .editor-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    textarea {
+      width: 100%;
+      height: 180px;
+      padding: 0.85rem;
+      font-size: 1.05rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-input);
+      color: var(--ink);
+      font-family: inherit;
+      resize: vertical;
+      line-height: 1.4;
+    }
+
+    textarea.mono {
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .audio-settings {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-surface);
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+
+    .slider-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .slider-field label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+
+    input[type="range"] {
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Keyer Section */
+    .keyer-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .key-button {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 4px solid var(--border);
+      user-select: none;
+      touch-action: manipulation;
+      transition: transform 0.05s, background 0.15s, box-shadow 0.1s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .key-button:active, .key-button.active {
+      transform: scale(0.94);
+      background: var(--accent-hover);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .key-monitor {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      min-height: 2rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    /* Cheat Sheet */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+    }
+
+    .cheat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0.65rem;
+      background: var(--bg-surface);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* Downloads Bar */
+    .downloads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .download-card {
+      padding: 1.25rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .download-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .download-card strong { font-size: 1.1rem; }
+    .download-card span { font-size: 0.85rem; color: var(--ink-muted); }
+
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img src="morsecore.svg" alt="MorseCore">
+        <span>MorseCore Web</span>
+      </a>
+      <div class="nav-tools">
+        <select id="langSelect" onchange="changeLanguage(this.value)">
+          <option value="tr">Türkçe</option>
+          <option value="en" selected>English</option>
+          <option value="de">Deutsch</option>
+        </select>
+        <button onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">🌓</button>
+        <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">
+          <button>GitHub ★</button>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Converter Card -->
+    <section class="card">
+      <h2 class="card-title" id="t-converter">Mors Kodu Çevirici & Ses Çalar</h2>
+      <p class="card-desc" id="t-converterDesc">Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.</p>
+
+      <div class="controls-bar">
+        <div class="group-left">
+          <button class="btn-primary" id="btnDirection" onclick="toggleDirection()">Metin → Mors</button>
+          <select id="alphabetSelect" onchange="convertNow()">
+            <option value="latin">Latin / Türkçe</option>
+            <option value="cyrillic">Русский (Cyrillic)</option>
+            <option value="arabic">العربية (Arabic)</option>
+          </select>
+          <select id="separatorSelect" onchange="convertNow()">
+            <option value="/">Ayraç: /</option>
+            <option value="|">Ayraç: |</option>
+            <option value="#">Ayraç: #</option>
+            <option value="*">Ayraç: *</option>
+          </select>
+        </div>
+        <div class="group-right">
+          <button onclick="clearText()" id="t-clear">Temizle</button>
+          <button onclick="copyOutput()" id="t-copy">Kopyala</button>
+        </div>
+      </div>
+
+      <div class="editors-grid">
+        <div class="editor-column">
+          <div class="editor-header">
+            <span id="inputLabel">Düz Metin</span>
+            <span id="inputStats" style="color:var(--ink-muted);">0 karakter</span>
+          </div>
+          <textarea id="inputText" placeholder="Dönüştürülecek mesajı buraya yazın..." oninput="convertNow()"></textarea>
+        </div>
+
+        <div class="editor-column">
+          <div class="editor-header">
+            <span id="outputLabel">Mors Kodu</span>
+            <span id="outputStats" style="color:var(--ink-muted);">0 simge</span>
+          </div>
+          <textarea id="outputText" class="mono" readonly placeholder="Mors kodu çıktısı..."></textarea>
+        </div>
+      </div>
+
+      <!-- Audio Controls -->
+      <div class="controls-bar">
+        <div class="group-left">
+          <button class="btn-primary" id="btnPlay" onclick="playMorse()">▶ Dinle</button>
+          <button onclick="stopAudio()" id="btnStop" disabled>■ Durdur</button>
+          <button onclick="downloadWav()" id="btnWav">💾 WAV İndir</button>
+        </div>
+        <div class="group-right">
+          <span id="audioStatus" style="font-size:0.85rem; color:var(--ink-muted);">Hazır</span>
+        </div>
+      </div>
+
+      <!-- Sliders -->
+      <div class="audio-settings">
+        <div class="slider-field">
+          <label><span>Hız (WPM)</span><span id="wpmValue">20 WPM</span></label>
+          <input type="range" id="wpmSlider" min="5" max="60" value="20" oninput="updateAudioSettings()">
+        </div>
+        <div class="slider-field">
+          <label><span>Frekans (Hz)</span><span id="pitchValue">700 Hz</span></label>
+          <input type="range" id="pitchSlider" min="300" max="1500" step="10" value="700" oninput="updateAudioSettings()">
+        </div>
+      </div>
+    </section>
+
+    <!-- Practice Keyer Section -->
+    <section class="card">
+      <h2 class="card-title" id="t-practiceKeyer">Mors Manevrası Alıştırması (CW Practice Keyer)</h2>
+      <p class="card-desc" id="t-practiceDesc">Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.</p>
+      
+      <div class="keyer-box">
+        <button class="key-button" id="keyerBtn">MORS TUŞU</button>
+        <div class="key-monitor" id="keyerMonitor">Hazır...</div>
+        <div style="font-size:0.9rem; color:var(--ink-muted);" id="keyerDecoded">Çözülen: -</div>
+        <button onclick="clearKeyer()" style="margin-top:0.5rem;">Sıfırla</button>
+      </div>
+    </section>
+
+    <!-- Cheat Sheet / Prosigns -->
+    <section class="card">
+      <h2 class="card-title" id="t-prosigns">Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)</h2>
+      <p class="card-desc" id="t-prosignsDesc">Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.</p>
+      <div class="cheat-grid" id="cheatGrid"></div>
+    </section>
+
+    <!-- Desktop Downloads -->
+    <section class="card">
+      <h2 class="card-title" id="t-downloads">Masaüstü Uygulamasını İndirin</h2>
+      <p class="card-desc" id="t-downloadsDesc">Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin.</p>
+      <div class="downloads-grid">
+        <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
+          <strong>🪟 Windows (x64)</strong>
+          <span>Setup .exe veya Taşınabilir .zip</span>
+        </a>
+        <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
+          <strong>🍏 macOS (Apple Silicon)</strong>
+          <span>Native arm64 .dmg (M1/M2/M3/M4)</span>
+        </a>
+        <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
+          <strong>🐧 Linux (x64)</strong>
+          <span>Ubuntu/Debian .deb, Pardus, Arch PKGBUILD</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>MorseCore &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
+  </footer>
+
+  <script>
+    // Morse Dictionaries
+    const MORSE_TABLE = {
+      'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+      'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+      'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+      'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+      'Y': '-.--', 'Z': '--..',
+      '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+      '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+      '.': '.-.-.-', ',': '--..--', '?': '..--..', '\'': '.----.', '/': '-..-.',
+      '(': '-.--.', ')': '-.--.-', ':': '---...', '=': '-...-', '+': '.-.-.',
+      '-': '-....-', '"': '.-..-.', '@': '.--.-.', '!': '-.-.--', '&': '.-...',
+      ';': '-.-.-.', '_': '..--.-', '$': '...-..-'
+    };
+
+    const REVERSE_MORSE = {};
+    for (const [k, v] of Object.entries(MORSE_TABLE)) REVERSE_MORSE[v] = k;
+
+    const PROSIGNS = [
+      { name: '<AR>', code: '.-.-.', desc: 'Mesaj sonu (End of message)' },
+      { name: '<SK>', code: '...-.-', desc: 'Görüşme sonu (End of contact)' },
+      { name: '<BT>', code: '-...-', desc: 'Bölüm ayracı (Separator)' },
+      { name: '<AS>', code: '.-...', desc: 'Lütfen bekleyin (Wait)' },
+      { name: '<KN>', code: '-.--.', desc: 'Yalnız çağrılan istasyon' },
+      { name: 'SOS', code: '...---...', desc: 'Acil durum imdat çağrısı' }
+    ];
+
+    let isDecoding = false;
+    let audioCtx = null;
+    let isPlaying = false;
+    let playTimeout = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function normalizeText(text) {
+      return text.toUpperCase()
+        .replace(/Ğ/g, 'G').replace(/Ü/g, 'U').replace(/Ş/g, 'S')
+        .replace(/İ/g, 'I').replace(/Ö/g, 'O').replace(/Ç/g, 'C');
+    }
+
+    function toggleDirection() {
+      isDecoding = !isDecoding;
+      const btn = document.getElementById('btnDirection');
+      const inputLbl = document.getElementById('inputLabel');
+      const outputLbl = document.getElementById('outputLabel');
+      const input = document.getElementById('inputText');
+      const output = document.getElementById('outputText');
+
+      if (isDecoding) {
+        btn.textContent = 'Mors → Metin';
+        inputLbl.textContent = 'Mors Kodu Girişi';
+        outputLbl.textContent = 'Çözülen Düz Metin';
+        input.classList.add('mono');
+        output.classList.remove('mono');
+      } else {
+        btn.textContent = 'Metin → Mors';
+        inputLbl.textContent = 'Düz Metin';
+        outputLbl.textContent = 'Mors Kodu';
+        input.classList.remove('mono');
+        output.classList.add('mono');
+      }
+
+      const temp = output.value;
+      input.value = temp;
+      convertNow();
+    }
+
+    function convertNow() {
+      const input = document.getElementById('inputText').value;
+      const sep = document.getElementById('separatorSelect').value;
+      const output = document.getElementById('outputText');
+
+      if (!isDecoding) {
+        // Encode Text -> Morse
+        const clean = normalizeText(input);
+        const words = clean.trim().split(/\s+/);
+        const encodedWords = words.map(w => {
+          return w.split('').map(ch => MORSE_TABLE[ch] || '').filter(Boolean).join(' ');
+        });
+        const result = encodedWords.join(' ' + sep + ' ');
+        output.value = result;
+        document.getElementById('inputStats').textContent = clean.length + ' karakter';
+        document.getElementById('outputStats').textContent = result.length + ' simge';
+      } else {
+        // Decode Morse -> Text
+        const sepChar = sep;
+        const words = input.split(new RegExp(`\\s*[${sepChar}]\\s*`));
+        const decodedWords = words.map(w => {
+          const tokens = w.trim().split(/\s+/);
+          return tokens.map(code => REVERSE_MORSE[code] || '□').join('');
+        });
+        const result = decodedWords.join(' ');
+        output.value = result;
+        document.getElementById('inputStats').textContent = input.length + ' simge';
+        document.getElementById('outputStats').textContent = result.length + ' karakter';
+      }
+    }
+
+    function clearText() {
+      document.getElementById('inputText').value = '';
+      document.getElementById('outputText').value = '';
+      document.getElementById('inputStats').textContent = '0';
+      document.getElementById('outputStats').textContent = '0';
+    }
+
+    function copyOutput() {
+      const text = document.getElementById('outputText').value;
+      if (!text) return;
+      navigator.clipboard.writeText(text);
+      document.getElementById('audioStatus').textContent = 'Panoya kopyalandı!';
+      setTimeout(() => document.getElementById('audioStatus').textContent = 'Hazır', 2000);
+    }
+
+    function updateAudioSettings() {
+      document.getElementById('wpmValue').textContent = document.getElementById('wpmSlider').value + ' WPM';
+      document.getElementById('pitchValue').textContent = document.getElementById('pitchSlider').value + ' Hz';
+    }
+
+    // Audio Synthesis (Web Audio API)
+    function playMorse() {
+      if (isPlaying) stopAudio();
+
+      const morse = isDecoding ? document.getElementById('inputText').value : document.getElementById('outputText').value;
+      if (!morse.trim()) return;
+
+      const wpm = parseInt(document.getElementById('wpmSlider').value, 10);
+      const freq = parseInt(document.getElementById('pitchSlider').value, 10);
+      const unitTime = 1.2 / wpm;
+
+      const ctx = getAudioContext();
+      const now = ctx.currentTime + 0.05;
+      let cursor = now;
+
+      isPlaying = true;
+      document.getElementById('btnPlay').disabled = true;
+      document.getElementById('btnStop').disabled = false;
+      document.getElementById('audioStatus').textContent = 'Çalınıyor (' + wpm + ' WPM)...';
+
+      for (let i = 0; i < morse.length; i++) {
+        const ch = morse[i];
+        if (ch === '.') {
+          scheduleTone(ctx, freq, cursor, unitTime);
+          cursor += unitTime * 2;
+        } else if (ch === '-') {
+          scheduleTone(ctx, freq, cursor, unitTime * 3);
+          cursor += unitTime * 4;
+        } else if (ch === ' ') {
+          cursor += unitTime * 2;
+        } else if (ch === '/' || ch === '|' || ch === '#' || ch === '*') {
+          cursor += unitTime * 4;
+        }
+      }
+
+      const totalDuration = (cursor - now) * 1000;
+      playTimeout = setTimeout(() => stopAudio(), totalDuration);
+    }
+
+    function scheduleTone(ctx, freq, start, duration) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, start);
+
+      // Smooth anti-click ramp (5ms cosine envelope)
+      const ramp = 0.005;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.3, start + ramp);
+      gain.gain.setValueAtTime(0.3, start + duration - ramp);
+      gain.gain.linearRampToValueAtTime(0, start + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(start);
+      osc.stop(start + duration);
+    }
+
+    function stopAudio() {
+      isPlaying = false;
+      if (playTimeout) clearTimeout(playTimeout);
+      if (audioCtx) audioCtx.close().then(() => { audioCtx = null; });
+      document.getElementById('btnPlay').disabled = false;
+      document.getElementById('btnStop').disabled = true;
+      document.getElementById('audioStatus').textContent = 'Hazır';
+    }
+
+    // WAV File Generator (Browser in-memory 16-bit PCM WAV)
+    function downloadWav() {
+      const morse = isDecoding ? document.getElementById('inputText').value : document.getElementById('outputText').value;
+      if (!morse.trim()) return;
+
+      const wpm = parseInt(document.getElementById('wpmSlider').value, 10);
+      const freq = parseInt(document.getElementById('pitchSlider').value, 10);
+      const sampleRate = 8000;
+      const unitSamples = Math.round(sampleRate * (1.2 / wpm));
+
+      const samples = [];
+      function addTone(len) {
+        for (let i = 0; i < len; i++) {
+          const env = Math.min(1, Math.min(i, len - i) / 40);
+          samples.push(Math.sin(2 * Math.PI * freq * (i / sampleRate)) * 0.4 * env);
+        }
+      }
+      function addSilence(len) {
+        for (let i = 0; i < len; i++) samples.push(0);
+      }
+
+      for (let ch of morse) {
+        if (ch === '.') { addTone(unitSamples); addSilence(unitSamples); }
+        else if (ch === '-') { addTone(unitSamples * 3); addSilence(unitSamples); }
+        else if (ch === ' ') { addSilence(unitSamples * 2); }
+        else if (ch === '/' || ch === '|' || ch === '#' || ch === '*') { addSilence(unitSamples * 4); }
+      }
+
+      // Build RIFF WAV
+      const buffer = new ArrayBuffer(44 + samples.length * 2);
+      const view = new DataView(buffer);
+
+      function writeString(offset, str) {
+        for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+      }
+
+      writeString(0, 'RIFF');
+      view.setUint32(4, 36 + samples.length * 2, true);
+      writeString(8, 'WAVE');
+      writeString(12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true); // PCM
+      view.setUint16(22, 1, true); // Mono
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeString(36, 'data');
+      view.setUint32(40, samples.length * 2, true);
+
+      let offset = 44;
+      for (let s of samples) {
+        view.setInt16(offset, Math.max(-32768, Math.min(32767, s * 32767)), true);
+        offset += 2;
+      }
+
+      const blob = new Blob([buffer], { type: 'audio/wav' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'morsecore-' + Date.now() + '.wav';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Practice Keyer Logic
+    let keyerDownTime = 0;
+    let keyerOsc = null;
+    let keyerGain = null;
+    let keyerCode = '';
+    let keyerSilenceTimer = null;
+
+    const keyBtn = document.getElementById('keyerBtn');
+
+    function keyerStart() {
+      if (keyerDownTime) return;
+      keyerDownTime = Date.now();
+      keyBtn.classList.add('active');
+
+      if (keyerSilenceTimer) clearTimeout(keyerSilenceTimer);
+
+      const ctx = getAudioContext();
+      const freq = parseInt(document.getElementById('pitchSlider').value, 10);
+      keyerOsc = ctx.createOscillator();
+      keyerGain = ctx.createGain();
+      keyerOsc.frequency.setValueAtTime(freq, ctx.currentTime);
+      keyerGain.gain.setValueAtTime(0.3, ctx.currentTime);
+      keyerOsc.connect(keyerGain);
+      keyerGain.connect(ctx.destination);
+      keyerOsc.start();
+    }
+
+    function keyerEnd() {
+      if (!keyerDownTime) return;
+      const duration = Date.now() - keyerDownTime;
+      keyerDownTime = 0;
+      keyBtn.classList.remove('active');
+
+      if (keyerGain && audioCtx) {
+        keyerGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.01);
+        setTimeout(() => { if (keyerOsc) { try { keyerOsc.stop(); } catch(e){} } }, 20);
+      }
+
+      const symbol = duration < 160 ? '.' : '-';
+      keyerCode += symbol;
+      document.getElementById('keyerMonitor').textContent = keyerCode;
+
+      keyerSilenceTimer = setTimeout(commitKeyerLetter, 450);
+    }
+
+    function commitKeyerLetter() {
+      if (!keyerCode) return;
+      const ch = REVERSE_MORSE[keyerCode] || '□';
+      document.getElementById('keyerDecoded').textContent += ch;
+      keyerCode = '';
+      document.getElementById('keyerMonitor').textContent = 'Hazır...';
+    }
+
+    function clearKeyer() {
+      keyerCode = '';
+      document.getElementById('keyerMonitor').textContent = 'Hazır...';
+      document.getElementById('keyerDecoded').textContent = 'Çözülen: ';
+    }
+
+    keyBtn.addEventListener('mousedown', keyerStart);
+    window.addEventListener('mouseup', keyerEnd);
+    keyBtn.addEventListener('touchstart', e => { e.preventDefault(); keyerStart(); });
+    keyBtn.addEventListener('touchend', e => { e.preventDefault(); keyerEnd(); });
+
+    window.addEventListener('keydown', e => {
+      if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        keyerStart();
+      }
+    });
+    window.addEventListener('keyup', e => {
+      if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        keyerEnd();
+      }
+    });
+
+    // Populate Cheat Sheet
+    const cheatGrid = document.getElementById('cheatGrid');
+    for (const [letter, code] of Object.entries(MORSE_TABLE)) {
+      const item = document.createElement('div');
+      item.className = 'cheat-item';
+      item.innerHTML = `<strong>${letter}</strong><span>${code}</span>`;
+      cheatGrid.appendChild(item);
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    if (localStorage.getItem('theme') === 'dark' || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+
+    // Multi-Language Support
+    const I18N = {
+      en: {
+        converter: "Morse Code Converter & Audio Player",
+        converterDesc: "Convert text and Morse code bidirectionally, listen with authentic CW tones, or export to WAV.",
+        clear: "Clear",
+        copy: "Copy",
+        practiceKeyer: "CW Practice Keyer",
+        practiceDesc: "Hold the key button or press Spacebar on your keyboard to practice timing and sending Morse.",
+        prosigns: "Morse Alphabet & Amateur Radio Reference",
+        prosignsDesc: "International ITU-R M.1677-1 standard characters and prosigns.",
+        downloads: "Download Desktop Application",
+        downloadsDesc: "Get the full desktop app with offline AI neural voices (Piper, EMA Lightning), microphone decoding and QSO logbook."
+      },
+      tr: {
+        converter: "Mors Kodu Çevirici & Ses Çalar",
+        converterDesc: "Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.",
+        clear: "Temizle",
+        copy: "Kopyala",
+        practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
+        practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
+        prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
+        prosignsDesc: "Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.",
+        downloads: "Masaüstü Uygulamasını İndirin",
+        downloadsDesc: "Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin."
+      },
+      de: {
+        converter: "Morsecode-Konverter & Audioplayer",
+        converterDesc: "Konvertieren Sie Text und Morsecode bidirektional, hören Sie authentische CW-Töne oder exportieren Sie WAV.",
+        clear: "Löschen",
+        copy: "Kopieren",
+        practiceKeyer: "CW-Übungstaste (Keyer)",
+        practiceDesc: "Halten Sie die Taste gedrückt oder nutzen Sie die Leertaste, um Ihren Morserhythmus zu üben.",
+        prosigns: "Morse-Alphabet & Funkbetriebszeichen",
+        prosignsDesc: "Internationale ITU-R M.1677-1 Standardzeichen und Verkehrszeichen.",
+        downloads: "Desktop-App herunterladen",
+        downloadsDesc: "Holen Sie sich die vollständige Desktop-Anwendung mit Offline-Sprachmodellen, Mikrofon-Decodierung und Logbuch."
+      }
+    };
+
+    function changeLanguage(lang) {
+      const t = I18N[lang] || I18N.en;
+      document.getElementById('t-converter').textContent = t.converter;
+      document.getElementById('t-converterDesc').textContent = t.converterDesc;
+      document.getElementById('t-clear').textContent = t.clear;
+      document.getElementById('t-copy').textContent = t.copy;
+      document.getElementById('t-practiceKeyer').textContent = t.practiceKeyer;
+      document.getElementById('t-practiceDesc').textContent = t.practiceDesc;
+      document.getElementById('t-prosigns').textContent = t.prosigns;
+      document.getElementById('t-prosignsDesc').textContent = t.prosignsDesc;
+      document.getElementById('t-downloads').textContent = t.downloads;
+      document.getElementById('t-downloadsDesc').textContent = t.downloadsDesc;
+    }
+
+    // Default to EN
+    changeLanguage('en');
+    document.getElementById('inputText').value = 'SOS MorseCore';
+    convertNow();
+  </script>
+</body>
+</html>
