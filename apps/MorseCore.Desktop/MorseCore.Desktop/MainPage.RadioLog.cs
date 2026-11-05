@@ -135,6 +135,33 @@ public sealed partial class MainPage
         Input("logbook.latitude",latitude,maximum:24); Input("logbook.longitude",longitude,maximum:24);
         stack.Children.Add(Columns(260,2,fields.ToArray())); stack.Children.Add(Label(T("logbook.locationHint"),12,true));
         var error=Label("",13,true); stack.Children.Add(error); var actions=Row();
+        actions.Children.Add(Action("lookupCall",async()=>
+        {
+            string call=inputs["otherCall"].Text.Trim();
+            if(call.Length==0) return;
+            try
+            {
+                var result=await CallsignLookupService.LookupAsync(call,lifetime.Token);
+                if(result!=null)
+                {
+                    if(!string.IsNullOrEmpty(result.GridSquare)) inputs["logbook.grid"].Text=result.GridSquare;
+                    if(result.Latitude.HasValue) inputs["logbook.latitude"].Text=result.Latitude.Value.ToString("R",CultureInfo.InvariantCulture);
+                    if(result.Longitude.HasValue) inputs["logbook.longitude"].Text=result.Longitude.Value.ToString("R",CultureInfo.InvariantCulture);
+                    if(!string.IsNullOrEmpty(result.Name))
+                    {
+                        string info=$"{result.Name} ({result.Qth ?? result.Country ?? ""})";
+                        inputs["qsoNote"].Text=string.IsNullOrEmpty(inputs["qsoNote"].Text)?info:$"{inputs["qsoNote"].Text} · {info}";
+                    }
+                    if(result.CountryId!=null)
+                    {
+                        int cIndex=Array.FindIndex(countries,c=>c.Id==result.CountryId);
+                        if(cIndex>=0) operatingCountryInput.SelectedIndex=cIndex;
+                    }
+                    SetStatus($"{result.CallSign} · {result.Country ?? ""} · {result.Name ?? result.Qth ?? ""}");
+                }
+            }
+            catch(Exception ex) { error.Text=ex.Message; }
+        },"\uE721"));
         actions.Children.Add(Action("logbook.save",async()=>
         {
             try

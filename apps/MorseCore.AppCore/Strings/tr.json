@@ -261,5 +261,9 @@
   "class_Special": "Özel",
   "europe": "Avrupa",
   "asia": "Asya",
-  "allIslands": "Tüm adalar"
+  "allIslands": "Tüm adalar",
+  "lookupCall": "Çağrıyı Sorgula",
+  "sendRig": "Telsize Gönder (Seri)",
+  "decoderLiveStream": "Canlı Akış Çözümü",
+  "noSerialPorts": "Kullanılabilir seri COM portu bulunamadı."
 }

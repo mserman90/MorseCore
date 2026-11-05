@@ -261,5 +261,9 @@
   "class_Special": "خاصة",
   "europe": "أوروبا",
   "asia": "آسيا",
-  "allIslands": "جميع الجزر"
+  "allIslands": "جميع الجزر",
+  "lookupCall": "البحث عن رمز النداء",
+  "sendRig": "إرسال إلى جهاز الراديو",
+  "decoderLiveStream": "فك تشفير البث المباشر",
+  "noSerialPorts": "لم يتم العثور على منافذ تسلسلية."
 }

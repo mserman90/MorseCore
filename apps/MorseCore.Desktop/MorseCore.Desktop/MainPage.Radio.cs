@@ -188,7 +188,10 @@ public sealed partial class MainPage
     {
         var stack=new StackPanel { Spacing=12 };
         string[] stages=["checkFrequency","generalCall","answerCall","signalReport","freeMessage","closeQso"];
-        stack.Children.Add(Columns(260,2,Choice(T("qsoStep"),stages.Select(T),(int)qsoStage,i=> { if(qsoStage==(QsoStage)i) return; qsoStage=(QsoStage)i; InvalidateQso(); BuildPage(); }),RadioInput("otherCall",otherCall,v=> { otherCall=v; InvalidateQso(); },true,32)));
+        var otherCallPanel = new StackPanel { Spacing = 6 };
+        otherCallPanel.Children.Add(RadioInput("otherCall", otherCall, v => { otherCall = v; InvalidateQso(); }, true, 32));
+        otherCallPanel.Children.Add(Action("lookupCall", LookupOtherCall, "\uE721"));
+        stack.Children.Add(Columns(260, 2, Choice(T("qsoStep"), stages.Select(T), (int)qsoStage, i => { if (qsoStage == (QsoStage)i) return; qsoStage = (QsoStage)i; InvalidateQso(); BuildPage(); }), otherCallPanel));
         var reports=Columns(220,2,RadioInput("sentRst",sentRst,v=> { sentRst=v; InvalidateQso(); },true,3),RadioInput("receivedRst",receivedRst,v=>receivedRst=v,true,3));
         if(qsoStage==QsoStage.Report) { stack.Children.Add(reports); stack.Children.Add(Label(T("rstHint"),12,true)); }
         if(qsoStage==QsoStage.Message) stack.Children.Add(RadioInput("freeMessage",qsoMessage,v=> { qsoMessage=v; InvalidateQso(); },false,2000));
@@ -210,6 +213,7 @@ public sealed partial class MainPage
         actions.Children.Add(Action("stop",()=> { StopPlayback(); return Task.CompletedTask; },"\uE71A"));
         actions.Children.Add(Action("copy",()=> { if(qsoPreview.Length>0) { var data=new DataPackage(); data.SetText(qsoPreview); Clipboard.SetContent(data); SetStatus(T("copied")); } return Task.CompletedTask; },"\uE8C8"));
         actions.Children.Add(Action("exportWav",async()=> { string snapshot=qsoMorse; var settings=preferences; if(snapshot.Length==0) return; string? path=await SavePath("wav","qso"); if(path!=null) await Task.Run(()=>MorseAudio.WriteWav(path,snapshot,new(settings.Wpm,settings.Frequency),'/')); },"\uE74E"));
+        actions.Children.Add(Action("sendRig", SendMorseToRig, "\uE703"));
         stack.Children.Add(actions); WrapActions(actions,stack); stack.Children.Add(Label(T("qsoProcedureNote"),12,true));
         PageContent.Children.Add(Card(stack));
         var record=new StackPanel { Spacing=12 };
@@ -229,5 +233,53 @@ public sealed partial class MainPage
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(recording,"QsoRecord");
         recording.Expanding+=(_,_)=>qsoRecordExpanded=true; recording.Collapsed+=(_,_)=>qsoRecordExpanded=false;
         PageContent.Children.Add(recording);
+    }
+
+    private async Task LookupOtherCall()
+    {
+        if (string.IsNullOrWhiteSpace(otherCall)) return;
+        SetStatus(T("busy"));
+        try
+        {
+            var lookup = await CallsignLookupService.LookupAsync(otherCall, lifetime.Token);
+            if (lookup != null)
+            {
+                if (!string.IsNullOrEmpty(lookup.GridSquare)) qsoGrid = lookup.GridSquare;
+                if (!string.IsNullOrEmpty(lookup.Name))
+                {
+                    string info = $"{lookup.Name} ({lookup.Qth ?? lookup.Country ?? ""})";
+                    qsoNote = string.IsNullOrEmpty(qsoNote) ? info : $"{qsoNote} · {info}";
+                }
+                BuildPage();
+                SetStatus($"{lookup.CallSign} · {lookup.Country ?? ""} · {lookup.Name ?? lookup.Qth ?? ""}");
+            }
+        }
+        catch (Exception ex)
+        {
+            SetStatus(ex.Message);
+        }
+    }
+
+    private async Task SendMorseToRig()
+    {
+        if (qsoMorse.Length == 0) return;
+        var ports = SerialPortKeyer.GetAvailablePorts();
+        if (ports.Count == 0)
+        {
+            SetStatus(T("noSerialPorts"));
+            return;
+        }
+        string port = ports[0];
+        SetStatus($"{T("sendRig")} → {port}...");
+        try
+        {
+            using var keyer = new SerialPortKeyer(new(port, UseDtr: true, UseRts: false));
+            await keyer.SendMorseAsync(qsoMorse, preferences.Wpm, lifetime.Token);
+            SetStatus(T("ready"));
+        }
+        catch (Exception ex)
+        {
+            SetStatus(ex.Message);
+        }
     }
 }

@@ -261,5 +261,9 @@
   "class_Special": "Special",
   "europe": "Europe",
   "asia": "Asia",
-  "allIslands": "All islands"
+  "allIslands": "All islands",
+  "lookupCall": "Lookup Call",
+  "sendRig": "Send to Rig (Serial)",
+  "decoderLiveStream": "Live Streaming Decode",
+  "noSerialPorts": "No available serial COM ports found."
 }

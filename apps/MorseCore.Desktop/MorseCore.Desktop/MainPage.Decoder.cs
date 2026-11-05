@@ -11,7 +11,8 @@ public sealed partial class MainPage
     private string? decoderPath;
     private DecoderResult? decoderResult;
     private bool decoderWasCapture, decoderHasCaptureDevice = false, decoderUseMicrophone;
-    private Button? decoderChooseButton, decoderSolveButton, decoderRecordButton = null, decoderRefreshButton = null, decoderStopRecordButton = null;
+    private Button? decoderChooseButton, decoderSolveButton, decoderRecordButton = null, decoderRefreshButton = null, decoderStopRecordButton = null, decoderLiveStreamButton = null;
+    private StreamingMorseDecoder? streamingDecoder;
     private Control? decoderDevicesChoice = null;
     private TextBlock? decoderSource, decoderProgress;
     private Button? decoderCancelButton;
@@ -200,7 +201,9 @@ public sealed partial class MainPage
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(decoderStopRecordButton, "DecoderStopRecord");
         decoderRefreshButton = Action("decoderRefreshDevices", RefreshDevices, "\uE72C");
         Microsoft.UI.Xaml.Automation.AutomationProperties.SetAutomationId(decoderRefreshButton, "DecoderRefreshInputs");
+        decoderLiveStreamButton = Action("decoderLiveStream", StartStreamingDecode, "\uE768");
         controls.Children.Add(decoderStopRecordButton);
+        controls.Children.Add(decoderLiveStreamButton);
         controls.Children.Add(decoderRefreshButton);
         stack.Children.Add(controls); WrapActions(controls, stack);
         _ = RefreshDevices();
@@ -283,6 +286,80 @@ public sealed partial class MainPage
         {
             decoderStopRecordButton.IsEnabled = decoderRecordStop != null;
             decoderStopRecordButton.Visibility = decoderRecordStop != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+        if (decoderLiveStreamButton != null) decoderLiveStreamButton.IsEnabled = idle && decoderHasCaptureDevice;
+    }
+
+    private async Task StartStreamingDecode()
+    {
+        if (decoderDevicesChoice is not ComboBox devices || devices.SelectedItem is not AudioCaptureDevice device || decoderOperation != null) return;
+        StopPlayback();
+        int generation = decoderGeneration;
+        using var operation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        using var stop = new CancellationTokenSource();
+        decoderResult = null;
+        decoderOperation = operation;
+        decoderRecordStop = stop;
+        UpdateDecoderControls();
+
+        var options = new DecoderOptions(
+            decoderAutomaticTone ? null : decoderFrequency,
+            decoderAutomaticSpeed ? null : decoderWpm,
+            decoderThreshold / 100,
+            preferences.Alphabet
+        );
+
+        streamingDecoder = new StreamingMorseDecoder(options);
+        if (decoderText != null) decoderText.Text = "";
+        if (decoderMorseText != null) decoderMorseText.Text = "";
+
+        streamingDecoder.CharacterDecoded += (ch, morse) =>
+        {
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                if (decoderText != null) decoderText.Text = streamingDecoder.DecodedText;
+                if (decoderMorseText != null) decoderMorseText.Text = streamingDecoder.DecodedMorse;
+            });
+        };
+
+        streamingDecoder.TelemetryUpdated += (telemetry) =>
+        {
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                SetDecoderStatus($"{telemetry.FrequencyHz:0} Hz · {telemetry.WordsPerMinute:0.#} WPM · Level: {telemetry.SignalLevel:F4}");
+            });
+        };
+
+        SetDecoderStatus(T("decoderLiveStream") + "...");
+        string? path = null;
+        try
+        {
+            path = await MorseAudioCapture.RecordAsync(device.Id, stop.Token, operation.Token);
+            if (disposed || generation != decoderGeneration) return;
+            if (File.Exists(path))
+            {
+                var audio = WaveAudio.Read(path);
+                const int chunkSize = 512;
+                for (int i = 0; i < audio.Samples.Length; i += chunkSize)
+                {
+                    int count = Math.Min(chunkSize, audio.Samples.Length - i);
+                    streamingDecoder.ProcessSamples(audio.Samples.AsSpan(i, count));
+                }
+                streamingDecoder.Flush();
+                decoderResult = new(streamingDecoder.DecodedText, streamingDecoder.DecodedMorse, streamingDecoder.CurrentFrequency, streamingDecoder.EstimatedWpm, 0, false, audio.Duration.TotalSeconds);
+                BuildPage();
+                SetStatus(T("ready"));
+            }
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) { SetDecoderStatus(ex.Message); }
+        finally
+        {
+            if (ReferenceEquals(decoderOperation, operation)) decoderOperation = null;
+            if (ReferenceEquals(decoderRecordStop, stop)) decoderRecordStop = null;
+            if (!disposed && generation == decoderGeneration) UpdateDecoderControls();
+            if (path != null) MorseAudioCapture.Delete(path);
+        }
         }
     }
 }
