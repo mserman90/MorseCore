@@ -272,5 +272,13 @@
   "stopListening": "Остановить прослушивание",
   "chooseAudioSpeech": "Выбрать аудиофайл речи (.wav/.mp3)",
   "speechLanguagePrompt": "Язык речи (Турецкий / Английский)",
-  "spokenText": "Распознанная речь"
+  "spokenText": "Распознанная речь",
+  "morseToSpeech": "Морзе в речь",
+  "morseToSpeechTitle": "Азбука Морзе в речь (Morse to Speech)",
+  "morseToSpeechDesc": "Преобразование азбуки Морзе (текст или аудио) на турецком или английском языке в речь.",
+  "chooseMorseAudio": "Выбрать аудиофайл Морзе (.wav)",
+  "speakDecodedText": "Озвучить текст",
+  "stopSpeech": "Остановить речь",
+  "speechStatusSpeaking": "Говорит...",
+  "transcribingMorseAudio": "Анализ аудиофайла Морзе..."
 }

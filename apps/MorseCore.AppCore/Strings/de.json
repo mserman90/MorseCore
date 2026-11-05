@@ -272,5 +272,13 @@
   "stopListening": "Zuhören beenden",
   "chooseAudioSpeech": "Audiodatei auswählen (.wav/.mp3)",
   "speechLanguagePrompt": "Sprachauswahl (Türkisch / Englisch)",
-  "spokenText": "Erkannte Sprache"
+  "spokenText": "Erkannte Sprache",
+  "morseToSpeech": "Morse zu Sprache",
+  "morseToSpeechTitle": "Morsecode zu Sprache (Morse to Speech)",
+  "morseToSpeechDesc": "Konvertieren Sie Morsecode (Text oder Audiodatei) auf Türkisch oder Englisch in gesprochene Sprache.",
+  "chooseMorseAudio": "Morse-Audiodatei auswählen (.wav)",
+  "speakDecodedText": "Text vorlesen",
+  "stopSpeech": "Sprache stoppen",
+  "speechStatusSpeaking": "Spricht...",
+  "transcribingMorseAudio": "Morse-Audiodatei wird analysiert..."
 }

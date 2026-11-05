@@ -292,4 +292,199 @@ public sealed partial class MainPage
 
         PageContent.Children.Add(Card(stack));
     }
+
+    private MorseToSpeechService? morseToSpeechService;
+    private string morseToSpeechLang = "tr-TR";
+
+    private void BuildMorseToSpeechSection()
+    {
+        var stack = new StackPanel { Spacing = 16 };
+        var heading = Row();
+        heading.Children.Add(new FontIcon { Glyph = "\uE768", FontSize = 20, Foreground = Brush("AccentInkBrush") });
+        heading.Children.Add(Label(T("morseToSpeechTitle"), 18));
+        heading.Children.Add(Label(T("morseToSpeechDesc"), 12, true));
+        stack.Children.Add(heading);
+
+        morseToSpeechService ??= new MorseToSpeechService();
+
+        var configRow = Row();
+        configRow.Spacing = 16;
+        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)" };
+        var langValues = new[] { "tr-TR", "en-US" };
+        var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, morseToSpeechLang), i =>
+        {
+            if (i >= 0 && i < langValues.Length) morseToSpeechLang = langValues[i];
+        });
+        configRow.Children.Add(langSelect);
+        stack.Children.Add(configRow);
+
+        var morseInputBox = new TextBox
+        {
+            Header = T("morseInput"),
+            PlaceholderText = "... --- ...",
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap,
+            Height = 110,
+            FontFamily = MonoFont,
+            FontSize = 18
+        };
+
+        var decodedBox = new TextBox
+        {
+            Header = T("decodedText"),
+            PlaceholderText = T("inputPlaceholder"),
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap,
+            Height = 110,
+            FontSize = 16
+        };
+
+        var statusInfo = Label(T("speechStatusReady"), 12, true);
+
+        morseInputBox.TextChanged += (_, _) =>
+        {
+            if (!string.IsNullOrWhiteSpace(morseInputBox.Text))
+            {
+                decodedBox.Text = MorseEngine.Decode(morseInputBox.Text, preferences.Alphabet, preferences.Separator).Text;
+            }
+            else
+            {
+                decodedBox.Text = "";
+            }
+        };
+
+        var pickAudioBtn = Action("chooseMorseAudio", async () =>
+        {
+            string? filePath = await PickOpenPath(["wav"]);
+            if (filePath == null) return;
+
+            statusInfo.Text = T("transcribingMorseAudio");
+            SetStatus(T("transcribingMorseAudio"));
+
+            try
+            {
+                var (morse, text) = await morseToSpeechService.DecodeMorseAudioFileAsync(
+                    filePath,
+                    preferences.Alphabet,
+                    lifetime.Token);
+
+                morseInputBox.Text = morse;
+                decodedBox.Text = text;
+                statusInfo.Text = T("ready");
+                SetStatus(T("ready"));
+            }
+            catch (Exception ex)
+            {
+                statusInfo.Text = ex.Message;
+                SetStatus(ex.Message);
+            }
+        }, "\uE8B7");
+
+        Button? speakBtn = null;
+        Button? stopBtn = null;
+
+        speakBtn = Action("speakDecodedText", async () =>
+        {
+            if (string.IsNullOrWhiteSpace(decodedBox.Text))
+            {
+                SetStatus(T("missingInput"));
+                return;
+            }
+
+            statusInfo.Text = T("speechStatusSpeaking");
+            SetStatus(T("speechStatusSpeaking"));
+            speakBtn!.IsEnabled = false;
+            stopBtn!.IsEnabled = true;
+
+            try
+            {
+                await morseToSpeechService.SpeakTextAsync(
+                    decodedBox.Text,
+                    morseToSpeechLang,
+                    lifetime.Token);
+
+                statusInfo.Text = T("ready");
+                SetStatus(T("ready"));
+            }
+            catch (Exception ex)
+            {
+                statusInfo.Text = ex.Message;
+                SetStatus(ex.Message);
+            }
+            finally
+            {
+                speakBtn!.IsEnabled = true;
+                stopBtn!.IsEnabled = false;
+            }
+        }, "\uE768", true);
+
+        stopBtn = Action("stopSpeech", () =>
+        {
+            morseToSpeechService.StopSpeech();
+            statusInfo.Text = T("ready");
+            SetStatus(T("ready"));
+            speakBtn!.IsEnabled = true;
+            stopBtn!.IsEnabled = false;
+            return Task.CompletedTask;
+        }, "\uE71A");
+        stopBtn.IsEnabled = false;
+
+        var exportWavBtn = Action("exportWav", async () =>
+        {
+            if (string.IsNullOrWhiteSpace(decodedBox.Text)) return;
+            string? savePath = await SavePath("wav", "morse-speech");
+            if (savePath == null) return;
+
+            try
+            {
+                await morseToSpeechService.ExportSpeechWavAsync(
+                    decodedBox.Text,
+                    savePath,
+                    morseToSpeechLang,
+                    lifetime.Token);
+
+                statusInfo.Text = T("saved");
+                SetStatus(T("saved"));
+            }
+            catch (Exception ex)
+            {
+                statusInfo.Text = ex.Message;
+                SetStatus(ex.Message);
+            }
+        }, "\uE74E");
+
+        var copyTextBtn = Action("copy", () =>
+        {
+            if (!string.IsNullOrWhiteSpace(decodedBox.Text))
+            {
+                ClipboardSet(decodedBox.Text);
+                SetStatus(T("copied"));
+            }
+            return Task.CompletedTask;
+        }, "\uE8C8");
+
+        var clearBtn = Action("clear", () =>
+        {
+            morseToSpeechService.StopSpeech();
+            morseInputBox.Text = "";
+            decodedBox.Text = "";
+            statusInfo.Text = T("ready");
+            return Task.CompletedTask;
+        }, "\uE74D");
+
+        var buttonBar = Row();
+        buttonBar.Children.Add(pickAudioBtn);
+        buttonBar.Children.Add(speakBtn);
+        buttonBar.Children.Add(stopBtn);
+        buttonBar.Children.Add(exportWavBtn);
+        buttonBar.Children.Add(copyTextBtn);
+        buttonBar.Children.Add(clearBtn);
+
+        stack.Children.Add(buttonBar);
+        stack.Children.Add(morseInputBox);
+        stack.Children.Add(decodedBox);
+        stack.Children.Add(statusInfo);
+
+        PageContent.Children.Add(Card(stack));
+    }
 }

@@ -272,5 +272,13 @@
   "stopListening": "Dinlemeyi Durdur",
   "chooseAudioSpeech": "Konuşma Ses Dosyası Seç (.wav/.mp3)",
   "speechLanguagePrompt": "Konuşma Dili (Türkçe / English)",
-  "spokenText": "Algılanan Konuşma"
+  "spokenText": "Algılanan Konuşma",
+  "morseToSpeech": "Mors'tan Konuşmaya",
+  "morseToSpeechTitle": "Mors Kodundan Konuşmaya (Morse to Speech)",
+  "morseToSpeechDesc": "Metin veya ses dosyası olarak yüklenen Türkçe veya İngilizce Mors kodunu konuşmaya dönüştürün.",
+  "chooseMorseAudio": "Mors Ses Dosyası Seç (.wav)",
+  "speakDecodedText": "Konuşmayı Başlat",
+  "stopSpeech": "Konuşmayı Durdur",
+  "speechStatusSpeaking": "Konuşuluyor...",
+  "transcribingMorseAudio": "Mors ses dosyası analiz ediliyor..."
 }
