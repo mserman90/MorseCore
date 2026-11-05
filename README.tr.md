@@ -8,6 +8,56 @@
 [![İndir macOS](https://img.shields.io/badge/macOS-Apple_Silicon-5e6a42?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg)
 [![İndir Linux](https://img.shields.io/badge/Linux-x64-5e6a42?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
 [![1.0.1](https://img.shields.io/badge/v1.0.1-Yay%C4%B1nda-c58c59?style=for-the-badge)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
+[![Canlı Web Uygulaması](https://img.shields.io/badge/Canl%C4%B1_Web_Uygulamas%C4%B1-GitHub_Pages-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://mserman90.github.io/MorseCore/)
+
+[English](README.md) · **Türkçe** · [Deutsch](README.de.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
+
+[**Canlı Web Uygulaması**](https://mserman90.github.io/MorseCore/) · [**Kullanım kılavuzu · Wiki**](https://github.com/mustafamertakceylan/MorseCore/wiki/Baslangic)
+
+</div>
+
+MorseCore; çift yönlü Mors kodu çevirisi, gerçek zamanlı DSP çözümü, amatör telsiz seri port anahtarlaması (Rig Keying) ve Türkçe & İngilizce çift yönlü konuşma (Konuşma-Mors ve Mors-Konuşma) özelliklerine sahip açık kaynaklı, çok platformlu (Web, Windows, macOS, Linux) bir Mors ekosistemidir.
+
+---
+
+## 🌟 Temel Özellikler & Modüller
+
+| Modül | Açıklama | Platform |
+| :--- | :--- | :--- |
+| **Çift Yönlü Çevirici** | ITU-R M.1677-1 standardı ile Metin ↔ Mors, WPM/Ton ayarı, Latin, Kiril ve Arapça alfabeleri. | Web & Masaüstü |
+| **🎙️ Konuşmayı Mors'a Çevir** | **Türkçe ve İngilizce** canlı mikrofon konuşmalarını ve ses dosyalarını anında Mors koduna dönüştürür. | Web & Masaüstü |
+| **🗣️ Mors'tan Konuşmaya (TTS)** | Mors metnini veya `.wav` ses dosyasını çözüp **Türkçe veya İngilizce** doğal yapay zeka sesiyle okur. | Web & Masaüstü |
+| **📡 Akışlı DSP Çözücü** | Goertzel algoritması ve adaptif enerji/hız eşikleriyle analog CW sinyallerini gerçek zamanlı çözer. | Masaüstü |
+| **📻 Telsiz Anahtarlama (Rig Keyer)** | USB-Seri dönüştürücüler (FTDI/CH340) üzerinden DTR/RTS pinleriyle telsizi doğrudan anahtarlar. | Masaüstü |
+| **🔍 Çağrı İşareti & QSO Günlüğü**| Çevrimdışı ITU önek çözümlemesi, DXCC/kıta doğrulaması ve ADIF formatında görüşme günlüğü. | Masaüstü |
+| **🎯 İnteraktif Alıştırma Manevrası**| Dit/Dah oran ölçümlü düz manevra simülatörü, Koch metodu egzersizleri ve Q-kodları sözlüğü. | Web & Masaüstü |
+
+---
+
+## 📖 Hızlı Kullanım Kılavuzu
+
+### 1. Metin ↔ Mors Çevirisi & Ses
+1. Metin kutusuna mesajınızı veya Mors kodunu yazın.
+2. Hız (5–60 WPM) ve Ton frekansını (200–2000 Hz) seçin.
+3. **Dinle** düğmesine basarak gerçekçi CW tonuyla dinleyin veya **WAV İndir** ile ses dosyası olarak kaydedin.
+
+### 2. Konuşmayı Mors'a Çevirme (Türkçe / İngilizce)
+1. Konuşma dilini seçin: **Türkçe (tr-TR)** veya **English (en-US)**.
+2. **Dinlemeyi Başlat** düğmesine basıp mikrofona konuşun; sözcükler anında Mors koduna çevrilir.
+3. Veya kayıtlı bir ses dosyasını (**Ses Dosyası Seç**) yükleyin.
+4. Oluşan Mors kodunu dinleyebilir veya doğrudan telsizinize gönderebilirsiniz.
+
+### 3. Mors Kodundan Konuşmaya (Mors -> Ses)
+1. Mors kodunu yapıştırın veya **Mors Ses Dosyası Seç (.wav)** ile CW kaydını yükleyin.
+2. Çözülen metin anında ekranda belirir.
+3. **Konuşmayı Başlat** düğmesine basarak Türkçe veya İngilizce doğal sesle dinleyin.
+
+### 4. Telsiz Donanım Anahtarlaması (Seri Port)
+1. Telsizinizin CW/Key girişini USB-Seri dönüştürücüye bağlayın.
+2. Telsiz ayarlarından COM portunu ve tetikleme pinini (**DTR** veya **RTS**) seçin.
+3. 'Telsize Gönder' ile mesajınızı mikrosaniye hassasiyetli zamanlamayla yayına verin.
+
+---
 
 [English](README.md) · **Türkçe** · [Deutsch](README.de.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
 

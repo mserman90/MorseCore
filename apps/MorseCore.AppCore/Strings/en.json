@@ -280,5 +280,7 @@
   "speakDecodedText": "Speak Text",
   "stopSpeech": "Stop Speech",
   "speechStatusSpeaking": "Speaking...",
-  "transcribingMorseAudio": "Analyzing Morse audio file..."
+  "transcribingMorseAudio": "Analyzing Morse audio file...",
+  "userGuide": "User Guide & Features",
+  "userGuideHint": "Comprehensive guide to all MorseCore modules, radio integration, speech tools, and tutorials."
 }

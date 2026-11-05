@@ -280,5 +280,7 @@
   "speakDecodedText": "Konuşmayı Başlat",
   "stopSpeech": "Konuşmayı Durdur",
   "speechStatusSpeaking": "Konuşuluyor...",
-  "transcribingMorseAudio": "Mors ses dosyası analiz ediliyor..."
+  "transcribingMorseAudio": "Mors ses dosyası analiz ediliyor...",
+  "userGuide": "Kullanım Kılavuzu & Özellikler",
+  "userGuideHint": "MorseCore uygulamasının tüm modülleri, telsiz entegrasyonu, ses özellikleri ve kullanım rehberi."
 }

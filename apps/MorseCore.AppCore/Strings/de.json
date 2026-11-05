@@ -280,5 +280,7 @@
   "speakDecodedText": "Text vorlesen",
   "stopSpeech": "Sprache stoppen",
   "speechStatusSpeaking": "Spricht...",
-  "transcribingMorseAudio": "Morse-Audiodatei wird analysiert..."
+  "transcribingMorseAudio": "Morse-Audiodatei wird analysiert...",
+  "userGuide": "Benutzerhandbuch & Funktionen",
+  "userGuideHint": "Umfassender Leitfaden zu allen Modulen, Funkintegration, Sprachtools und Anleitungen."
 }

@@ -19,7 +19,7 @@ public sealed partial class MainPage : Page
     private readonly HttpClient http=UpdateService.CreateHttpClient();
     private readonly List<Button> menuButtons=[];
     private readonly Dictionary<Button,Border> navigationIndicators=[];
-    private static readonly string[] EducationPages=["alphabet","practice","keying","glossary"];
+    private static readonly string[] EducationPages=["alphabet","practice","keying","glossary","userGuide"];
     private static readonly string[] RadioPages=["stationProfiles","qsoAssistant","qsoLog"];
     private bool educationExpanded,radioExpanded;
     private StackPanel? educationChildren,radioChildren;
@@ -246,6 +246,7 @@ public sealed partial class MainPage : Page
             case "keying": BuildKeying(); break;
             case "alphabet": BuildAlphabet(); break;
             case "glossary": BuildGlossary(); break;
+            case "userGuide": BuildUserGuide(); break;
             case "stationProfiles": case "qsoAssistant": case "qsoLog": BuildRadio(); break;
             case "settings": BuildSettings(); break;
         }

@@ -280,5 +280,7 @@
   "speakDecodedText": "قراءة النص بصوت عالٍ",
   "stopSpeech": "إيقاف الكلام",
   "speechStatusSpeaking": "يتحدث...",
-  "transcribingMorseAudio": "جاري تحليل ملف مورس الصوتي..."
+  "transcribingMorseAudio": "جاري تحليل ملف مورس الصوتي...",
+  "userGuide": "دليل الاستخدام والميزات",
+  "userGuideHint": "دليل شامل لجميع وحدات مورس كور، وتكامل الراديو، وأدوات الصوت، والإرشادات."
 }

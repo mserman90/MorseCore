@@ -280,5 +280,7 @@
   "speakDecodedText": "Озвучить текст",
   "stopSpeech": "Остановить речь",
   "speechStatusSpeaking": "Говорит...",
-  "transcribingMorseAudio": "Анализ аудиофайла Морзе..."
+  "transcribingMorseAudio": "Анализ аудиофайла Морзе...",
+  "userGuide": "Руководство пользователя",
+  "userGuideHint": "Полное руководство по всем модулям MorseCore, радиоинтеграции, голосовым функциям и урокам."
 }
