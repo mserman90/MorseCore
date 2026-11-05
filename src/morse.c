@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 #include "morse.h"
+#include "morsecore_compat.h"
 #include "constants.h"
 
 typedef struct {

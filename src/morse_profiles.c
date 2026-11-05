@@ -1,7 +1,7 @@
 #include "morse_profiles.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdckdint.h>
+#include "morsecore_compat.h"
 
 typedef struct { uint32_t character; const char *code; } Entry;
 /* Signal Corps TM 11-459 (1943), Appendix VII, pp. 71-72.

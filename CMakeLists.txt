@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(MorseCore VERSION 1.0.1 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 23)
-set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD_REQUIRED OFF)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 if(MSVC OR CMAKE_C_SIMULATE_ID STREQUAL "MSVC")
@@ -22,7 +22,7 @@ static thread_local int value;
 int main(void) { atomic_bool flag = false; unsigned n; value = 1; return ckd_add(&n, 1U, 2U) || atomic_load(&flag) || value != 1 || nullptr != nullptr; }
 " MORSECORE_HAS_C23)
 if(NOT MORSECORE_HAS_C23)
-    message(FATAL_ERROR "A final C23 compiler with atomics, thread_local and stdckdint.h is required (GCC 15+/Clang 18+; feature probe is authoritative).")
+    message(STATUS "Native C23 not fully supported; using MorseCore C11/C17 compatibility shim.")
 endif()
 
 add_library(MorseCoreCore STATIC
@@ -48,7 +48,7 @@ if(MINGW)
 endif()
 
 install(TARGETS MorseCoreNative RUNTIME DESTINATION . LIBRARY DESTINATION . ARCHIVE DESTINATION lib)
-install(FILES include/morsecore_native.h DESTINATION include)
+install(FILES include/morsecore_native.h include/morsecore_compat.h DESTINATION include)
 install(FILES LICENSE NOTICE DESTINATION .)
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/MorseCoreVersion.cmake"
     "set(MORSECORE_PROJECT_VERSION ${PROJECT_VERSION})\n")

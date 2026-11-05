@@ -1,4 +1,5 @@
 #include "audio.h"
+#include "morsecore_compat.h"
 #include "platform_io.h"
 
 #include <ctype.h>

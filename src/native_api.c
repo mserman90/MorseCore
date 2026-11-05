@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-#include <stdckdint.h>
+#include "morsecore_compat.h"
 
 static_assert(sizeof(mc_statistics) == 40);
 static_assert(sizeof(mc_symbol) == 16);
