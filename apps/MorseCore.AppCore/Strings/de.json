@@ -275,7 +275,7 @@
   "spokenText": "Erkannte Sprache",
   "morseToSpeech": "Morse zu Sprache",
   "morseToSpeechTitle": "Morsecode zu Sprache (Morse to Speech)",
-  "morseToSpeechDesc": "Konvertieren Sie Morsecode (Text oder Audiodatei) auf Türkisch oder Englisch in gesprochene Sprache.",
+  "morseToSpeechDesc": "Konvertieren Sie Morsecode (Text oder Audiodatei) auf Türkisch, Englisch, Russisch oder Arabisch in gesprochene Sprache.",
   "chooseMorseAudio": "Morse-Audiodatei auswählen (.wav)",
   "speakDecodedText": "Text vorlesen",
   "stopSpeech": "Sprache stoppen",

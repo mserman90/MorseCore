@@ -318,10 +318,7 @@ public sealed partial class MainPage
         configRow.Spacing = 16;
         var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)", "Русский (ru-RU)", "العربية (ar-SA)" };
         var langValues = new[] { "tr-TR", "en-US", "ru-RU", "ar-SA" };
-        var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, morseToSpeechLang), i =>
-        {
-            if (i >= 0 && i < langValues.Length) morseToSpeechLang = langValues[i];
-        });
+        var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, morseToSpeechLang), _ => { });
         configRow.Children.Add(langSelect);
         stack.Children.Add(configRow);
 
@@ -348,11 +345,31 @@ public sealed partial class MainPage
 
         var statusInfo = Label(T("speechStatusReady"), 12, true);
 
+        MorseAlphabet CurrentMorseAlphabet() => morseToSpeechLang switch
+        {
+            "ar-SA" => MorseAlphabet.Arabic,
+            "ru-RU" => MorseAlphabet.Cyrillic,
+            _ => MorseAlphabet.Latin
+        };
+
+        langSelect.SelectionChanged += (_, _) =>
+        {
+            if (langSelect.SelectedIndex >= 0 && langSelect.SelectedIndex < langValues.Length)
+            {
+                morseToSpeechLang = langValues[langSelect.SelectedIndex];
+                decodedBox.FlowDirection = morseToSpeechLang == "ar-SA" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+                if (!string.IsNullOrWhiteSpace(morseInputBox.Text))
+                {
+                    decodedBox.Text = MorseEngine.Decode(morseInputBox.Text, CurrentMorseAlphabet(), preferences.Separator).Text;
+                }
+            }
+        };
+
         morseInputBox.TextChanged += (_, _) =>
         {
             if (!string.IsNullOrWhiteSpace(morseInputBox.Text))
             {
-                decodedBox.Text = MorseEngine.Decode(morseInputBox.Text, preferences.Alphabet, preferences.Separator).Text;
+                decodedBox.Text = MorseEngine.Decode(morseInputBox.Text, CurrentMorseAlphabet(), preferences.Separator).Text;
             }
             else
             {
@@ -372,7 +389,7 @@ public sealed partial class MainPage
             {
                 var (morse, text) = await morseToSpeechService.DecodeMorseAudioFileAsync(
                     filePath,
-                    preferences.Alphabet,
+                    CurrentMorseAlphabet(),
                     lifetime.Token);
 
                 morseInputBox.Text = morse;

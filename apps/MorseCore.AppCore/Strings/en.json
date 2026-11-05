@@ -275,7 +275,7 @@
   "spokenText": "Recognized Speech",
   "morseToSpeech": "Morse to Speech",
   "morseToSpeechTitle": "Morse Code to Speech",
-  "morseToSpeechDesc": "Convert Morse code (from text or audio file) in Turkish or English into spoken voice.",
+  "morseToSpeechDesc": "Convert Morse code (from text or audio file) in Turkish, English, Russian or Arabic into spoken voice.",
   "chooseMorseAudio": "Select Morse Audio File (.wav)",
   "speakDecodedText": "Speak Text",
   "stopSpeech": "Stop Speech",

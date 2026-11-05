@@ -56,8 +56,16 @@ public sealed class MorseToSpeechService : IDisposable
         return decoded.Text;
     }
 
+    private static string ResolveLangPrefix(string language) => language switch
+    {
+        var s when s.StartsWith("ar", StringComparison.OrdinalIgnoreCase) => "ar",
+        var s when s.StartsWith("ru", StringComparison.OrdinalIgnoreCase) => "ru",
+        var s when s.StartsWith("tr", StringComparison.OrdinalIgnoreCase) => "tr",
+        _ => "en"
+    };
+
     /// <summary>
-    /// Synthesizes and plays speech for the given text in Turkish (tr-TR) or English (en-US).
+    /// Synthesizes and plays speech for the given text in Turkish, English, Russian or Arabic.
     /// </summary>
     public async Task SpeakTextAsync(
         string text,
@@ -81,7 +89,7 @@ public sealed class MorseToSpeechService : IDisposable
             using var synth = new SpeechSynthesizer();
 
             // Find matching system voice for requested language
-            string langPrefix = language.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ? "tr" : "en";
+            string langPrefix = ResolveLangPrefix(language);
             var matchedVoice = SpeechSynthesizer.AllVoices
                 .FirstOrDefault(v => v.Language.StartsWith(langPrefix, StringComparison.OrdinalIgnoreCase));
 
@@ -138,7 +146,7 @@ public sealed class MorseToSpeechService : IDisposable
 
 #if MORSE_WINUI
         using var synth = new SpeechSynthesizer();
-        string langPrefix = language.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ? "tr" : "en";
+        string langPrefix = ResolveLangPrefix(language);
         var matchedVoice = SpeechSynthesizer.AllVoices
             .FirstOrDefault(v => v.Language.StartsWith(langPrefix, StringComparison.OrdinalIgnoreCase));
 

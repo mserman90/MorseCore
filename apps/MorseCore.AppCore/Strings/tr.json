@@ -275,7 +275,7 @@
   "spokenText": "Algılanan Konuşma",
   "morseToSpeech": "Mors'tan Konuşmaya",
   "morseToSpeechTitle": "Mors Kodundan Konuşmaya (Morse to Speech)",
-  "morseToSpeechDesc": "Metin veya ses dosyası olarak yüklenen Türkçe veya İngilizce Mors kodunu konuşmaya dönüştürün.",
+  "morseToSpeechDesc": "Metin veya ses dosyası olarak yüklenen Türkçe, İngilizce, Rusça veya Arapça Mors kodunu konuşmaya dönüştürün.",
   "chooseMorseAudio": "Mors Ses Dosyası Seç (.wav)",
   "speakDecodedText": "Konuşmayı Başlat",
   "stopSpeech": "Konuşmayı Durdur",

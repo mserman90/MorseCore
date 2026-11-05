@@ -507,7 +507,7 @@
       <div class="controls-bar">
         <div class="group-left">
           <label for="m2sLang" style="font-weight:600; font-size:0.9rem;" id="t-m2sLangLbl">Konuşma Dili:</label>
-          <select id="m2sLang">
+          <select id="m2sLang" onchange="onM2sLangChanged()">
             <option value="tr-TR" selected>Türkçe (tr-TR)</option>
             <option value="en-US">English (en-US)</option>
             <option value="ru-RU">Русский (ru-RU)</option>
@@ -688,6 +688,12 @@
       'ل': '.-..', 'م': '--', 'ن': '-.', 'ه': '..-..', 'و': '.--', 'ي': '..',
       'ى': '.-.-', 'ة': '..', 'ء': '.'
     };
+
+    const REVERSE_CYRILLIC = {};
+    for (const [k, v] of Object.entries(CYRILLIC_MORSE)) REVERSE_CYRILLIC[v] = k;
+
+    const REVERSE_ARABIC = {};
+    for (const [k, v] of Object.entries(ARABIC_MORSE)) REVERSE_ARABIC[v] = k;
 
     const PROSIGNS = [
       { name: '<AR>', code: '.-.-.', desc: 'Mesaj sonu (End of message)' },
@@ -1041,7 +1047,7 @@
         morseOutputHeader: "Generated Morse Code",
         speechLangLbl: "Recognition Language:",
         m2sTitle: "🗣️ Morse Code to Speech (Text & Audio File)",
-        m2sDesc: "Decode Morse code in Turkish or English from text or audio files and listen to synthesized speech.",
+        m2sDesc: "Decode Morse code in Turkish, English, Russian or Arabic from text or audio files and listen to synthesized speech.",
         m2sLangLbl: "Speech Language:",
         m2sMorseHeader: "Morse Code Input",
         m2sDecodedHeader: "Decoded Speech Text",
@@ -1065,7 +1071,7 @@
         morseOutputHeader: "Oluşturulan Mors Kodu",
         speechLangLbl: "Tanıma Dili:",
         m2sTitle: "🗣️ Mors Kodundan Konuşmaya (Morse to Speech)",
-        m2sDesc: "Metin veya ses dosyası (.wav) olarak yüklenen Türkçe veya İngilizce Mors kodunu çözün ve sesli olarak dinleyin.",
+        m2sDesc: "Metin veya ses dosyası (.wav) olarak yüklenen Türkçe, İngilizce, Rusça veya Arapça Mors kodunu çözün ve sesli olarak dinleyin.",
         m2sLangLbl: "Konuşma Dili:",
         m2sMorseHeader: "Mors Kodu Girişi",
         m2sDecodedHeader: "Çözülen Konuşma Metni",
@@ -1089,7 +1095,7 @@
         morseOutputHeader: "Erzeugter Morsecode",
         speechLangLbl: "Sprache:",
         m2sTitle: "🗣️ Morsecode zu Sprache (Text & Audiodatei)",
-        m2sDesc: "Dekodieren Sie Morsecode auf Türkisch oder Englisch aus Text oder Audiodateien und hören Sie Sprachausgabe.",
+        m2sDesc: "Dekodieren Sie Morsecode auf Türkisch, Englisch, Russisch oder Arabisch aus Text oder Audiodateien und hören Sie Sprachausgabe.",
         m2sLangLbl: "Sprache:",
         m2sMorseHeader: "Morsecode-Eingabe",
         m2sDecodedHeader: "Dekodierter Sprachtext",
@@ -1321,18 +1327,43 @@
     }
 
     // Morse to Speech Implementation (Text & Audio -> TTS)
-    function morseToTextString(morse) {
+    function morseToTextString(morse, lang) {
       if (!morse) return '';
+      const selectedLang = lang || (document.getElementById('m2sLang') ? document.getElementById('m2sLang').value : 'tr-TR');
+      let reverseTable = REVERSE_MORSE;
+      if (selectedLang === 'ar-SA') {
+        reverseTable = Object.assign({}, REVERSE_MORSE, REVERSE_ARABIC);
+      } else if (selectedLang === 'ru-RU') {
+        reverseTable = Object.assign({}, REVERSE_MORSE, REVERSE_CYRILLIC);
+      }
+
       // Split words by '/' or double spaces
       const words = morse.trim().split(/\s*\/\s*|\s{2,}/);
       return words.map(word => {
         const letters = word.trim().split(/\s+/);
-        return letters.map(sym => REVERSE_MORSE[sym] || '').join('');
+        return letters.map(sym => reverseTable[sym] || '').join('');
       }).join(' ');
     }
 
+    function onM2sLangChanged() {
+      const lang = document.getElementById('m2sLang').value || 'tr-TR';
+      const decodedBox = document.getElementById('m2sDecodedOutput');
+      if (decodedBox) {
+        decodedBox.dir = lang === 'ar-SA' ? 'rtl' : 'ltr';
+      }
+      const morseInput = document.getElementById('m2sMorseInput').value;
+      if (morseInput) {
+        document.getElementById('m2sDecodedOutput').value = morseToTextString(morseInput, lang);
+      }
+    }
+
     function onMorseToSpeechInput(val) {
-      const decoded = morseToTextString(val);
+      const lang = document.getElementById('m2sLang') ? document.getElementById('m2sLang').value : 'tr-TR';
+      const decodedBox = document.getElementById('m2sDecodedOutput');
+      if (decodedBox) {
+        decodedBox.dir = lang === 'ar-SA' ? 'rtl' : 'ltr';
+      }
+      const decoded = morseToTextString(val, lang);
       document.getElementById('m2sDecodedOutput').value = decoded;
     }
 
@@ -1358,8 +1389,9 @@
     function speakMorseDecodedText() {
       let text = document.getElementById('m2sDecodedOutput').value.trim();
       const morseInput = document.getElementById('m2sMorseInput').value.trim();
+      const lang = document.getElementById('m2sLang').value || 'tr-TR';
       if (!text && morseInput) {
-        text = morseToTextString(morseInput);
+        text = morseToTextString(morseInput, lang);
         document.getElementById('m2sDecodedOutput').value = text;
       }
 
@@ -1377,7 +1409,6 @@
 
       window.speechSynthesis.cancel(); // Stop any ongoing speech
 
-      const lang = document.getElementById('m2sLang').value || 'tr-TR';
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang;
       utterance.rate = 1.0;
@@ -1385,12 +1416,14 @@
 
       // Try selecting a native voice for the selected language
       const voices = window.speechSynthesis.getVoices();
-      const prefix = lang.startsWith('tr') ? 'tr' : 'en';
+      const prefix = lang.slice(0, 2).toLowerCase();
       const matched = voices.find(v => v.lang.toLowerCase().startsWith(prefix));
       if (matched) utterance.voice = matched;
 
       utterance.onstart = () => {
-        status.textContent = lang === 'tr-TR' ? 'Konuşuluyor (Türkçe)...' : 'Speaking (English)...';
+        status.textContent = lang === 'ar-SA' ? 'يتحدث (العربية)...' :
+                             lang === 'ru-RU' ? 'Говорит (Русский)...' :
+                             lang === 'tr-TR' ? 'Konuşuluyor (Türkçe)...' : 'Speaking (English)...';
       };
 
       utterance.onend = () => {
