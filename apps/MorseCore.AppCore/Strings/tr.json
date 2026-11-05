@@ -66,7 +66,7 @@
   "updateAvailable": "Yeni sürüm hazır",
   "updateUnavailable": "Güncelleme kontrolü tamamlanamadı. Çevrimdışı devam edebilirsin.",
   "openRelease": "Sürümü görüntüle",
-  "loading": "MorseCore yükleniyor",
+  "loading": "MorsLab yükleniyor",
   "loadingSettings": "Tercihler hazırlanıyor…",
   "loadingEngine": "Dönüşüm motoru hazırlanıyor…",
   "nativeUnavailable": "Dönüşüm motoru yüklenemedi. Uygulama paketini yeniden kur.",
@@ -75,7 +75,7 @@
   "closePane": "Menüyü daralt",
   "openPane": "Menüyü genişlet",
   "saveError": "Tercihler kaydedilemedi.",
-  "about": "MorseCore · Apache 2.0",
+  "about": "MorsLab · Apache 2.0",
   "missingInput": "Önce dönüştürülecek bir metin gir.",
   "practiceEnded": "Oturum tamamlandı.",
   "mode": "Alıştırma türü",
@@ -113,7 +113,7 @@
   "creditsLicenseNote": "Motorların ve ses modellerinin lisansları ayrıdır; her kaynağın kendi lisansı geçerlidir.",
   "installUpdate": "İndir ve yükle",
   "updateDownloading": "Güncelleme indiriliyor ve doğrulanıyor…",
-  "updateConfirm": "Güncelleme doğrulandı. Kurulumu açmak için onayla. MorseCore kapanacak; dosyaların, ayarların ve ses paketin korunacak.",
+  "updateConfirm": "Güncelleme doğrulandı. Kurulumu açmak için onayla. MorsLab kapanacak; dosyaların, ayarların ve ses paketin korunacak.",
   "updateInstallClose": "Kur ve uygulamayı kapat",
   "cancelUpdate": "İptal",
   "updateFailed": "Güncelleme indirilemedi veya doğrulanamadı. Yeniden dene ya da sürüm sayfasından indir.",
@@ -282,5 +282,5 @@
   "speechStatusSpeaking": "Konuşuluyor...",
   "transcribingMorseAudio": "Mors ses dosyası analiz ediliyor...",
   "userGuide": "Kullanım Kılavuzu & Özellikler",
-  "userGuideHint": "MorseCore uygulamasının tüm modülleri, telsiz entegrasyonu, ses özellikleri ve kullanım rehberi."
+  "userGuideHint": "MorsLab uygulamasının tüm modülleri, telsiz entegrasyonu, ses özellikleri ve kullanım rehberi."
 }

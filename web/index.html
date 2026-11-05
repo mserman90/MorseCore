@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MorseCore — Text, Signals and Speech</title>
+  <title>MorsLab — Text, Signals and Speech</title>
   <link rel="icon" type="image/svg+xml" href="morsecore.svg">
-  <meta name="description" content="MorseCore: Free cross-platform tool for converting text to Morse code, listening, practicing and amateur radio tools.">
+  <meta name="description" content="MorsLab: Free cross-platform tool for converting text to Morse code, listening, practicing and amateur radio tools.">
   <style>
     :root {
       --bg-canvas: #FAF8F2;
@@ -383,8 +383,8 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <img src="morsecore.svg" alt="MorseCore">
-        <span>MorseCore Web</span>
+        <img src="morsecore.svg" alt="MorsLab">
+        <span>MorsLab Web</span>
       </a>
       <div class="nav-tools">
         <button onclick="switchMainTab('guide')" id="navGuideBtn" style="font-weight:600;">📖 Rehber / Guide</button>
@@ -595,7 +595,7 @@
     <!-- Comprehensive User Guide & Features Manual -->
     <section class="card" id="userGuideCard">
       <h2 class="card-title" id="t-guideTitle">📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)</h2>
-      <p class="card-desc" id="t-guideDesc">MorseCore web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.</p>
+      <p class="card-desc" id="t-guideDesc">MorsLab web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.</p>
 
       <div class="controls-bar" style="margin-bottom: 1.25rem;">
         <input type="text" id="guideSearchInput" placeholder="Rehberde ara (örn: konuşma, telsiz, WAV, WPM, mikrofon)..." oninput="filterWebGuide(this.value)" style="width: 100%; max-width: 450px;">
@@ -693,7 +693,7 @@
   </main>
 
   <footer>
-    <p>MorseCore &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
+    <p>MorsLab &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
   </footer>
 
   <script>
@@ -978,7 +978,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'morsecore-' + Date.now() + '.wav';
+      a.download = 'morslab-' + Date.now() + '.wav';
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -1100,7 +1100,7 @@
         m2sMorseHeader: "Morse Code Input",
         m2sDecodedHeader: "Decoded Speech Text",
         guideTitle: "📖 User Guide & Features Manual",
-        guideDesc: "Comprehensive guide to all MorseCore web and desktop capabilities, radio integration and step-by-step tutorials.",
+        guideDesc: "Comprehensive guide to all MorsLab web and desktop capabilities, radio integration and step-by-step tutorials.",
         practiceKeyer: "CW Practice Keyer",
         practiceDesc: "Hold the key button or press Spacebar on your keyboard to practice timing and sending Morse.",
         prosigns: "Morse Alphabet & Amateur Radio Reference",
@@ -1126,7 +1126,7 @@
         m2sMorseHeader: "Mors Kodu Girişi",
         m2sDecodedHeader: "Çözülen Konuşma Metni",
         guideTitle: "📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)",
-        guideDesc: "MorseCore web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.",
+        guideDesc: "MorsLab web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.",
         practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
         practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
         prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
@@ -1152,7 +1152,7 @@
         m2sMorseHeader: "Morsecode-Eingabe",
         m2sDecodedHeader: "Dekodierter Sprachtext",
         guideTitle: "📖 Benutzerhandbuch & Funktionsübersicht",
-        guideDesc: "Umfassender Leitfaden zu allen Web- und Desktop-Funktionen von MorseCore, Funkintegration und Anleitungen.",
+        guideDesc: "Umfassender Leitfaden zu allen Web- und Desktop-Funktionen von MorsLab, Funkintegration und Anleitungen.",
         practiceKeyer: "CW-Übungstaste (Keyer)",
         practiceDesc: "Halten Sie die Taste gedrückt oder nutzen Sie die Leertaste, um Ihren Morserhythmus zu üben.",
         prosigns: "Morse-Alphabet & Funkbetriebszeichen",
@@ -1178,7 +1178,7 @@
         m2sMorseHeader: "Ввод азбуки Морзе" ,
         m2sDecodedHeader: "Декодированный текст речи",
         guideTitle: "📖 Руководство пользователя и функции",
-        guideDesc: "Полное руководство по веб- и десктопным возможностям MorseCore, радиоинтеграции и пошаговым урокам.",
+        guideDesc: "Полное руководство по веб- и десктопным возможностям MorsLab, радиоинтеграции и пошаговым урокам.",
         practiceKeyer: "Практический ключ CW (Keyer)",
         practiceDesc: "Удерживайте клавишу или используйте Пробел на клавиатуре для тренировки ритма Морзе.",
         prosigns: "Азбука Морзе и радиокоды (Q-коды)",
@@ -1204,7 +1204,7 @@
         m2sMorseHeader: "إدخال شفرة مورس",
         m2sDecodedHeader: "النص المفكوك تشفيره",
         guideTitle: "📖 دليل الاستخدام والميزات",
-        guideDesc: "دليل شامل لجميع إمكانيات مورس كور على الويب والحاسوب، وتكامل أجهزة اللاسلكي والشروحات.",
+        guideDesc: "دليل شامل لجميع إمكانيات مورس لاب (MorsLab) على الويب والحاسوب، وتكامل أجهزة اللاسلكي والشروحات.",
         practiceKeyer: "مفتاح مورس للتدريب (CW Keyer)",
         practiceDesc: "اضغط مطولاً على الزر أو استخدم زر المسافة (Space) على لوحة المفاتيح لتطوير مهارات وإيقاع مورس.",
         prosigns: "أبجدية مورس ورموز الراديو (Q-Codes)",
@@ -1215,7 +1215,10 @@
     };
 
     function changeLanguage(lang) {
-      try { localStorage.setItem('morsecore_lang', lang); } catch(e){}
+      try { 
+        localStorage.setItem('morslab_lang', lang);
+        localStorage.setItem('morsecore_lang', lang); 
+      } catch(e){}
       const sel = document.getElementById('langSelect');
       if (sel && sel.value !== lang) sel.value = lang;
 
@@ -1628,9 +1631,9 @@
     }
 
     // Default / saved language
-    const savedLang = localStorage.getItem('morsecore_lang') || 'tr';
+    const savedLang = localStorage.getItem('morslab_lang') || localStorage.getItem('morsecore_lang') || 'tr';
     changeLanguage(savedLang);
-    document.getElementById('inputText').value = 'SOS MorseCore';
+    document.getElementById('inputText').value = 'SOS MorsLab';
     convertNow();
   </script>
 </body>

@@ -66,7 +66,7 @@
   "updateAvailable": "Update available",
   "updateUnavailable": "Update check unavailable. You can continue offline.",
   "openRelease": "View release",
-  "loading": "Loading MorseCore",
+  "loading": "Loading MorsLab",
   "loadingSettings": "Loading preferences…",
   "loadingEngine": "Preparing the conversion engine…",
   "nativeUnavailable": "The conversion engine could not be loaded. Reinstall the app package.",
@@ -75,7 +75,7 @@
   "closePane": "Collapse menu",
   "openPane": "Expand menu",
   "saveError": "Could not save preferences.",
-  "about": "MorseCore · Apache 2.0",
+  "about": "MorsLab · Apache 2.0",
   "missingInput": "Enter some text first.",
   "practiceEnded": "Session complete.",
   "mode": "Practice mode",
@@ -113,7 +113,7 @@
   "creditsLicenseNote": "Engines and voice models have separate licenses; each source retains its own license.",
   "installUpdate": "Download and install",
   "updateDownloading": "Downloading and verifying the update…",
-  "updateConfirm": "Update verified. Confirm to open Setup. MorseCore will close; your files, settings and voice pack will be kept.",
+  "updateConfirm": "Update verified. Confirm to open Setup. MorsLab will close; your files, settings and voice pack will be kept.",
   "updateInstallClose": "Install and close app",
   "cancelUpdate": "Cancel",
   "updateFailed": "The update could not be downloaded or verified. Retry or download it from the release page.",
@@ -282,5 +282,5 @@
   "speechStatusSpeaking": "Speaking...",
   "transcribingMorseAudio": "Analyzing Morse audio file...",
   "userGuide": "User Guide & Features",
-  "userGuideHint": "Comprehensive guide to all MorseCore modules, radio integration, speech tools, and tutorials."
+  "userGuideHint": "Comprehensive guide to all MorsLab modules, radio integration, speech tools, and tutorials."
 }

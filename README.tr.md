@@ -16,7 +16,7 @@
 
 </div>
 
-MorseCore; çift yönlü Mors kodu çevirisi, gerçek zamanlı DSP çözümü, amatör telsiz seri port anahtarlaması (Rig Keying) ve Türkçe & İngilizce çift yönlü konuşma (Konuşma-Mors ve Mors-Konuşma) özelliklerine sahip açık kaynaklı, çok platformlu (Web, Windows, macOS, Linux) bir Mors ekosistemidir.
+MorsLab; çift yönlü Mors kodu çevirisi, gerçek zamanlı DSP çözümü, amatör telsiz seri port anahtarlaması (Rig Keying) ve Türkçe & İngilizce çift yönlü konuşma (Konuşma-Mors ve Mors-Konuşma) özelliklerine sahip açık kaynaklı, çok platformlu (Web, Windows, macOS, Linux) bir Mors ekosistemidir.
 
 ---
 
@@ -65,7 +65,7 @@ MorseCore; çift yönlü Mors kodu çevirisi, gerçek zamanlı DSP çözümü, a
 
 </div>
 
-MorseCore; metni Morse koduna çevirmek, dinlemek ve alıştırma yapmak için ücretsiz bir Windows, macOS ve Linux uygulamasıdır. Mesajların bilgisayarında kalır.
+MorsLab; metni Morse koduna çevirmek, dinlemek ve alıştırma yapmak için ücretsiz bir Windows, macOS ve Linux uygulamasıdır. Mesajların bilgisayarında kalır.
 
 ![Türkçe MorseCore: solda metin, sağda Morse kodu](docs/media/converter.tr.png)
 

@@ -25,7 +25,7 @@ public partial class App : Application
 #else
         await Task.CompletedTask;
 #endif
-        MainWindow=new Window { Title="MorseCore" };
+        MainWindow=new Window { Title="MorsLab" };
         var page=new MainPage(); MainWindow.Content=page;
         WindowChrome.Configure(MainWindow);
         MainWindow.Closed+=(_,_)=>

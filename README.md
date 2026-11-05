@@ -16,7 +16,7 @@
 
 </div>
 
-MorseCore is an open-source, multiplatform suite (Web, Windows, macOS, Linux) for bidirectional Morse code conversion, real-time DSP decoding, amateur radio hardware rig keying, and bidirectional speech (Speech-to-Morse and Morse-to-Speech) in Turkish and English.
+MorsLab is an open-source, multiplatform suite (Web, Windows, macOS, Linux) for bidirectional Morse code conversion, real-time DSP decoding, amateur radio hardware rig keying, and bidirectional speech (Speech-to-Morse and Morse-to-Speech) in Turkish and English.
 
 ---
 
@@ -65,7 +65,7 @@ MorseCore is an open-source, multiplatform suite (Web, Windows, macOS, Linux) fo
 
 </div>
 
-MorseCore is a free Windows, macOS and Linux app for converting text to Morse code, listening and practicing. Your messages stay on your computer.
+MorsLab is a free Windows, macOS and Linux app for converting text to Morse code, listening and practicing. Your messages stay on your computer.
 
 ![MorseCore in English: text on the left, Morse code on the right](docs/media/converter.en.png)
 
