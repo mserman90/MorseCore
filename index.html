@@ -119,6 +119,39 @@
       color: #FFFFFF;
     }
 
+    .tab-nav {
+      display: flex;
+      gap: 0.6rem;
+      max-width: 1100px;
+      width: 100%;
+      margin: 1.25rem auto 0 auto;
+      padding: 0 1rem;
+    }
+
+    .tab-btn {
+      padding: 0.65rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
     main {
       flex: 1;
       max-width: 1100px;
@@ -354,7 +387,7 @@
         <span>MorseCore Web</span>
       </a>
       <div class="nav-tools">
-        <button onclick="scrollToUserGuide()" id="navGuideBtn" style="font-weight:600;">📖 Rehber / Guide</button>
+        <button onclick="switchMainTab('guide')" id="navGuideBtn" style="font-weight:600;">📖 Rehber / Guide</button>
         <select id="langSelect" onchange="changeLanguage(this.value)">
           <option value="tr">Türkçe</option>
           <option value="en" selected>English</option>
@@ -368,8 +401,16 @@
     </div>
   </header>
 
+  <!-- Navigation Tabs (Tools vs Guide) -->
+  <nav class="tab-nav">
+    <button id="tabBtnTools" class="tab-btn active" onclick="switchMainTab('tools')">⚡ Çevirici & Ses Araçları</button>
+    <button id="tabBtnGuide" class="tab-btn" onclick="switchMainTab('guide')">📖 Rehber & Referans</button>
+  </nav>
+
   <main>
-    <!-- Converter Card -->
+    <!-- TAB 1: CONVERTER & AUDIO TOOLS -->
+    <div id="toolsSection" style="display:flex; flex-direction:column; gap:1.75rem;">
+      <!-- Converter Card -->
     <section class="card">
       <h2 class="card-title" id="t-converter">Mors Kodu Çevirici & Ses Çalar</h2>
       <p class="card-desc" id="t-converterDesc">Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.</p>
@@ -546,14 +587,10 @@
         </div>
       </div>
     </section>
+    </div>
 
-    <!-- Cheat Sheet / Prosigns -->
-    <section class="card">
-      <h2 class="card-title" id="t-prosigns">Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)</h2>
-      <p class="card-desc" id="t-prosignsDesc">Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.</p>
-      <div class="cheat-grid" id="cheatGrid"></div>
-    </section>
-
+    <!-- TAB 2: GUIDE & REFERENCE SECTION -->
+    <div id="guideSection" style="display:none; flex-direction:column; gap:1.75rem;">
     <!-- Comprehensive User Guide & Features Manual -->
     <section class="card" id="userGuideCard">
       <h2 class="card-title" id="t-guideTitle">📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)</h2>
@@ -581,7 +618,7 @@
           <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🎙️ 2. Konuşmayı Mors Koduna Dönüştür (Speech-to-Morse)</h3>
           <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Mikrofona konuşulan Türkçe veya İngilizce sözcükleri ya da yüklenen ses dosyalarını gerçek zamanlı olarak Mors koduna dönüştürün.</p>
           <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Tanıma Dili:</strong> Açılır menüden <code>Türkçe (tr-TR)</code> veya <code>English (en-US)</code> seçin.</li>
+            <li><strong>Tanıma Dili:</strong> Açılır menüden <code>Türkçe (tr-TR)</code>, <code>English (en-US)</code>, <code>Русский (ru-RU)</code> veya <code>العربية (ar-SA)</code> seçin.</li>
             <li><strong>Canlı Mikrofon:</strong> <code>🎙️ Dinlemeyi Başlat</code> butonuna basın ve mikrofona konuşun. Söyledikleriniz hem metin hem de anında Mors kodu olarak belirecektir.</li>
             <li><strong>Ses Dosyası:</strong> <code>📁 Ses Dosyası Seç</code> butonuyla konuşma içeren bir ses dosyasını yükleyebilirsiniz.</li>
             <li><strong>Oynat & Kopyala:</strong> Oluşan Mors kodunu <code>🔊 Mors Oynat</code> ile dinleyebilir veya <code>📋 Mors Kopyala</code> ile panoya kopyalayabilirsiniz.</li>
@@ -625,6 +662,13 @@
       </div>
     </section>
 
+    <!-- Cheat Sheet / Prosigns (Morse Alphabet & Amateur Radio Reference) -->
+    <section class="card" id="cheatSheetCard">
+      <h2 class="card-title" id="t-prosigns">Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)</h2>
+      <p class="card-desc" id="t-prosignsDesc">Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.</p>
+      <div class="cheat-grid" id="cheatGrid"></div>
+    </section>
+
     <!-- Desktop Downloads -->
     <section class="card">
       <h2 class="card-title" id="t-downloads">Masaüstü Uygulamasını İndirin</h2>
@@ -644,6 +688,7 @@
         </a>
       </div>
     </section>
+    </div>
   </main>
 
   <footer>
@@ -1037,6 +1082,8 @@
     // Multi-Language Support
     const I18N = {
       en: {
+        tabTools: "⚡ Converter & Audio Tools",
+        tabGuide: "📖 Guide & Reference",
         converter: "Morse Code Converter & Audio Player",
         converterDesc: "Convert text and Morse code bidirectionally, listen with authentic CW tones, or export to WAV.",
         clear: "Clear",
@@ -1061,6 +1108,8 @@
         downloadsDesc: "Get the full desktop app with offline AI neural voices (Piper, EMA Lightning), microphone decoding and QSO logbook."
       },
       tr: {
+        tabTools: "⚡ Çevirici & Ses Araçları",
+        tabGuide: "📖 Rehber & Referans",
         converter: "Mors Kodu Çevirici & Ses Çalar",
         converterDesc: "Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.",
         clear: "Temizle",
@@ -1085,6 +1134,8 @@
         downloadsDesc: "Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin."
       },
       de: {
+        tabTools: "⚡ Konverter & Audiotools",
+        tabGuide: "📖 Handbuch & Referenz",
         converter: "Morsecode-Konverter & Audioplayer",
         converterDesc: "Konvertieren Sie Text und Morsecode bidirektional, hören Sie authentische CW-Töne oder exportieren Sie WAV.",
         clear: "Löschen",
@@ -1112,6 +1163,8 @@
 
     function changeLanguage(lang) {
       const t = I18N[lang] || I18N.en;
+      if (document.getElementById('tabBtnTools')) document.getElementById('tabBtnTools').textContent = t.tabTools;
+      if (document.getElementById('tabBtnGuide')) document.getElementById('tabBtnGuide').textContent = t.tabGuide;
       document.getElementById('t-converter').textContent = t.converter;
       document.getElementById('t-converterDesc').textContent = t.converterDesc;
       document.getElementById('t-clear').textContent = t.clear;
@@ -1470,9 +1523,29 @@
       document.getElementById('m2sStatus').textContent = 'Temizlendi';
     }
 
+    function switchMainTab(tabId) {
+      const toolsSec = document.getElementById('toolsSection');
+      const guideSec = document.getElementById('guideSection');
+      const tabTools = document.getElementById('tabBtnTools');
+      const tabGuide = document.getElementById('tabBtnGuide');
+
+      if (tabId === 'guide') {
+        toolsSec.style.display = 'none';
+        guideSec.style.display = 'flex';
+        tabTools.classList.remove('active');
+        tabGuide.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        guideSec.style.display = 'none';
+        toolsSec.style.display = 'flex';
+        tabGuide.classList.remove('active');
+        tabTools.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
     function scrollToUserGuide() {
-      const el = document.getElementById('userGuideCard');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      switchMainTab('guide');
     }
 
     function filterWebGuide(query) {
