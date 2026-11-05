@@ -37,6 +37,17 @@ public sealed class SpeechToMorseService : IDisposable
         }
     }
 
+    private static (string culture, MorseAlphabet alphabet) ResolveCultureAndAlphabet(string languageCode)
+    {
+        if (languageCode.StartsWith("ar", StringComparison.OrdinalIgnoreCase))
+            return ("ar-SA", MorseAlphabet.Arabic);
+        if (languageCode.StartsWith("ru", StringComparison.OrdinalIgnoreCase))
+            return ("ru-RU", MorseAlphabet.Cyrillic);
+        if (languageCode.StartsWith("tr", StringComparison.OrdinalIgnoreCase))
+            return ("tr-TR", MorseAlphabet.Latin);
+        return ("en-US", MorseAlphabet.Latin);
+    }
+
     public async Task StartLiveListeningAsync(
         string languageCode,
         Action<string, string> onProgress,
@@ -45,13 +56,20 @@ public sealed class SpeechToMorseService : IDisposable
     {
         if (_isListening) return;
 
-        string culture = languageCode.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ? "tr-TR" : "en-US";
+        var (culture, alphabet) = ResolveCultureAndAlphabet(languageCode);
         _listeningCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
 #if MORSE_WINUI
         try
         {
-            onStatus(languageCode.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ? "Mikrofon dinleniyor (Türkçe)..." : "Listening to microphone (English)...");
+            string statusMsg = culture switch
+            {
+                "ar-SA" => "جارٍ الاستماع للميكروفون (العربية)...",
+                "ru-RU" => "Прослушивание микрофона (Русский)...",
+                "tr-TR" => "Mikrofon dinleniyor (Türkçe)...",
+                _ => "Listening to microphone (English)..."
+            };
+            onStatus(statusMsg);
             var lang = new Language(culture);
             _recognizer = new SpeechRecognizer(lang);
 
@@ -61,7 +79,7 @@ public sealed class SpeechToMorseService : IDisposable
             {
                 if (args.Result?.Text is { } spoken && !string.IsNullOrWhiteSpace(spoken))
                 {
-                    string morse = MorseEngine.Encode(spoken, MorseAlphabet.Latin).Text;
+                    string morse = MorseEngine.Encode(spoken, alphabet).Text;
                     onProgress(spoken, morse);
                 }
             };
@@ -95,7 +113,7 @@ public sealed class SpeechToMorseService : IDisposable
         if (!File.Exists(audioFilePath))
             throw new FileNotFoundException("Audio file not found.", audioFilePath);
 
-        string culture = languageCode.StartsWith("tr", StringComparison.OrdinalIgnoreCase) ? "tr-TR" : "en-US";
+        var (culture, alphabet) = ResolveCultureAndAlphabet(languageCode);
 
 #if MORSE_WINUI
         var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(audioFilePath);
@@ -106,7 +124,7 @@ public sealed class SpeechToMorseService : IDisposable
         var operation = await recognizer.RecognizeAsync();
         string spoken = operation.Text ?? "";
         string morse = !string.IsNullOrWhiteSpace(spoken)
-            ? MorseEngine.Encode(spoken, MorseAlphabet.Latin).Text
+            ? MorseEngine.Encode(spoken, alphabet).Text
             : "";
 
         return new SpeechToMorseResult(spoken, morse, culture);

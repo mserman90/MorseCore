@@ -106,8 +106,8 @@ public sealed partial class MainPage
 
         var configRow = Row();
         configRow.Spacing = 16;
-        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)" };
-        var langValues = new[] { "tr-TR", "en-US" };
+        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)", "Русский (ru-RU)", "العربية (ar-SA)" };
+        var langValues = new[] { "tr-TR", "en-US", "ru-RU", "ar-SA" };
         var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, speechToMorseLang), i =>
         {
             if (i >= 0 && i < langValues.Length) speechToMorseLang = langValues[i];
@@ -138,6 +138,13 @@ public sealed partial class MainPage
 
         var statusInfo = Label(T("speechStatusReady"), 12, true);
 
+        MorseAlphabet CurrentSpeechAlphabet() => speechToMorseLang switch
+        {
+            "ar-SA" => MorseAlphabet.Arabic,
+            "ru-RU" => MorseAlphabet.Cyrillic,
+            _ => MorseAlphabet.Latin
+        };
+
         void UpdateTranscription(string text)
         {
             _ = DispatcherQueue.TryEnqueue(() =>
@@ -145,7 +152,7 @@ public sealed partial class MainPage
                 spokenBox.Text = text;
                 if (!string.IsNullOrWhiteSpace(text))
                 {
-                    morseBox.Text = MorseEngine.Encode(text, preferences.Alphabet, preferences.Separator).Text;
+                    morseBox.Text = MorseEngine.Encode(text, CurrentSpeechAlphabet(), preferences.Separator).Text;
                 }
                 else
                 {
@@ -158,7 +165,7 @@ public sealed partial class MainPage
         {
             if (!speechToMorseListening && !string.IsNullOrWhiteSpace(spokenBox.Text))
             {
-                morseBox.Text = MorseEngine.Encode(spokenBox.Text, preferences.Alphabet, preferences.Separator).Text;
+                morseBox.Text = MorseEngine.Encode(spokenBox.Text, CurrentSpeechAlphabet(), preferences.Separator).Text;
             }
         };
 
@@ -309,8 +316,8 @@ public sealed partial class MainPage
 
         var configRow = Row();
         configRow.Spacing = 16;
-        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)" };
-        var langValues = new[] { "tr-TR", "en-US" };
+        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)", "Русский (ru-RU)", "العربية (ar-SA)" };
+        var langValues = new[] { "tr-TR", "en-US", "ru-RU", "ar-SA" };
         var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, morseToSpeechLang), i =>
         {
             if (i >= 0 && i < langValues.Length) morseToSpeechLang = langValues[i];

@@ -267,7 +267,7 @@
   "decoderLiveStream": "Canlı Akış Çözümü",
   "noSerialPorts": "Kullanılabilir seri COM portu bulunamadı.",
   "speechToMorse": "Konuşmayı Mors'a Çevir",
-  "speechToMorseDesc": "Türkçe ve İngilizce canlı konuşmayı veya ses dosyasını dinleyip anında Mors koduna dönüştürün.",
+  "speechToMorseDesc": "Türkçe, İngilizce, Rusça ve Arapça canlı konuşmayı veya ses dosyasını dinleyip anında Mors koduna dönüştürün.",
   "startListening": "Dinlemeyi Başlat",
   "stopListening": "Dinlemeyi Durdur",
   "chooseAudioSpeech": "Konuşma Ses Dosyası Seç (.wav/.mp3)",

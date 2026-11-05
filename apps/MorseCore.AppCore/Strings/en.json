@@ -267,7 +267,7 @@
   "decoderLiveStream": "Live Streaming Decode",
   "noSerialPorts": "No available serial COM ports found.",
   "speechToMorse": "Speech to Morse",
-  "speechToMorseDesc": "Listen to live speech or an audio file in Turkish or English and instantly convert to Morse code.",
+  "speechToMorseDesc": "Listen to live speech or an audio file in Turkish, English, Russian or Arabic and instantly convert to Morse code.",
   "startListening": "Start Listening",
   "stopListening": "Stop Listening",
   "chooseAudioSpeech": "Choose Speech Audio File (.wav/.mp3)",

@@ -459,9 +459,11 @@
       <div class="controls-bar">
         <div class="group-left">
           <label for="speechLang" style="font-weight:600; font-size:0.9rem;" id="t-speechLangLbl">Tanıma Dili:</label>
-          <select id="speechLang">
+          <select id="speechLang" onchange="onSpeechLangChanged()">
             <option value="tr-TR" selected>Türkçe (tr-TR)</option>
             <option value="en-US">English (en-US)</option>
+            <option value="ru-RU">Русский (ru-RU)</option>
+            <option value="ar-SA">العربية (ar-SA)</option>
           </select>
 
           <button id="startSpeechBtn" class="btn-primary" onclick="toggleSpeechRecognition()">🎙️ Dinlemeyi Başlat</button>
@@ -508,6 +510,8 @@
           <select id="m2sLang">
             <option value="tr-TR" selected>Türkçe (tr-TR)</option>
             <option value="en-US">English (en-US)</option>
+            <option value="ru-RU">Русский (ru-RU)</option>
+            <option value="ar-SA">العربية (ar-SA)</option>
           </select>
 
           <label class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
@@ -664,6 +668,26 @@
 
     const REVERSE_MORSE = {};
     for (const [k, v] of Object.entries(MORSE_TABLE)) REVERSE_MORSE[v] = k;
+
+    // Cyrillic (Russian) Morse Table
+    const CYRILLIC_MORSE = {
+      'А': '.-', 'Б': '-...', 'В': '.--', 'Г': '--.', 'Д': '-..', 'Е': '.', 'Ё': '.',
+      'Ж': '...-', 'З': '--..', 'И': '..', 'Й': '.---', 'К': '-.-', 'Л': '.-..',
+      'М': '--', 'Н': '-.', 'О': '---', 'П': '.--.', 'Р': '.-.', 'С': '...',
+      'Т': '-', 'У': '..-', 'Ф': '..-.', 'Х': '....', 'Ц': '-.-.', 'Ч': '---.',
+      'Ш': '----', 'Щ': '--.-', 'Ъ': '--.--', 'Ы': '-.--', 'Ь': '-..-', 'Э': '..-..',
+      'Ю': '..--', 'Я': '.-.-'
+    };
+
+    // Arabic Morse Table
+    const ARABIC_MORSE = {
+      'ا': '.-', 'أ': '.-', 'إ': '.-', 'آ': '.-', 'ب': '-...', 'ت': '-', 'ث': '-.-.',
+      'ج': '.---', 'ح': '....', 'خ': '---', 'د': '-..', 'ذ': '--..', 'ر': '.-.',
+      'ز': '---.', 'س': '...', 'ش': '----', 'ص': '-..-', 'ض': '...-', 'ط': '..-',
+      'ظ': '-.--', 'ع': '.-.-', 'غ': '--.', 'ف': '..-.', 'ق': '--.-', 'ك': '-.-',
+      'ل': '.-..', 'م': '--', 'ن': '-.', 'ه': '..-..', 'و': '.--', 'ي': '..',
+      'ى': '.-.-', 'ة': '..', 'ء': '.'
+    };
 
     const PROSIGNS = [
       { name: '<AR>', code: '.-.-.', desc: 'Mesaj sonu (End of message)' },
@@ -1012,7 +1036,7 @@
         clear: "Clear",
         copy: "Copy",
         speechTitle: "🎙️ Speech to Morse Code (Live & Audio File)",
-        speechDesc: "Speak into your microphone in Turkish or English, or load an audio file to convert speech to Morse code in real-time.",
+        speechDesc: "Speak into your microphone in Turkish, English, Russian or Arabic, or load an audio file to convert speech to Morse code in real-time.",
         spokenHeader: "Transcribed Speech Text",
         morseOutputHeader: "Generated Morse Code",
         speechLangLbl: "Recognition Language:",
@@ -1036,7 +1060,7 @@
         clear: "Temizle",
         copy: "Kopyala",
         speechTitle: "🎙️ Konuşmayı Mors Koduna Dönüştür (Speech to Morse)",
-        speechDesc: "Türkçe veya İngilizce canlı mikrofon konuşmanızı veya ses dosyasını dinleyerek anında Mors koduna dönüştürün.",
+        speechDesc: "Türkçe, İngilizce, Rusça veya Arapça canlı mikrofon konuşmanızı veya ses dosyasını dinleyerek anında Mors koduna dönüştürün.",
         spokenHeader: "Algılanan Konuşma Metni",
         morseOutputHeader: "Oluşturulan Mors Kodu",
         speechLangLbl: "Tanıma Dili:",
@@ -1060,7 +1084,7 @@
         clear: "Löschen",
         copy: "Kopieren",
         speechTitle: "🎙️ Sprache zu Morsecode (Live & Audiodatei)",
-        speechDesc: "Sprechen Sie auf Türkisch oder Englisch ins Mikrofon oder laden Sie eine Audiodatei, um Sprache in Morsecode umzuwandeln.",
+        speechDesc: "Sprechen Sie auf Türkisch, Englisch, Russisch oder Arabisch ins Mikrofon oder laden Sie eine Audiodatei, um Sprache in Morsecode umzuwandeln.",
         spokenHeader: "Erkannter Sprachtext",
         morseOutputHeader: "Erzeugter Morsecode",
         speechLangLbl: "Sprache:",
@@ -1112,15 +1136,40 @@
     let speechMorsePlaying = false;
     let speechPlayTimeout = null;
 
-    function textToMorseString(text) {
-      return text.toUpperCase().split('').map(ch => {
+    function textToMorseString(text, lang) {
+      if (!text) return '';
+      const selectedLang = lang || (document.getElementById('speechLang') ? document.getElementById('speechLang').value : 'tr-TR');
+      const isArabic = selectedLang === 'ar-SA' || /[\u0600-\u06FF]/.test(text);
+      const isCyrillic = selectedLang === 'ru-RU' || /[\u0400-\u04FF]/.test(text);
+
+      let table = MORSE_TABLE;
+      if (isArabic) {
+        table = Object.assign({}, MORSE_TABLE, ARABIC_MORSE);
+      } else if (isCyrillic) {
+        table = Object.assign({}, MORSE_TABLE, CYRILLIC_MORSE);
+      }
+
+      const upper = text.toUpperCase();
+      return upper.split('').map(ch => {
         if (ch === ' ' || ch === '\n') return '/';
-        return MORSE_TABLE[ch] || '';
+        return table[ch] || '';
       }).filter(Boolean).join(' ');
     }
 
+    function onSpeechLangChanged() {
+      const lang = document.getElementById('speechLang').value || 'tr-TR';
+      const textOutput = document.getElementById('speechTextOutput');
+      if (textOutput) {
+        textOutput.dir = lang === 'ar-SA' ? 'rtl' : 'ltr';
+        if (textOutput.value) {
+          document.getElementById('speechMorseOutput').value = textToMorseString(textOutput.value, lang);
+        }
+      }
+    }
+
     function onSpeechManualInput(val) {
-      document.getElementById('speechMorseOutput').value = textToMorseString(val);
+      const lang = document.getElementById('speechLang') ? document.getElementById('speechLang').value : 'tr-TR';
+      document.getElementById('speechMorseOutput').value = textToMorseString(val, lang);
     }
 
     function toggleSpeechRecognition() {
@@ -1144,6 +1193,7 @@
       }
 
       const lang = document.getElementById('speechLang').value || 'tr-TR';
+      onSpeechLangChanged();
       recognitionInstance = new SpeechRecognition();
       recognitionInstance.lang = lang;
       recognitionInstance.continuous = true;
@@ -1153,7 +1203,9 @@
         isSpeechListening = true;
         btn.textContent = '⏹️ Dinlemeyi Durdur';
         btn.classList.remove('btn-primary');
-        status.textContent = lang === 'tr-TR' ? 'Dinleniyor (Türkçe)...' : 'Listening (English)...';
+        status.textContent = lang === 'ar-SA' ? 'جارٍ الاستماع (العربية)...' :
+                             lang === 'ru-RU' ? 'Прослушивание (Русский)...' :
+                             lang === 'tr-TR' ? 'Dinleniyor (Türkçe)...' : 'Listening (English)...';
       };
 
       recognitionInstance.onresult = (event) => {
@@ -1163,7 +1215,7 @@
         }
         fullTranscript = fullTranscript.trim();
         document.getElementById('speechTextOutput').value = fullTranscript;
-        document.getElementById('speechMorseOutput').value = textToMorseString(fullTranscript);
+        document.getElementById('speechMorseOutput').value = textToMorseString(fullTranscript, lang);
       };
 
       recognitionInstance.onerror = (event) => {
@@ -1174,7 +1226,8 @@
         isSpeechListening = false;
         btn.textContent = '🎙️ Dinlemeyi Başlat';
         btn.classList.add('btn-primary');
-        if (status.textContent.startsWith('Dinleniyor') || status.textContent.startsWith('Listening')) {
+        if (status.textContent.startsWith('Dinleniyor') || status.textContent.startsWith('Listening') ||
+            status.textContent.startsWith('Прослушивание') || status.textContent.startsWith('جارٍ')) {
           status.textContent = 'Hazır';
         }
       };
