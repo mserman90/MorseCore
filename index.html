@@ -417,56 +417,14 @@
     <section class="card" id="omniHubCard" style="background: linear-gradient(135deg, var(--bg-card), var(--bg-surface)); border: 2px solid var(--accent-soft);">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
         <h2 class="card-title" style="margin-bottom:0;" id="t-omniTitle">🌐 4 Boyutlu Çok Yönlü Çeviri Matrisi</h2>
-        <span style="font-size:0.8rem; background:var(--accent-soft); color:var(--accent); padding:0.25rem 0.65rem; border-radius:12px; font-weight:600;">12 Yönlü Tam Çapraz Çeviri</span>
+        <span id="t-omniBadge" style="font-size:0.8rem; background:var(--accent-soft); color:var(--accent); padding:0.25rem 0.65rem; border-radius:12px; font-weight:600;">12 Yönlü Tam Çapraz Çeviri</span>
       </div>
       <p class="card-desc" id="t-omniDesc" style="margin-bottom:1rem;">
         <strong>Düz Metin</strong>, <strong>Mors Alfabesi Metni</strong>, <strong>Konuşma Sesi</strong> ve <strong>Mors Sesi (CW)</strong> arasında anında ve kayıpsız geçiş yapın:
       </p>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem;">
-        <!-- Modal 1: Düz Metin -->
-        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
-          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">1. 📝 Düz Metin</div>
-          <div style="font-size:0.8rem; color:var(--ink-muted);">Türkçe, İngilizce, Rusça, Arapça</div>
-          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
-            ➔ <strong>Mors Metni:</strong> Anında sembollere dönüştürülür.<br>
-            ➔ <strong>Mors Sesi:</strong> CW radyo tonuyla çalınır & WAV üretilir.<br>
-            ➔ <strong>Konuşma Sesi:</strong> TTS ile insan sesiyle okunur.
-          </div>
-        </div>
-
-        <!-- Modal 2: Mors Metni -->
-        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
-          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">2. 📟 Mors Metni (. -)</div>
-          <div style="font-size:0.8rem; color:var(--ink-muted);">ITU-R M.1677-1 / Q-Kodları</div>
-          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
-            ➔ <strong>Düz Metin:</strong> Otomatik deşifre edilir.<br>
-            ➔ <strong>Mors Sesi:</strong> Seçilen WPM ve frekansta çalınır.<br>
-            ➔ <strong>Konuşma Sesi:</strong> Çözülüp doğal sesle seslendirilir.
-          </div>
-        </div>
-
-        <!-- Modal 3: Konuşma Sesi -->
-        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
-          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">3. 🎙️ Konuşma Sesi</div>
-          <div style="font-size:0.8rem; color:var(--ink-muted);">Canlı Mikrofon / Ses Dosyası (.wav/.mp3)</div>
-          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
-            ➔ <strong>Düz Metin:</strong> ASR ile anında yazıya dökülür.<br>
-            ➔ <strong>Mors Metni:</strong> Eş zamanlı Mors sembollerine aktarılır.<br>
-            ➔ <strong>Mors Sesi:</strong> Mors tonu dinlenir & WAV indirilir.
-          </div>
-        </div>
-
-        <!-- Modal 4: Mors Sesi -->
-        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
-          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">4. 📻 Mors Sesi (CW)</div>
-          <div style="font-size:0.8rem; color:var(--ink-muted);">CW Ses Dosyası (.wav) / Canlı CW Tonu</div>
-          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">
-            ➔ <strong>Mors Metni:</strong> Goertzel/Zarf DSP ile nokta-çizgiye çözülür.<br>
-            ➔ <strong>Düz Metin:</strong> Semboller anında anlamlı metne dönüşür.<br>
-            ➔ <strong>Konuşma Sesi:</strong> Çözülen mesaj yapay zeka sesiyle okunur.
-          </div>
-        </div>
+      <div id="omniCardsContainer" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem;">
+        <!-- Injected dynamically by renderOmniCards() -->
       </div>
     </section>
 
@@ -530,11 +488,11 @@
       <!-- Sliders -->
       <div class="audio-settings">
         <div class="slider-field">
-          <label><span>Hız (WPM)</span><span id="wpmValue">20 WPM</span></label>
+          <label><span id="t-wpmLbl">Hız (WPM)</span><span id="wpmValue">20 WPM</span></label>
           <input type="range" id="wpmSlider" min="5" max="60" value="20" oninput="updateAudioSettings()">
         </div>
         <div class="slider-field">
-          <label><span>Frekans (Hz)</span><span id="pitchValue">700 Hz</span></label>
+          <label><span id="t-pitchLbl">Frekans (Hz)</span><span id="pitchValue">700 Hz</span></label>
           <input type="range" id="pitchSlider" min="300" max="1500" step="10" value="700" oninput="updateAudioSettings()">
         </div>
       </div>
@@ -549,7 +507,7 @@
         <button class="key-button" id="keyerBtn">MORS TUŞU</button>
         <div class="key-monitor" id="keyerMonitor">Hazır...</div>
         <div style="font-size:0.9rem; color:var(--ink-muted);" id="keyerDecoded">Çözülen: -</div>
-        <button onclick="clearKeyer()" style="margin-top:0.5rem;">Sıfırla</button>
+        <button onclick="clearKeyer()" id="t-keyerReset" style="margin-top:0.5rem;">Sıfırla</button>
       </div>
     </section>
 
@@ -569,8 +527,8 @@
           </select>
 
           <button id="startSpeechBtn" class="btn-primary" onclick="toggleSpeechRecognition()">🎙️ Dinlemeyi Başlat</button>
-          <label class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
-            📁 Ses Dosyası Seç (.wav/.mp3)
+          <label id="t-speechFileLabel" class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
+            <span>📁 Ses Dosyası Seç (.wav/.mp3)</span>
             <input type="file" id="speechFileInput" accept="audio/*" style="display:none;" onchange="handleSpeechAudioFile(this)">
           </label>
         </div>
@@ -592,12 +550,12 @@
 
       <div class="controls-bar" style="margin-bottom:0;">
         <div class="group-left">
-          <button class="btn-primary" onclick="playSpeechMorse()">🔊 Mors Oynat</button>
-          <button onclick="stopSpeechMorse()">⏹️ Durdur</button>
+          <button class="btn-primary" id="btnPlaySpeechMorse" onclick="playSpeechMorse()">🔊 Mors Oynat</button>
+          <button id="btnStopSpeechMorse" onclick="stopSpeechMorse()">⏹️ Durdur</button>
           <button onclick="downloadSpeechMorseWav()" id="btnDownloadSpeechWav">💾 Mors WAV İndir</button>
-          <button onclick="copySpeechMorse()">📋 Mors Kopyala</button>
-          <button onclick="copySpeechText()">📋 Metni Kopyala</button>
-          <button onclick="clearSpeechToMorse()">🧹 Temizle</button>
+          <button id="btnCopySpeechMorse" onclick="copySpeechMorse()">📋 Mors Kopyala</button>
+          <button id="btnCopySpeechText" onclick="copySpeechText()">📋 Metni Kopyala</button>
+          <button id="btnClearSpeech" onclick="clearSpeechToMorse()">🧹 Temizle</button>
         </div>
       </div>
     </section>
@@ -617,16 +575,16 @@
             <option value="ar-SA">العربية (ar-SA)</option>
           </select>
 
-          <label class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
-            📁 Mors Ses Dosyası Seç (.wav)
+          <label id="t-m2sFileLabel" class="btn-secondary" style="display:inline-flex; align-items:center; gap:0.35rem; cursor:pointer; padding:0.45rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.875rem;">
+            <span>📁 Mors Ses Dosyası Seç (.wav)</span>
             <input type="file" id="m2sAudioFile" accept=".wav,audio/*" style="display:none;" onchange="handleMorseAudioUpload(this)">
           </label>
 
-          <button class="btn-primary" onclick="speakMorseDecodedText()">🔊 Konuşmayı Dinle</button>
-          <button onclick="stopMorseSpeech()">⏹️ Durdur</button>
+          <button class="btn-primary" id="btnSpeakMorseDecodedText" onclick="speakMorseDecodedText()">🔊 Konuşmayı Dinle</button>
+          <button id="btnStopMorseSpeech" onclick="stopMorseSpeech()">⏹️ Durdur</button>
           <button class="btn-secondary" id="btnLiveCw" onclick="toggleLiveCwListening()">📻 Canlı Mors Sesi Dinle (Mikrofon CW DSP)</button>
-          <button onclick="playM2sMorseAudio()">🔊 Mors Sesi Çal</button>
-          <button onclick="downloadM2sMorseWav()">💾 Mors WAV İndir</button>
+          <button id="btnPlayM2sMorseAudio" onclick="playM2sMorseAudio()">🔊 Mors Sesi Çal</button>
+          <button id="btnDownloadM2sMorseWav" onclick="downloadM2sMorseWav()">💾 Mors WAV İndir</button>
         </div>
         <div class="group-right">
           <span id="m2sStatus" style="font-size:0.85rem; color:var(--ink-muted); font-weight:500;">Hazır</span>
@@ -646,9 +604,9 @@
 
       <div class="controls-bar" style="margin-bottom:0;">
         <div class="group-left">
-          <button onclick="copyM2sText()">📋 Metni Kopyala</button>
-          <button onclick="copyM2sMorse()">📋 Mors Kopyala</button>
-          <button onclick="clearMorseToSpeech()">🧹 Temizle</button>
+          <button id="btnCopyM2sText" onclick="copyM2sText()">📋 Metni Kopyala</button>
+          <button id="btnCopyM2sMorse" onclick="copyM2sMorse()">📋 Mors Kopyala</button>
+          <button id="btnClearM2s" onclick="clearMorseToSpeech()">🧹 Temizle</button>
         </div>
       </div>
     </section>
@@ -666,64 +624,7 @@
       </div>
 
       <div id="guideSectionsContainer" style="display: flex; flex-direction: column; gap: 1rem;">
-        <!-- Guide Item 1 -->
-        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🔄 1. Çift Yönlü Çevirici (Metin ↔ Mors Kodu)</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Uluslararası ITU-R M.1677-1 standardı ile metin ve Mors kodunu iki yönlü çevirin, otantik CW tonlarıyla dinleyin veya WAV olarak indirin.</p>
-          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Yön Değiştirme:</strong> <code>Metin → Mors</code> veya <code>Mors → Metin</code> butonuna basarak çeviri yönünü değiştirin.</li>
-            <li><strong>Hız ve Ton:</strong> WPM (5-60) kaydırıcısı ile gönderme hızını, Pitch (300-1200 Hz) ile ton frekansını ayarlayın.</li>
-            <li><strong>Ses Dışa Aktarma:</strong> <code>💾 WAV İndir</code> butonuna basarak Mors kodunu standart PCM WAV ses dosyası olarak cihazınıza kaydedin.</li>
-          </ul>
-          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: Kelime ayrımları için standart olarak eğik çizgi (<code>/</code>) veya çift boşluk kullanılır.</div>
-        </div>
-
-        <!-- Guide Item 2 -->
-        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🎙️ 2. Konuşmayı Mors Koduna Dönüştür (Speech-to-Morse)</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Mikrofona konuşulan Türkçe veya İngilizce sözcükleri ya da yüklenen ses dosyalarını gerçek zamanlı olarak Mors koduna dönüştürün.</p>
-          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Tanıma Dili:</strong> Açılır menüden <code>Türkçe (tr-TR)</code>, <code>English (en-US)</code>, <code>Русский (ru-RU)</code> veya <code>العربية (ar-SA)</code> seçin.</li>
-            <li><strong>Canlı Mikrofon:</strong> <code>🎙️ Dinlemeyi Başlat</code> butonuna basın ve mikrofona konuşun. Söyledikleriniz hem metin hem de anında Mors kodu olarak belirecektir.</li>
-            <li><strong>Ses Dosyası:</strong> <code>📁 Ses Dosyası Seç</code> butonuyla konuşma içeren bir ses dosyasını yükleyebilirsiniz.</li>
-            <li><strong>Oynat & Kopyala:</strong> Oluşan Mors kodunu <code>🔊 Mors Oynat</code> ile dinleyebilir veya <code>📋 Mors Kopyala</code> ile panoya kopyalayabilirsiniz.</li>
-          </ul>
-          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: En yüksek tanıma doğruluğu için Google Chrome veya Microsoft Edge tarayıcısı önerilir.</div>
-        </div>
-
-        <!-- Guide Item 3 -->
-        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🗣️ 3. Mors Kodundan Konuşmaya (Morse-to-Speech / TTS)</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Metin olarak yazılan veya ses dosyası olarak yüklenen Mors kodunu çözerek Türkçe veya İngilizce yapay zeka ses senteziyle sesli olarak okutun.</p>
-          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Mors Girişi:</strong> Mors kodu alanına noktalar ve çizgiler yazın (örn: <code>... --- ...</code>). Metin anında deşifre edilir.</li>
-            <li><strong>Seslendirme:</strong> <code>🔊 Konuşmayı Dinle</code> butonuna basıldığında çözülen mesaj seçilen dilde doğal insan sesiyle okunur.</li>
-            <li><strong>Mors Dosyası:</strong> <code>📁 Mors Ses Dosyası Seç (.wav)</code> butonuyla CW ses dosyası önizlenebilir.</li>
-          </ul>
-          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: Masaüstü sürümünde Windows yerel konuşma motoru ve ek offline ses paketleriyle internet bağlantısı olmadan da seslendirme yapılabilir.</div>
-        </div>
-
-        <!-- Guide Item 4 -->
-        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🎯 4. CW Manevra Alıştırması (Practice Keyer)</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Mors el manevrası (Straight Key) yeteneğinizi, dit/dah zamanlama dengesini ve ritminizi geliştirmek için tasarlanmıştır.</p>
-          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Kullanım:</strong> Ekrandaki <code>MORS TUŞU</code> butonuna basılı tutun veya klavyenizden <strong>Boşluk (Spacebar)</strong> tuşuna basılı tutarak manevra yapın.</li>
-            <li><strong>Zamanlama Kuralı:</strong> 1 Dah süresi = 3 Dit süresidir. Harf içi dit/dah aralığı 1 Dit, harfler arası boşluk 3 Dit süresidir.</li>
-            <li><strong>Anlık İzleme:</strong> Bastığınız ritim anlık olarak nokta ve çizgilere dönüştürülüp çözümlenen harfler ekranda gösterilir.</li>
-          </ul>
-        </div>
-
-        <!-- Guide Item 5 -->
-        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">📻 5. Masaüstü Gelişmiş Özellikleri: Telsiz & Gerçek Zamanlı DSP</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Masaüstü sürümümüz (Windows, macOS, Linux) amatör telsizciler ve profesyonel CW operatörleri için gelişmiş donanım ve DSP araçları sunar:</p>
-          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
-            <li><strong>Seri Port Telsiz Anahtarlama (Rig Keyer):</strong> USB-Seri dönüştürücüler (FTDI/CH340) üzerinden DTR/RTS pinleriyle HF/VHF telsizinizi doğrudan anahtarlar.</li>
-            <li><strong>Gerçek Zamanlı DSP Çözücü:</strong> Telsizden gelen analog CW sesini Goertzel algoritması ve adaptif zamanlamayla anında deşifre eder.</li>
-            <li><strong>Çağrı İşareti & QSO Günlüğü:</strong> DXCC/ITU önek veritabanıyla çağrı işaretlerini sorgular, ADIF formatında görüşme günlüğü tutar.</li>
-          </ul>
-        </div>
+        <!-- Injected dynamically by renderGuideSections() -->
       </div>
     </section>
 
@@ -740,16 +641,16 @@
       <p class="card-desc" id="t-downloadsDesc">Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin.</p>
       <div class="downloads-grid">
         <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
-          <strong>🪟 Windows (x64)</strong>
-          <span>Setup .exe veya Taşınabilir .zip</span>
+          <strong id="t-dlWinTitle">🪟 Windows (x64)</strong>
+          <span id="t-dlWinSub">Setup .exe veya Taşınabilir .zip</span>
         </a>
         <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
-          <strong>🍏 macOS (Apple Silicon)</strong>
-          <span>Native arm64 .dmg (M1/M2/M3/M4)</span>
+          <strong id="t-dlMacTitle">🍏 macOS (Apple Silicon)</strong>
+          <span id="t-dlMacSub">Native arm64 .dmg (M1/M2/M3/M4)</span>
         </a>
         <a class="download-card" href="https://github.com/mustafamertakceylan/MorseCore/releases/latest" target="_blank" rel="noopener">
-          <strong>🐧 Linux (x64)</strong>
-          <span>Ubuntu/Debian .deb, Pardus, Arch PKGBUILD</span>
+          <strong id="t-dlLinTitle">🐧 Linux (x64)</strong>
+          <span id="t-dlLinSub">Ubuntu/Debian .deb, Pardus, Arch PKGBUILD</span>
         </a>
       </div>
     </section>
@@ -760,25 +661,25 @@
       <p class="card-desc" id="t-creditsDesc">MorsLab, açık kaynaklı yazılım topluluğunun, ITU standartlarının ve yapay zeka araştırma projelerinin desteğiyle geliştirilmektedir.</p>
       
       <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
-        <p style="font-weight: 600; color: var(--accent); margin-bottom: 0.6rem;">
-          MorseCore &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a>
+        <p style="font-weight: 600; color: var(--accent); margin-bottom: 0.6rem;" id="t-creditsCopyright">
+          MorsLab &copy; 2026 Mustafa Mert Akceylan &middot; <span id="t-creditsLicLbl">Açık Kaynak</span> <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener" id="t-creditsLicLink">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener" id="t-creditsRepoLink">GitHub Deposu</a>
         </p>
         <p style="font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 0.75rem;" id="t-creditsBody">
           Çevrimdışı ve web tabanlı konuşma/Mors işleme teknolojilerini mümkün kılan açık kaynak modellerin (Piper TTS, EMA Lightning), Goertzel DSP algoritmalarının ve amatör telsiz topluluğunun katkılarına içtenlikle teşekkür ederiz.
         </p>
-        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.82rem;">
-          <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 600; text-decoration: underline;">GitHub Kaynak Kodu</a> &middot;
-          <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Apache-2.0 Lisansı</a> &middot;
-          <a href="https://huggingface.co/rhasspy/piper-voices" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Piper Neural Voices</a> &middot;
-          <a href="https://www.itu.int/rec/R-REC-M.1677" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">ITU-R M.1677-1 Standardı</a>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.82rem;" id="t-creditsLinks">
+          <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener" id="t-linkGithub" style="color: var(--accent); font-weight: 600; text-decoration: underline;">GitHub Kaynak Kodu</a> &middot;
+          <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener" id="t-linkLicense" style="color: var(--accent); text-decoration: underline;">Apache-2.0 Lisansı</a> &middot;
+          <a href="https://huggingface.co/rhasspy/piper-voices" target="_blank" rel="noopener" id="t-linkPiper" style="color: var(--accent); text-decoration: underline;">Piper Neural Voices</a> &middot;
+          <a href="https://www.itu.int/rec/R-REC-M.1677" target="_blank" rel="noopener" id="t-linkItu" style="color: var(--accent); text-decoration: underline;">ITU-R M.1677-1 Standardı</a>
         </div>
       </div>
     </section>
     </div>
   </main>
 
-  <footer>
-    <p>MorsLab &middot; <a href="javascript:void(0)" onclick="switchMainTab('guide'); document.getElementById('creditsCard').scrollIntoView({behavior:'smooth'});">🤝 Teşekkür & Lisans / Credits</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
+  <footer id="mainFooter">
+    <p><span id="t-footerBrand">MorsLab</span> &middot; <a href="javascript:void(0)" onclick="switchMainTab('guide'); document.getElementById('creditsCard').scrollIntoView({behavior:'smooth'});" id="t-footerCredits">🤝 Teşekkür & Lisans / Credits</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener" id="t-footerRepo">GitHub Deposu</a></p>
   </footer>
 
   <script>
@@ -827,12 +728,12 @@
     for (const [k, v] of Object.entries(ARABIC_MORSE)) REVERSE_ARABIC[v] = k;
 
     const PROSIGNS = [
-      { name: '<AR>', code: '.-.-.', desc: 'Mesaj sonu (End of message)' },
-      { name: '<SK>', code: '...-.-', desc: 'Görüşme sonu (End of contact)' },
-      { name: '<BT>', code: '-...-', desc: 'Bölüm ayracı (Separator)' },
-      { name: '<AS>', code: '.-...', desc: 'Lütfen bekleyin (Wait)' },
-      { name: '<KN>', code: '-.--.', desc: 'Yalnız çağrılan istasyon' },
-      { name: 'SOS', code: '...---...', desc: 'Acil durum imdat çağrısı' }
+      { name: '<AR>', code: '.-.-.', desc: { tr: 'Mesaj sonu', en: 'End of message', ru: 'Конец сообщения', ar: 'نهاية الرسالة', de: 'Ende der Nachricht' } },
+      { name: '<SK>', code: '...-.-', desc: { tr: 'Görüşme sonu', en: 'End of contact / Final', ru: 'Конец связи', ar: 'نهاية الاتصال', de: 'Ende des Kontakts' } },
+      { name: '<BT>', code: '-...-', desc: { tr: 'Bölüm ayracı', en: 'Separator / Break', ru: 'Разделитель', ar: 'فاصل فقرات', de: 'Trennung / Pause' } },
+      { name: '<AS>', code: '.-...', desc: { tr: 'Lütfen bekleyin', en: 'Please wait', ru: 'Ждите', ar: 'يرجى الانتظار', de: 'Bitte warten' } },
+      { name: '<KN>', code: '-.--.', desc: { tr: 'Yalnız çağrılan istasyon', en: 'Named station only', ru: 'Только вызываемая станция', ar: 'المحطة المعنية فقط', de: 'Nur die gerufene Station' } },
+      { name: 'SOS', code: '...---...', desc: { tr: 'Acil durum imdat çağrısı', en: 'Emergency distress call', ru: 'Сигнал бедствия SOS', ar: 'نداء استغاثة طارئ', de: 'Notrufsignal SOS' } }
     ];
 
     let isDecoding = false;
@@ -856,8 +757,14 @@
         .replace(/İ/g, 'I').replace(/Ö/g, 'O').replace(/Ç/g, 'C');
     }
 
+    function getCurrentLang() {
+      return document.getElementById('langSelect') ? document.getElementById('langSelect').value : 'tr';
+    }
+
     function toggleDirection() {
       isDecoding = !isDecoding;
+      const lang = getCurrentLang();
+      const t = I18N[lang] || I18N.en;
       const btn = document.getElementById('btnDirection');
       const inputLbl = document.getElementById('inputLabel');
       const outputLbl = document.getElementById('outputLabel');
@@ -865,15 +772,19 @@
       const output = document.getElementById('outputText');
 
       if (isDecoding) {
-        btn.textContent = 'Mors → Metin';
-        inputLbl.textContent = 'Mors Kodu Girişi';
-        outputLbl.textContent = 'Çözülen Düz Metin';
+        btn.textContent = t.dirMorseToText;
+        inputLbl.textContent = t.lblMorseCode;
+        outputLbl.textContent = t.lblPlainText;
+        input.placeholder = t.placeholderInputMorse;
+        output.placeholder = t.placeholderOutputText;
         input.classList.add('mono');
         output.classList.remove('mono');
       } else {
-        btn.textContent = 'Metin → Mors';
-        inputLbl.textContent = 'Düz Metin';
-        outputLbl.textContent = 'Mors Kodu';
+        btn.textContent = t.dirTextToMorse;
+        inputLbl.textContent = t.lblPlainText;
+        outputLbl.textContent = t.lblMorseCode;
+        input.placeholder = t.placeholderInputText;
+        output.placeholder = t.placeholderOutputMorse;
         input.classList.remove('mono');
         output.classList.add('mono');
       }
@@ -887,6 +798,8 @@
       const input = document.getElementById('inputText').value;
       const sep = document.getElementById('separatorSelect').value;
       const output = document.getElementById('outputText');
+      const lang = getCurrentLang();
+      const t = I18N[lang] || I18N.en;
 
       if (!isDecoding) {
         // Encode Text -> Morse
@@ -897,8 +810,8 @@
         });
         const result = encodedWords.join(' ' + sep + ' ');
         output.value = result;
-        document.getElementById('inputStats').textContent = clean.length + ' karakter';
-        document.getElementById('outputStats').textContent = result.length + ' simge';
+        document.getElementById('inputStats').textContent = clean.length + ' ' + (t.statsChars || 'karakter');
+        document.getElementById('outputStats').textContent = result.length + ' ' + (t.statsSymbols || 'simge');
       } else {
         // Decode Morse -> Text
         const sepChar = sep;
@@ -909,8 +822,8 @@
         });
         const result = decodedWords.join(' ');
         output.value = result;
-        document.getElementById('inputStats').textContent = input.length + ' simge';
-        document.getElementById('outputStats').textContent = result.length + ' karakter';
+        document.getElementById('inputStats').textContent = input.length + ' ' + (t.statsSymbols || 'simge');
+        document.getElementById('outputStats').textContent = result.length + ' ' + (t.statsChars || 'karakter');
       }
     }
 
@@ -925,8 +838,10 @@
       const text = document.getElementById('outputText').value;
       if (!text) return;
       navigator.clipboard.writeText(text);
-      document.getElementById('audioStatus').textContent = 'Panoya kopyalandı!';
-      setTimeout(() => document.getElementById('audioStatus').textContent = 'Hazır', 2000);
+      const lang = getCurrentLang();
+      const t = I18N[lang] || I18N.en;
+      document.getElementById('audioStatus').textContent = t.copied || 'Panoya kopyalandı!';
+      setTimeout(() => document.getElementById('audioStatus').textContent = t.statusReady || 'Hazır', 2000);
     }
 
     function updateAudioSettings() {
@@ -1186,164 +1101,760 @@
       document.body.setAttribute('data-theme', 'dark');
     }
 
-    // Multi-Language Support
+    // Complete Multilingual Dictionaries (Turkish, English, Arabic, Russian, German)
     const I18N = {
       en: {
+        navGuideBtn: "📖 Guide",
         tabTools: "⚡ Converter & Audio Tools",
         tabGuide: "📖 Guide & Reference",
         omniTitle: "🌐 4-Way Omnidirectional Translation Matrix",
-        omniDesc: "Seamless and lossless cross-conversion between Plain Text, Morse Code Text, Speech Audio, and Morse Audio (CW):",
+        omniBadge: "12-Way Complete Cross Conversion",
+        omniDesc: "Seamless and lossless cross-conversion between <strong>Plain Text</strong>, <strong>Morse Code Text</strong>, <strong>Speech Voice</strong>, and <strong>Morse Audio (CW)</strong>:",
+        omniCards: [
+          {
+            title: "1. 📝 Plain Text",
+            sub: "English, Turkish, Russian, Arabic",
+            lines: "➔ <strong>Morse Text:</strong> Instant prefix encoding.<br>➔ <strong>Morse Audio:</strong> CW sidetone audio & WAV.<br>➔ <strong>Speech Voice:</strong> Neural human-quality TTS."
+          },
+          {
+            title: "2. 📟 Morse Text (. -)",
+            sub: "ITU-R M.1677-1 / Q-Codes",
+            lines: "➔ <strong>Plain Text:</strong> Instant decoding to text.<br>➔ <strong>Morse Audio:</strong> Play at chosen WPM & pitch.<br>➔ <strong>Speech Voice:</strong> Decoded and spoken aloud."
+          },
+          {
+            title: "3. 🎙️ Speech Voice",
+            sub: "Live Microphone / Audio (.wav/.mp3)",
+            lines: "➔ <strong>Plain Text:</strong> Real-time voice ASR transcription.<br>➔ <strong>Morse Text:</strong> Synchronous Morse encoding.<br>➔ <strong>Morse Audio:</strong> Play CW tone & export WAV."
+          },
+          {
+            title: "4. 📻 Morse Audio (CW)",
+            sub: "Audio File (.wav) / Live CW Tone",
+            lines: "➔ <strong>Morse Text:</strong> Goertzel/envelope DSP demodulation.<br>➔ <strong>Plain Text:</strong> Symbols parsed into readable text.<br>➔ <strong>Speech Voice:</strong> Read out via synthetic voice."
+          }
+        ],
         converter: "Morse Code Converter & Audio Player",
         converterDesc: "Convert text and Morse code bidirectionally, listen with authentic CW tones, or export to WAV.",
+        dirTextToMorse: "Text → Morse",
+        dirMorseToText: "Morse → Text",
+        optAlphabetLatin: "Latin / Turkish / English",
+        optAlphabetCyrillic: "Русский (Cyrillic)",
+        optAlphabetArabic: "العربية (Arabic)",
+        optSepSlash: "Separator: /",
+        optSepPipe: "Separator: |",
+        optSepHash: "Separator: #",
+        optSepStar: "Separator: *",
         clear: "Clear",
         copy: "Copy",
-        speechTitle: "🎙️ Speech to Morse Code (Live & Audio File)",
-        speechDesc: "Speak into your microphone in Turkish, English, Russian or Arabic, or load an audio file to convert speech to Morse code in real-time.",
-        spokenHeader: "Transcribed Speech Text",
-        morseOutputHeader: "Generated Morse Code",
-        speechLangLbl: "Recognition Language:",
-        m2sTitle: "🗣️ Morse Code to Speech (Text & Audio File)",
-        m2sDesc: "Decode Morse code in Turkish, English, Russian or Arabic from text or audio files and listen to synthesized speech.",
-        m2sLangLbl: "Speech Language:",
-        m2sMorseHeader: "Morse Code Input",
-        m2sDecodedHeader: "Decoded Speech Text",
-        guideTitle: "📖 User Guide & Features Manual",
-        guideDesc: "Comprehensive guide to all MorsLab web and desktop capabilities, radio integration and step-by-step tutorials.",
+        copied: "Copied to clipboard!",
+        lblPlainText: "Plain Text",
+        lblMorseCode: "Morse Code",
+        statsChars: "chars",
+        statsSymbols: "symbols",
+        placeholderInputText: "Type message to convert...",
+        placeholderInputMorse: "Enter Morse code (e.g. ... --- ...)...",
+        placeholderOutputMorse: "Morse code output...",
+        placeholderOutputText: "Decoded plain text...",
+        btnPlay: "▶ Listen",
+        btnStop: "■ Stop",
+        btnWav: "💾 Download WAV",
+        btnSpeakText: "🗣️ Speak Text (TTS)",
+        statusReady: "Ready",
+        lblWpm: "Speed (WPM)",
+        lblPitch: "Tone Pitch (Hz)",
         practiceKeyer: "CW Practice Keyer",
         practiceDesc: "Hold the key button or press Spacebar on your keyboard to practice timing and sending Morse.",
+        keyerBtn: "MORSE KEY (Hold Button or Spacebar)",
+        keyerReset: "Reset",
+        keyerMonitorReady: "Ready...",
+        keyerDecodedPrefix: "Decoded: ",
+        speechTitle: "🎙️ Speech to Morse Code (Live & Audio File)",
+        speechDesc: "Speak into your microphone in English, Turkish, Russian or Arabic, or load an audio file to convert speech to Morse code in real-time.",
+        speechLangLbl: "Recognition Language:",
+        startSpeechBtn: "🎙️ Start Listening",
+        stopSpeechBtn: "⏹️ Stop Listening",
+        speechFileLabel: "📁 Select Audio File (.wav/.mp3)",
+        spokenHeader: "Transcribed Speech Text",
+        speechTextPlaceholder: "Speak into your microphone or select an audio file...",
+        morseOutputHeader: "Generated Morse Code",
+        btnPlaySpeechMorse: "🔊 Play Morse",
+        btnStopSpeechMorse: "⏹️ Stop",
+        btnDownloadSpeechWav: "💾 Download Morse WAV",
+        btnCopySpeechMorse: "📋 Copy Morse",
+        btnCopySpeechText: "📋 Copy Text",
+        btnClearSpeech: "🧹 Clear",
+        m2sTitle: "🗣️ Morse Code to Speech (Text & Audio File)",
+        m2sDesc: "Decode Morse code in English, Turkish, Russian or Arabic from text or audio files and listen to synthesized speech.",
+        m2sLangLbl: "Speech Language:",
+        m2sFileLabel: "📁 Select Morse Audio (.wav)",
+        btnSpeakMorseDecodedText: "🔊 Listen to Speech",
+        btnStopMorseSpeech: "⏹️ Stop",
+        btnLiveCw: "📻 Live Morse Audio Listen (Mic CW DSP)",
+        btnStopLiveCw: "⏹️ Stop CW Listening",
+        btnPlayM2sMorseAudio: "🔊 Play Morse Audio",
+        btnDownloadM2sMorseWav: "💾 Download Morse WAV",
+        m2sMorseHeader: "Morse Code Input",
+        m2sMorsePlaceholder: "... --- ... (or upload audio file)",
+        m2sDecodedHeader: "Decoded Speech Text",
+        m2sDecodedPlaceholder: "Decoded text will appear here and be read aloud...",
+        btnCopyM2sText: "📋 Copy Text",
+        btnCopyM2sMorse: "📋 Copy Morse",
+        btnClearM2s: "🧹 Clear",
+        guideTitle: "📖 User Guide & Features Manual",
+        guideDesc: "Comprehensive guide to all MorsLab web and desktop capabilities, radio integration and step-by-step tutorials.",
+        guideSearchPlaceholder: "Search guide (e.g. speech, transceiver, WAV, WPM, microphone)...",
+        guideItems: [
+          {
+            title: "🔄 1. Bidirectional Converter (Text ↔ Morse Code)",
+            desc: "Convert text and Morse code bidirectionally according to international ITU-R M.1677-1 standards, listen with authentic CW sidetones, or export to WAV.",
+            bullets: [
+              "<strong>Direction Swap:</strong> Click <code>Text → Morse</code> or <code>Morse → Text</code> to reverse the translation direction.",
+              "<strong>Speed & Pitch:</strong> Adjust WPM (5-60) sending speed and sidetone pitch (300-1200 Hz) in real-time.",
+              "<strong>WAV Export:</strong> Click <code>💾 Download WAV</code> to save pure 16-bit PCM WAV audio to your computer."
+            ],
+            tip: "💡 Pro Tip: Standard word separation uses a forward slash (<code>/</code>) or double spaces."
+          },
+          {
+            title: "🎙️ 2. Speech to Morse Code (Live & Audio File)",
+            desc: "Convert spoken voice in English, Turkish, Russian, or Arabic from your microphone or audio files into real-time Morse code.",
+            bullets: [
+              "<strong>Recognition Language:</strong> Select <code>English (en-US)</code>, <code>Türkçe (tr-TR)</code>, <code>Русский (ru-RU)</code>, or <code>العربية (ar-SA)</code>.",
+              "<strong>Live Microphone:</strong> Click <code>🎙️ Start Listening</code> and speak. Your speech is transcribed and converted to Morse code on the fly.",
+              "<strong>Audio File:</strong> Upload any speech audio file via <code>📁 Select Audio File</code>.",
+              "<strong>Playback & WAV:</strong> Listen to the generated Morse using <code>🔊 Play Morse</code> or export with <code>💾 Download Morse WAV</code>."
+            ],
+            tip: "💡 Pro Tip: For optimal speech recognition accuracy, use Google Chrome or Microsoft Edge."
+          },
+          {
+            title: "🗣️ 3. Morse Code to Speech (Morse-to-Speech / TTS)",
+            desc: "Decode Morse code from text or uploaded audio files in English, Turkish, Russian, or Arabic and listen with natural AI text-to-speech.",
+            bullets: [
+              "<strong>Morse Input:</strong> Enter dits and dahs (e.g. <code>... --- ...</code>) into the box to instantly decode to plain text.",
+              "<strong>Speech Synthesis:</strong> Press <code>🔊 Listen to Speech</code> to hear the decoded message in a natural human voice.",
+              "<strong>CW DSP File Decoder:</strong> Upload CW audio via <code>📁 Select Morse Audio (.wav)</code> to demodulate signals directly with Goertzel DSP.",
+              "<strong>Live CW Demodulator:</strong> Use <code>📻 Live Morse Audio Listen</code> to decode real CW beeps directly from your microphone."
+            ],
+            tip: "💡 Pro Tip: The desktop app includes offline neural Piper TTS models for pristine voice synthesis without internet."
+          },
+          {
+            title: "🎯 4. CW Practice Keyer (Straight Key Practice)",
+            desc: "Designed to build muscle memory, dit/dah duration precision, and rhythmic cadence for hand-key radiotelegraphy.",
+            bullets: [
+              "<strong>Controls:</strong> Click and hold the on-screen <code>MORSE KEY</code> button or tap your keyboard's <strong>Spacebar</strong>.",
+              "<strong>Timing Rule:</strong> 1 Dah duration = 3 Dits. Intra-character element gap = 1 Dit, inter-character gap = 3 Dits.",
+              "<strong>Real-Time Decoder:</strong> The built-in monitor translates your cadence into symbols and displays decoded letters instantly."
+            ],
+            tip: "💡 Pro Tip: Keep your wrist relaxed and practice maintaining uniform spacing based on the PARIS standard."
+          },
+          {
+            title: "📻 5. Desktop Advanced Features: Transceiver Rig Keying & Real-Time DSP",
+            desc: "The desktop edition (Windows, macOS, Linux) provides dedicated hardware interfacing and scientific DSP tools for radio amateurs:",
+            bullets: [
+              "<strong>Serial Rig Keying:</strong> Keys HF/VHF transceivers directly via USB-Serial adapters (FTDI/CH340) using hardware DTR/RTS lines.",
+              "<strong>Real-Time Goertzel DSP:</strong> Demodulates audio CW signals directly from receiver audio jacks with adaptive noise tracking.",
+              "<strong>Callsign Lookup & QSO Logbook:</strong> Validates prefixes against the DXCC/ITU database and exports logs in standard ADIF 3.1.4 format."
+            ],
+            tip: "💡 Pro Tip: Download portable ZIPs or setup installers below in the 'Download Desktop Application' section."
+          }
+        ],
         prosigns: "Morse Alphabet & Amateur Radio Reference",
-        prosignsDesc: "International ITU-R M.1677-1 standard characters and prosigns.",
+        prosignsDesc: "International ITU-R M.1677-1 standard characters and amateur radio operating abbreviations.",
         downloads: "Download Desktop Application",
         downloadsDesc: "Get the full desktop app with offline AI neural voices (Piper, EMA Lightning), microphone decoding and QSO logbook.",
+        dlWinTitle: "🪟 Windows (x64)",
+        dlWinSub: "Setup .exe or Portable .zip",
+        dlMacTitle: "🍏 macOS (Apple Silicon)",
+        dlMacSub: "Native arm64 .dmg (M1/M2/M3/M4)",
+        dlLinTitle: "🐧 Linux (x64)",
+        dlLinSub: "Ubuntu/Debian .deb, Pardus, Arch PKGBUILD",
         creditsTitle: "🤝 Acknowledgments & Open Source License",
         creditsDesc: "MorsLab is developed with the support of the open-source software community, ITU standards, and AI research projects.",
-        creditsBody: "Special thanks to the authors and contributors of open-source neural speech models (Piper TTS, EMA Lightning), Goertzel DSP implementations, and the amateur radio community worldwide."
+        creditsCopyright: "MorsLab &copy; 2026 Mustafa Mert Akceylan &middot; <span id=\"t-creditsLicLbl\">Open Source</span> <a href=\"https://github.com/mserman90/MorseCore/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsLicLink\">Apache-2.0 License</a> &middot; <a href=\"https://github.com/mserman90/MorseCore\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsRepoLink\">GitHub Repository</a>",
+        creditsBody: "Special thanks to the authors and contributors of open-source neural speech models (Piper TTS, EMA Lightning), Goertzel DSP implementations, and the amateur radio community worldwide.",
+        linkGithub: "GitHub Source Code",
+        linkLicense: "Apache-2.0 License",
+        linkPiper: "Piper Neural Voices",
+        linkItu: "ITU-R M.1677-1 Standard",
+        footerBrand: "MorsLab",
+        footerCredits: "🤝 Acknowledgments & License",
+        footerRepo: "GitHub Repository"
       },
       tr: {
+        navGuideBtn: "📖 Rehber",
         tabTools: "⚡ Çevirici & Ses Araçları",
         tabGuide: "📖 Rehber & Referans",
         omniTitle: "🌐 4 Boyutlu Çok Yönlü Çeviri Matrisi",
-        omniDesc: "Düz Metin, Mors Alfabesi Metni, Konuşma Sesi ve Mors Sesi (CW) arasında anında ve kayıpsız geçiş yapın:",
+        omniBadge: "12 Yönlü Tam Çapraz Çeviri",
+        omniDesc: "<strong>Düz Metin</strong>, <strong>Mors Alfabesi Metni</strong>, <strong>Konuşma Sesi</strong> ve <strong>Mors Sesi (CW)</strong> arasında anında ve kayıpsız geçiş yapın:",
+        omniCards: [
+          {
+            title: "1. 📝 Düz Metin",
+            sub: "Türkçe, İngilizce, Rusça, Arapça",
+            lines: "➔ <strong>Mors Metni:</strong> Anında sembollere dönüştürülür.<br>➔ <strong>Mors Sesi:</strong> CW radyo tonuyla çalınır & WAV üretilir.<br>➔ <strong>Konuşma Sesi:</strong> TTS ile insan sesiyle okunur."
+          },
+          {
+            title: "2. 📟 Mors Metni (. -)",
+            sub: "ITU-R M.1677-1 / Q-Kodları",
+            lines: "➔ <strong>Düz Metin:</strong> Otomatik deşifre edilir.<br>➔ <strong>Mors Sesi:</strong> Seçilen WPM ve frekansta çalınır.<br>➔ <strong>Konuşma Sesi:</strong> Çözülüp doğal sesle seslendirilir."
+          },
+          {
+            title: "3. 🎙️ Konuşma Sesi",
+            sub: "Canlı Mikrofon / Ses Dosyası (.wav/.mp3)",
+            lines: "➔ <strong>Düz Metin:</strong> ASR ile anında yazıya dökülür.<br>➔ <strong>Mors Metni:</strong> Eş zamanlı Mors sembollerine aktarılır.<br>➔ <strong>Mors Sesi:</strong> Mors tonu dinlenir & WAV indirilir."
+          },
+          {
+            title: "4. 📻 Mors Sesi (CW)",
+            sub: "CW Ses Dosyası (.wav) / Canlı CW Tonu",
+            lines: "➔ <strong>Mors Metni:</strong> Goertzel/Zarf DSP ile nokta-çizgiye çözülür.<br>➔ <strong>Düz Metin:</strong> Semboller anında anlamlı metne dönüşür.<br>➔ <strong>Konuşma Sesi:</strong> Çözülen mesaj yapay zeka sesiyle okunur."
+          }
+        ],
         converter: "Mors Kodu Çevirici & Ses Çalar",
         converterDesc: "Metin ve Mors kodunu iki yönlü dönüştürün, gerçeğe yakın CW tonlarıyla dinleyin veya WAV olarak indirin.",
+        dirTextToMorse: "Metin → Mors",
+        dirMorseToText: "Mors → Metin",
+        optAlphabetLatin: "Latin / Türkçe",
+        optAlphabetCyrillic: "Русский (Cyrillic)",
+        optAlphabetArabic: "العربية (Arabic)",
+        optSepSlash: "Ayraç: /",
+        optSepPipe: "Ayraç: |",
+        optSepHash: "Ayraç: #",
+        optSepStar: "Ayraç: *",
         clear: "Temizle",
         copy: "Kopyala",
+        copied: "Panoya kopyalandı!",
+        lblPlainText: "Düz Metin",
+        lblMorseCode: "Mors Kodu",
+        statsChars: "karakter",
+        statsSymbols: "simge",
+        placeholderInputText: "Dönüştürülecek mesajı buraya yazın...",
+        placeholderInputMorse: "Mors kodunu buraya yazın (örn: ... --- ...)...",
+        placeholderOutputMorse: "Mors kodu çıktısı...",
+        placeholderOutputText: "Çözülen düz metin...",
+        btnPlay: "▶ Dinle",
+        btnStop: "■ Durdur",
+        btnWav: "💾 WAV İndir",
+        btnSpeakText: "🗣️ Metni Seslendir (TTS)",
+        statusReady: "Hazır",
+        lblWpm: "Hız (WPM)",
+        lblPitch: "Frekans (Hz)",
+        practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
+        practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
+        keyerBtn: "MORS TUŞU (Basılı Tutun veya Boşluk)",
+        keyerReset: "Sıfırla",
+        keyerMonitorReady: "Hazır...",
+        keyerDecodedPrefix: "Çözülen: ",
         speechTitle: "🎙️ Konuşmayı Mors Koduna Dönüştür (Speech to Morse)",
         speechDesc: "Türkçe, İngilizce, Rusça veya Arapça canlı mikrofon konuşmanızı veya ses dosyasını dinleyerek anında Mors koduna dönüştürün.",
-        spokenHeader: "Algılanan Konuşma Metni",
-        morseOutputHeader: "Oluşturulan Mors Kodu",
         speechLangLbl: "Tanıma Dili:",
+        startSpeechBtn: "🎙️ Dinlemeyi Başlat",
+        stopSpeechBtn: "⏹️ Dinlemeyi Durdur",
+        speechFileLabel: "📁 Ses Dosyası Seç (.wav/.mp3)",
+        spokenHeader: "Algılanan Konuşma Metni",
+        speechTextPlaceholder: "Mikrofona konuşun veya bir ses dosyası seçin...",
+        morseOutputHeader: "Oluşturulan Mors Kodu",
+        btnPlaySpeechMorse: "🔊 Mors Oynat",
+        btnStopSpeechMorse: "⏹️ Durdur",
+        btnDownloadSpeechWav: "💾 Mors WAV İndir",
+        btnCopySpeechMorse: "📋 Mors Kopyala",
+        btnCopySpeechText: "📋 Metni Kopyala",
+        btnClearSpeech: "🧹 Temizle",
         m2sTitle: "🗣️ Mors Kodundan Konuşmaya (Morse to Speech)",
         m2sDesc: "Metin veya ses dosyası (.wav) olarak yüklenen Türkçe, İngilizce, Rusça veya Arapça Mors kodunu çözün ve sesli olarak dinleyin.",
         m2sLangLbl: "Konuşma Dili:",
+        m2sFileLabel: "📁 Mors Ses Dosyası Seç (.wav)",
+        btnSpeakMorseDecodedText: "🔊 Konuşmayı Dinle",
+        btnStopMorseSpeech: "⏹️ Durdur",
+        btnLiveCw: "📻 Canlı Mors Sesi Dinle (Mikrofon CW DSP)",
+        btnStopLiveCw: "⏹️ CW Dinlemeyi Durdur",
+        btnPlayM2sMorseAudio: "🔊 Mors Sesi Çal",
+        btnDownloadM2sMorseWav: "💾 Mors WAV İndir",
         m2sMorseHeader: "Mors Kodu Girişi",
+        m2sMorsePlaceholder: "... --- ... (veya ses dosyası yükleyin)",
         m2sDecodedHeader: "Çözülen Konuşma Metni",
+        m2sDecodedPlaceholder: "Çözülen metin burada belirecek ve seslendirilecektir...",
+        btnCopyM2sText: "📋 Metni Kopyala",
+        btnCopyM2sMorse: "📋 Mors Kopyala",
+        btnClearM2s: "🧹 Temizle",
         guideTitle: "📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)",
         guideDesc: "MorsLab web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.",
-        practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
-        practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
+        guideSearchPlaceholder: "Rehberde ara (örn: konuşma, telsiz, WAV, WPM, mikrofon)...",
+        guideItems: [
+          {
+            title: "🔄 1. Çift Yönlü Çevirici (Metin ↔ Mors Kodu)",
+            desc: "Uluslararası ITU-R M.1677-1 standardı ile metin ve Mors kodunu iki yönlü çevirin, otantik CW tonlarıyla dinleyin veya WAV olarak indirin.",
+            bullets: [
+              "<strong>Yön Değiştirme:</strong> <code>Metin → Mors</code> veya <code>Mors → Metin</code> butonuna basarak çeviri yönünü değiştirin.",
+              "<strong>Hız ve Ton:</strong> WPM (5-60) kaydırıcısı ile gönderme hızını, Pitch (300-1200 Hz) ile ton frekansını ayarlayın.",
+              "<strong>Ses Dışa Aktarma:</strong> <code>💾 WAV İndir</code> butonuna basarak Mors kodunu standart PCM WAV ses dosyası olarak cihazınıza kaydedin."
+            ],
+            tip: "💡 İpucu: Kelime ayrımları için standart olarak eğik çizgi (<code>/</code>) veya çift boşluk kullanılır."
+          },
+          {
+            title: "🎙️ 2. Konuşmayı Mors Koduna Dönüştür (Speech-to-Morse)",
+            desc: "Mikrofona konuşulan Türkçe, İngilizce, Rusça veya Arapça sözcükleri ya da yüklenen ses dosyalarını gerçek zamanlı olarak Mors koduna dönüştürün.",
+            bullets: [
+              "<strong>Tanıma Dili:</strong> Açılır menüden <code>Türkçe (tr-TR)</code>, <code>English (en-US)</code>, <code>Русский (ru-RU)</code> veya <code>العربية (ar-SA)</code> seçin.",
+              "<strong>Canlı Mikrofon:</strong> <code>🎙️ Dinlemeyi Başlat</code> butonuna basın ve mikrofona konuşun. Söyledikleriniz hem metin hem de Mors kodu olarak belirir.",
+              "<strong>Ses Dosyası:</strong> <code>📁 Ses Dosyası Seç</code> butonuyla konuşma içeren bir ses dosyasını yükleyebilirsiniz.",
+              "<strong>Oynat & Kaydet:</strong> Oluşan Mors kodunu <code>🔊 Mors Oynat</code> ile dinleyebilir veya <code>💾 Mors WAV İndir</code> ile kaydedebilirsiniz."
+            ],
+            tip: "💡 İpucu: En yüksek tanıma doğruluğu için Google Chrome veya Microsoft Edge tarayıcısı önerilir."
+          },
+          {
+            title: "🗣️ 3. Mors Kodundan Konuşmaya (Morse-to-Speech / TTS)",
+            desc: "Metin olarak yazılan veya ses dosyası olarak yüklenen Mors kodunu çözerek Türkçe veya İngilizce yapay zeka ses senteziyle sesli olarak okutun.",
+            bullets: [
+              "<strong>Mors Girişi:</strong> Mors kodu alanına noktalar ve çizgiler yazın (örn: <code>... --- ...</code>). Metin anında deşifre edilir.",
+              "<strong>Seslendirme:</strong> <code>🔊 Konuşmayı Dinle</code> butonuna basıldığında çözülen mesaj seçilen dilde doğal insan sesiyle okunur.",
+              "<strong>CW DSP Dosya Çözümleme:</strong> <code>📁 Mors Ses Dosyası Seç (.wav)</code> butonuyla yüklenen ses Goertzel DSP ile nokta-çizgiye çözülür.",
+              "<strong>Canlı CW Dinleme:</strong> <code>📻 Canlı Mors Sesi Dinle</code> butonuyla mikrofondan gelen telsiz sinyallerini canlı olarak metne dökün."
+            ],
+            tip: "💡 İpucu: Masaüstü sürümünde offline Piper TTS nöral ses motoru ile internet olmadan da ultra kaliteli seslendirme yapılabilir."
+          },
+          {
+            title: "🎯 4. CW Manevra Alıştırması (Practice Keyer)",
+            desc: "Mors el manevrası (Straight Key) yeteneğinizi, dit/dah zamanlama dengesini ve ritminizi geliştirmek için tasarlanmıştır.",
+            bullets: [
+              "<strong>Kullanım:</strong> Ekrandaki <code>MORS TUŞU</code> butonuna basılı tutun veya klavyenizden <strong>Boşluk (Spacebar)</strong> tuşuna basarak manevra yapın.",
+              "<strong>Zamanlama Kuralı:</strong> 1 Dah süresi = 3 Dit süresidir. Harf içi dit/dah aralığı 1 Dit, harfler arası boşluk 3 Dit süresidir.",
+              "<strong>Anlık İzleme:</strong> Bastığınız ritim anlık olarak nokta ve çizgilere dönüştürülüp çözümlenen harfler ekranda gösterilir."
+            ],
+            tip: "💡 İpucu: Ritminizi korumak için bileğinizi gevşek tutun ve standart PARIS zamanlamasını hedefleyin."
+          },
+          {
+            title: "📻 5. Masaüstü Gelişmiş Özellikleri: Telsiz & Gerçek Zamanlı DSP",
+            desc: "Masaüstü sürümümüz (Windows, macOS, Linux) amatör telsizciler ve profesyonel CW operatörleri için gelişmiş donanım ve DSP araçları sunar:",
+            bullets: [
+              "<strong>Seri Port Telsiz Anahtarlama (Rig Keyer):</strong> USB-Seri dönüştürücüler (FTDI/CH340) üzerinden DTR/RTS pinleriyle HF/VHF telsizinizi doğrudan anahtarlar.",
+              "<strong>Gerçek Zamanlı DSP Çözücü:</strong> Telsizden gelen analog CW sesini Goertzel algoritması ve adaptif zamanlamayla anında deşifre eder.",
+              "<strong>Çağrı İşareti & QSO Günlüğü:</strong> DXCC/ITU önek veritabanıyla çağrı işaretlerini sorgular, ADIF formatında görüşme günlüğü tutar."
+            ],
+            tip: "💡 İpucu: Kurulum gerektirmeyen taşınabilir sürümü veya sistem yükleyicisini 'Masaüstü Uygulamasını İndirin' bölümünden temin edebilirsiniz."
+          }
+        ],
         prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
         prosignsDesc: "Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.",
         downloads: "Masaüstü Uygulamasını İndirin",
         downloadsDesc: "Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin.",
+        dlWinTitle: "🪟 Windows (x64)",
+        dlWinSub: "Setup .exe veya Taşınabilir .zip",
+        dlMacTitle: "🍏 macOS (Apple Silicon)",
+        dlMacSub: "Native arm64 .dmg (M1/M2/M3/M4)",
+        dlLinTitle: "🐧 Linux (x64)",
+        dlLinSub: "Ubuntu/Debian .deb, Pardus, Arch PKGBUILD",
         creditsTitle: "🤝 Teşekkür & Açık Kaynak Lisans",
         creditsDesc: "MorsLab, açık kaynaklı yazılım topluluğunun, ITU standartlarının ve yapay zeka araştırma projelerinin desteğiyle geliştirilmektedir.",
-        creditsBody: "Çevrimdışı ve web tabanlı konuşma/Mors işleme teknolojilerini mümkün kılan açık kaynak modellerin (Piper TTS, EMA Lightning), Goertzel DSP algoritmalarının ve amatör telsiz topluluğunun katkılarına içtenlikle teşekkür ederiz."
-      },
-      de: {
-        tabTools: "⚡ Konverter & Audiotools",
-        tabGuide: "📖 Handbuch & Referenz",
-        omniTitle: "🌐 4-Wege Multidirektionale Übersetzungsmatrix",
-        omniDesc: "Verlustfreie und sofortige Konvertierung zwischen Klartext, Morsecode, Sprache und Morseton (CW):",
-        converter: "Morsecode-Konverter & Audioplayer",
-        converterDesc: "Konvertieren Sie Text und Morsecode bidirektional, hören Sie authentische CW-Töne oder exportieren Sie WAV.",
-        clear: "Löschen",
-        copy: "Kopieren",
-        speechTitle: "🎙️ Sprache zu Morsecode (Live & Audiodatei)",
-        speechDesc: "Sprechen Sie auf Türkisch, Englisch, Russisch oder Arabisch ins Mikrofon oder laden Sie eine Audiodatei, um Sprache in Morsecode umzuwandeln.",
-        spokenHeader: "Erkannter Sprachtext",
-        morseOutputHeader: "Erzeugter Morsecode",
-        speechLangLbl: "Sprache:",
-        m2sTitle: "🗣️ Morsecode zu Sprache (Text & Audiodatei)",
-        m2sDesc: "Dekodieren Sie Morsecode auf Türkisch, Englisch, Russisch oder Arabisch aus Text oder Audiodateien und hören Sie Sprachausgabe.",
-        m2sLangLbl: "Sprache:",
-        m2sMorseHeader: "Morsecode-Eingabe",
-        m2sDecodedHeader: "Dekodierter Sprachtext",
-        guideTitle: "📖 Benutzerhandbuch & Funktionsübersicht",
-        guideDesc: "Umfassender Leitfaden zu allen Web- und Desktop-Funktionen von MorsLab, Funkintegration und Anleitungen.",
-        practiceKeyer: "CW-Übungstaste (Keyer)",
-        practiceDesc: "Halten Sie die Taste gedrückt oder nutzen Sie die Leertaste, um Ihren Morserhythmus zu üben.",
-        prosigns: "Morse-Alphabet & Funkbetriebszeichen",
-        prosignsDesc: "Internationale ITU-R M.1677-1 Standardzeichen und Verkehrszeichen.",
-        downloads: "Desktop-App herunterladen",
-        downloadsDesc: "Holen Sie sich die vollständige Desktop-Anwendung mit Offline-Sprachmodellen, Mikrofon-Decodierung und Logbuch.",
-        creditsTitle: "🤝 Danksagung & Open-Source-Lizenz",
-        creditsDesc: "MorsLab wird mit Unterstützung der Open-Source-Community, ITU-Standards und KI-Forschungsprojekten entwickelt.",
-        creditsBody: "Herzlichen Dank an die Entwickler von Open-Source-Sprachmodellen (Piper TTS, EMA Lightning), Goertzel-DSP-Algorithmen und die weltweite Amateurfunkgemeinschaft."
+        creditsCopyright: "MorsLab &copy; 2026 Mustafa Mert Akceylan &middot; <span id=\"t-creditsLicLbl\">Açık Kaynak</span> <a href=\"https://github.com/mserman90/MorseCore/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsLicLink\">Apache-2.0 Lisansı</a> &middot; <a href=\"https://github.com/mserman90/MorseCore\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsRepoLink\">GitHub Deposu</a>",
+        creditsBody: "Çevrimdışı ve web tabanlı konuşma/Mors işleme teknolojilerini mümkün kılan açık kaynak modellerin (Piper TTS, EMA Lightning), Goertzel DSP algoritmalarının ve amatör telsiz topluluğunun katkılarına içtenlikle teşekkür ederiz.",
+        linkGithub: "GitHub Kaynak Kodu",
+        linkLicense: "Apache-2.0 Lisansı",
+        linkPiper: "Piper Neural Voices",
+        linkItu: "ITU-R M.1677-1 Standardı",
+        footerBrand: "MorsLab",
+        footerCredits: "🤝 Teşekkür & Lisans",
+        footerRepo: "GitHub Deposu"
       },
       ru: {
-        tabTools: "⚡ Конвертер и аудиоинструменты",
+        navGuideBtn: "📖 Справочник",
+        tabTools: "⚡ Конвертер и аудиоплеер",
         tabGuide: "📖 Справочник и руководство",
         omniTitle: "🌐 4-сторонняя многомерная матрица перевода",
-        omniDesc: "Мгновенный перевод без потерь между обычным текстом, текстом азбуки Морзе, речью и аудио Морзе (CW):",
+        omniBadge: "12-сторонний полный перекрестный перевод",
+        omniDesc: "Мгновенный перевод без потерь между <strong>обычным текстом</strong>, <strong>текстом Морзе</strong>, <strong>речью (голосом)</strong> и <strong>аудио Морзе (CW)</strong>:",
+        omniCards: [
+          {
+            title: "1. 📝 Обычный текст",
+            sub: "Русский, турецкий, английский, арабский",
+            lines: "➔ <strong>Текст Морзе:</strong> Мгновенный перевод в символы.<br>➔ <strong>Аудио Морзе:</strong> Воспроизведение тона CW и экспорт в WAV.<br>➔ <strong>Речь (голос):</strong> Синтез речи человеческим голосом (TTS)."
+          },
+          {
+            title: "2. 📟 Текст Морзе (. -)",
+            sub: "Стандарт ITU-R M.1677-1 / Q-коды",
+            lines: "➔ <strong>Обычный текст:</strong> Автоматическое декодирование в текст.<br>➔ <strong>Аудио Морзе:</strong> Воспроизведение на заданной скорости WPM и тоне.<br>➔ <strong>Речь (голос):</strong> Чтение расшифрованного текста естественным голосом."
+          },
+          {
+            title: "3. 🎙️ Речь (голос)",
+            sub: "Микрофон / Аудиофайл (.wav/.mp3)",
+            lines: "➔ <strong>Обычный текст:</strong> Распознавание речи в текст в реальном времени (ASR).<br>➔ <strong>Текст Морзе:</strong> Синхронный перевод в символы Морзе.<br>➔ <strong>Аудио Морзе:</strong> Прослушивание тона Морзе и экспорт WAV."
+          },
+          {
+            title: "4. 📻 Аудио Морзе (CW)",
+            sub: "Аудиофайл (.wav) / Живой тон CW",
+            lines: "➔ <strong>Текст Морзе:</strong> DSP-демодуляция огибающей в точки и тире.<br>➔ <strong>Обычный текст:</strong> Символы мгновенно превращаются в осмысленный текст.<br>➔ <strong>Речь (голос):</strong> Озвучивание сообщения голосом ИИ."
+          }
+        ],
         converter: "Конвертер азбуки Морзе и аудиоплеер",
         converterDesc: "Двусторонняя конвертация текста и азбуки Морзе, воспроизведение аутентичных тонов CW или экспорт в WAV.",
+        dirTextToMorse: "Текст → Морзе",
+        dirMorseToText: "Морзе → Текст",
+        optAlphabetLatin: "Latin / Turkish / English",
+        optAlphabetCyrillic: "Русский (Cyrillic)",
+        optAlphabetArabic: "العربية (Arabic)",
+        optSepSlash: "Разделитель: /",
+        optSepPipe: "Разделитель: |",
+        optSepHash: "Разделитель: #",
+        optSepStar: "Разделитель: *",
         clear: "Очистить",
         copy: "Копировать",
-        speechTitle: "🎙️ Речь в азбуку Морзе (Микрофон и аудиофайл)",
-        speechDesc: "Слушайте микрофон или аудиофайл на турецком, английском, русском или арабском языке и мгновенно конвертируйте в азбуку Морзе.",
-        spokenHeader: "Распознанный текст речи",
-        morseOutputHeader: "Сгенерированная азбука Морзе",
-        speechLangLbl: "Язык распознавания:",
-        m2sTitle: "🗣️ Азбука Морзе в речь (Текст и аудиофайл)",
-        m2sDesc: "Декодируйте азбуку Морзе на турецком, английском, русском или арабском языке из текста или аудио и слушайте синтез речи.",
-        m2sLangLbl: "Язык речи:",
-        m2sMorseHeader: "Ввод азбуки Морзе" ,
-        m2sDecodedHeader: "Декодированный текст речи",
-        guideTitle: "📖 Руководство пользователя и функции",
-        guideDesc: "Полное руководство по веб- и десктопным возможностям MorsLab, радиоинтеграции и пошаговым урокам.",
+        copied: "Скопировано в буфер!",
+        lblPlainText: "Обычный текст",
+        lblMorseCode: "Азбука Морзе",
+        statsChars: "символов",
+        statsSymbols: "знаков",
+        placeholderInputText: "Введите сообщение для конвертации...",
+        placeholderInputMorse: "Введите код Морзе (например: ... --- ...)...",
+        placeholderOutputMorse: "Результат азбуки Морзе...",
+        placeholderOutputText: "Декодированный текст...",
+        btnPlay: "▶ Слушать",
+        btnStop: "■ Стоп",
+        btnWav: "💾 Скачать WAV",
+        btnSpeakText: "🗣️ Озвучить текст (TTS)",
+        statusReady: "Готов",
+        lblWpm: "Скорость (WPM)",
+        lblPitch: "Частота тона (Гц)",
         practiceKeyer: "Практический ключ CW (Keyer)",
         practiceDesc: "Удерживайте клавишу или используйте Пробел на клавиатуре для тренировки ритма Морзе.",
+        keyerBtn: "КЛЮЧ МОРЗЕ (Удерживайте или Пробел)",
+        keyerReset: "Сброс",
+        keyerMonitorReady: "Готов...",
+        keyerDecodedPrefix: "Декодировано: ",
+        speechTitle: "🎙️ Речь в азбуку Морзе (Микрофон и аудиофайл)",
+        speechDesc: "Слушайте микрофон или аудиофайл на русском, турецком, английском или арабском языке и мгновенно конвертируйте в азбуку Морзе.",
+        speechLangLbl: "Язык распознавания:",
+        startSpeechBtn: "🎙️ Начать запись",
+        stopSpeechBtn: "⏹️ Остановить запись",
+        speechFileLabel: "📁 Выбрать аудиофайл (.wav/.mp3)",
+        spokenHeader: "Распознанный текст речи",
+        speechTextPlaceholder: "Говорите в микрофон или выберите аудиофайл...",
+        morseOutputHeader: "Сгенерированная азбука Морзе",
+        btnPlaySpeechMorse: "🔊 Воспроизвести Морзе",
+        btnStopSpeechMorse: "⏹️ Стоп",
+        btnDownloadSpeechWav: "💾 Скачать Морзе WAV",
+        btnCopySpeechMorse: "📋 Копировать Морзе",
+        btnCopySpeechText: "📋 Копировать текст",
+        btnClearSpeech: "🧹 Очистить",
+        m2sTitle: "🗣️ Азбука Морзе в речь (Текст и аудиофайл)",
+        m2sDesc: "Декодируйте азбуку Морзе на русском, турецком, английском или арабском языке из текста или аудио и слушайте синтез речи.",
+        m2sLangLbl: "Язык речи:",
+        m2sFileLabel: "📁 Загрузить файл Морзе (.wav)",
+        btnSpeakMorseDecodedText: "🔊 Слушать речь",
+        btnStopMorseSpeech: "⏹️ Стоп",
+        btnLiveCw: "📻 Слушать Морзе с микрофона (CW DSP)",
+        btnStopLiveCw: "⏹️ Остановить CW",
+        btnPlayM2sMorseAudio: "🔊 Воспроизвести тон Морзе",
+        btnDownloadM2sMorseWav: "💾 Скачать Морзе WAV",
+        m2sMorseHeader: "Ввод азбуки Морзе",
+        m2sMorsePlaceholder: "... --- ... (или загрузите файл .wav)",
+        m2sDecodedHeader: "Декодированный текст речи",
+        m2sDecodedPlaceholder: "Декодированный текст появится здесь и будет озвучен...",
+        btnCopyM2sText: "📋 Копировать текст",
+        btnCopyM2sMorse: "📋 Копировать Морзе",
+        btnClearM2s: "🧹 Очистить",
+        guideTitle: "📖 Руководство пользователя и справочник функций",
+        guideDesc: "Полное руководство по веб- и десктопным возможностям MorsLab, радиоинтеграции и пошаговым урокам.",
+        guideSearchPlaceholder: "Поиск в руководстве (например: речь, радио, WAV, WPM, микрофон)...",
+        guideItems: [
+          {
+            title: "🔄 1. Двусторонний конвертер (Текст ↔ Азбука Морзе)",
+            desc: "Двусторонняя конвертация текста и кода Морзе по международному стандарту ITU-R M.1677-1, воспроизведение аутентичных тонов CW и экспорт в WAV.",
+            bullets: [
+              "<strong>Смена направления:</strong> Нажмите <code>Текст → Морзе</code> или <code>Морзе → Текст</code> для смены режима перевода.",
+              "<strong>Скорость и тон:</strong> Настройте скорость WPM (5-60) и частоту тона (300-1200 Гц) ползунками.",
+              "<strong>Экспорт в WAV:</strong> Нажмите <code>💾 Скачать WAV</code> для сохранения 16-битного аудиофайла PCM."
+            ],
+            tip: "💡 Совет: Для разделения слов стандартно используется косая черта (<code>/</code>) или двойной пробел."
+          },
+          {
+            title: "🎙️ 2. Речь в азбуку Морзе (Микрофон и аудиофайл)",
+            desc: "Преобразование голоса на русском, английском, турецком или арабском языках с микрофона или аудиофайла в код Морзе в реальном времени.",
+            bullets: [
+              "<strong>Язык распознавания:</strong> Выберите <code>Русский (ru-RU)</code>, <code>English (en-US)</code>, <code>Türkçe (tr-TR)</code> или <code>العربية (ar-SA)</code>.",
+              "<strong>Живой микрофон:</strong> Нажмите <code>🎙️ Начать запись</code> и говорите в микрофон. Речь сразу преобразуется в символы Морзе.",
+              "<strong>Аудиофайл:</strong> Загрузите аудиозапись речи кнопкой <code>📁 Выбрать аудиофайл</code>.",
+              "<strong>Воспроизведение:</strong> Слушайте сгенерированный тон через <code>🔊 Воспроизвести</code> или сохраните через <code>💾 Скачать WAV</code>."
+            ],
+            tip: "💡 Совет: Для лучшего распознавания речи используйте Google Chrome или Microsoft Edge."
+          },
+          {
+            title: "🗣️ 3. Азбука Морзе в речь (Синтез речи TTS)",
+            desc: "Декодируйте код Морзе из текста или аудиофайлов на русском, английском, турецком или арабском языках и слушайте естественный голос ИИ.",
+            bullets: [
+              "<strong>Ввод Морзе:</strong> Введите точки и тире (например: <code>... --- ...</code>) для мгновенного декодирования в текст.",
+              "<strong>Озвучивание:</strong> Нажмите <code>🔊 Слушать речь</code> для озвучивания декодированного текста.",
+              "<strong>DSP-декодер файлов:</strong> Загрузите файл CW кнопкой <code>📁 Загрузить файл Морзе (.wav)</code> для автоматического DSP-анализа.",
+              "<strong>Живой CW-демодулятор:</strong> Нажмите <code>📻 Слушать Морзе с микрофона</code> для дешифровки звуков радиоприемника в реальном времени."
+            ],
+            tip: "💡 Совет: Десктопная версия включает офлайн-нейросеть Piper TTS для высококачественного синтеза речи без интернета."
+          },
+          {
+            title: "🎯 4. Тренировочный ключ CW (Practice Keyer)",
+            desc: "Развивайте навыки работы на ручном телеграфном ключе, точность интервалов точек и тире и чувство ритма Морзе.",
+            bullets: [
+              "<strong>Управление:</strong> Удерживайте кнопку <code>КЛЮЧ МОРЗЕ</code> на экране или нажимайте клавишу <strong>Пробел</strong>.",
+              "<strong>Правило времени:</strong> 1 Тире = 3 Точки. Пауза между элементами знака = 1 Точка, между буквами = 3 Точки.",
+              "<strong>Живой монитор:</strong> Ваш ритм автоматически анализируется и декодированные буквы сразу отображаются на экране."
+            ],
+            tip: "💡 Совет: Держите запястье расслабленным и ориентируйтесь на международный стандарт времени PARIS."
+          },
+          {
+            title: "📻 5. Расширенные возможности ПК: Подключение трансивера и DSP",
+            desc: "Версия для ПК (Windows, macOS, Linux) предоставляет аппаратное сопряжение и алгоритмы DSP для радиолюбителей:",
+            bullets: [
+              "<strong>Манипуляция трансивером (Rig Keying):</strong> Прямое управление трансиверами HF/VHF через USB-Serial (FTDI/CH340) линиями DTR/RTS.",
+              "<strong>DSP-демодулятор в реальном времени:</strong> Декодирует аналоговый сигнал CW с приемника с помощью алгоритма Герцеля (Goertzel).",
+              "<strong>Поиск позывных и журнал QSO:</strong> Запросы позывных по базе DXCC/ITU и ведение аппаратного журнала в формате ADIF 3.1.4."
+            ],
+            tip: "💡 Совет: Портативные версии и установочные пакеты доступны в разделе 'Скачать приложение для ПК'."
+          }
+        ],
         prosigns: "Азбука Морзе и радиокоды (Q-коды)",
         prosignsDesc: "Международные стандарты ITU-R M.1677-1 и радиолюбительские служебные знаки.",
         downloads: "Скачать приложение для ПК",
         downloadsDesc: "Получите настольную версию с офлайн-голосами ИИ (Piper, EMA Lightning), декодером микрофона и журналом QSO.",
+        dlWinTitle: "🪟 Windows (x64)",
+        dlWinSub: "Установщик .exe или портативный .zip",
+        dlMacTitle: "🍏 macOS (Apple Silicon)",
+        dlMacSub: "Нативный arm64 .dmg (Apple Silicon)",
+        dlLinTitle: "🐧 Linux (x64)",
+        dlLinSub: "Пакеты Ubuntu/Debian .deb, Pardus, Arch",
         creditsTitle: "🤝 Благодарности и открытая лицензия",
         creditsDesc: "MorsLab разработан при поддержке сообщества свободного ПО, стандартов ITU и исследовательских проектов в сфере ИИ.",
-        creditsBody: "Искренне благодарим разработчиков открытых нейросетевых моделей (Piper TTS, EMA Lightning), алгоритмов цифровой обработки сигналов (DSP Goertzel) и мировое радиолюбительское сообщество."
+        creditsCopyright: "MorsLab &copy; 2026 Мустафа Мерт Акджейлан &middot; <span id=\"t-creditsLicLbl\">Открытый исходный код</span> <a href=\"https://github.com/mserman90/MorseCore/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsLicLink\">Лицензия Apache-2.0</a> &middot; <a href=\"https://github.com/mserman90/MorseCore\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsRepoLink\">Репозиторий GitHub</a>",
+        creditsBody: "Искренне благодарим разработчиков открытых нейросетевых моделей (Piper TTS, EMA Lightning), алгоритмов цифровой обработки сигналов (DSP Goertzel) и мировое радиолюбительское сообщество.",
+        linkGithub: "Исходный код на GitHub",
+        linkLicense: "Лицензия Apache-2.0",
+        linkPiper: "Нейросетевые голоса Piper",
+        linkItu: "Стандарт ITU-R M.1677-1",
+        footerBrand: "MorsLab",
+        footerCredits: "🤝 Благодарности и лицензия",
+        footerRepo: "Репозиторий GitHub"
       },
       ar: {
+        navGuideBtn: "📖 الدليل",
         tabTools: "⚡ أدوات التحويل والصوت",
         tabGuide: "📖 الدليل والمراجع",
-        omniTitle: "🌐 مصفوفة التحويل رباعية الأبعاد ومتعددة الاتجاهات",
-        omniDesc: "تحويل فوري ودقيق بين النص العادي، شفرة مورس، الصوت البشري (الكلام)، ونغمات مورس اللاسلكية (CW):",
+        omniTitle: "🌐 مصفوفة التحويل رباعية الأبعاد والمتعددة الاتجاهات",
+        omniBadge: "تحويل متقاطع كامل بـ 12 اتجاهاً",
+        omniDesc: "تحويل فوري ودقيق بين <strong>النص العادي</strong>، و<strong>شفرة مورس</strong>، و<strong>صوت الكلام</strong>، و<strong>نغمة مورس (CW)</strong>:",
+        omniCards: [
+          {
+            title: "1. 📝 النص العادي",
+            sub: "العربية، الإنجليزية، التركية، الروسية",
+            lines: "➔ <strong>شفرة مورس:</strong> تحويل فوري لرموز مورس.<br>➔ <strong>نغمة مورس:</strong> استماع لنغمات CW وتوليد WAV.<br>➔ <strong>صوت الكلام:</strong> نطق بشري عالي الجودة عبر TTS."
+          },
+          {
+            title: "2. 📟 شفرة مورس (. -)",
+            sub: "معيار ITU-R M.1677-1 / رموز Q",
+            lines: "➔ <strong>النص العادي:</strong> فك تشفير فوري إلى نص مفهوم.<br>➔ <strong>نغمة مورس:</strong> تشغيل بسرعة WPM والتردد المختار.<br>➔ <strong>صوت الكلام:</strong> قراءة النص المفكوك بصوت طبيعي."
+          },
+          {
+            title: "3. 🎙️ صوت الكلام",
+            sub: "ميكروفون مباشر / ملف صوتي (.wav/.mp3)",
+            lines: "➔ <strong>النص العادي:</strong> تحويل الكلام إلى نص بدقة عالية (ASR).<br>➔ <strong>شفرة مورس:</strong> ترميز فوري متزامن إلى رموز مورس.<br>➔ <strong>نغمة مورس:</strong> الاستماع لنغمة مورس وتحميل ملف WAV."
+          },
+          {
+            title: "4. 📻 نغمة مورس (CW)",
+            sub: "ملف صوتي (.wav) / نغمة CW مباشرة",
+            lines: "➔ <strong>شفرة مورس:</strong> فك التشفير إلى نقاط وشرطات عبر خوارزميات DSP.<br>➔ <strong>النص العادي:</strong> تحويل الرموز فورياً إلى كلمات مقروءة.<br>➔ <strong>صوت الكلام:</strong> نطق الرسالة المفكوكة عبر الذكاء الاصطناعي."
+          }
+        ],
         converter: "محول شفرة مورس ومشغل الصوت",
         converterDesc: "تحويل ثنائي الاتجاه بين النص وشفرة مورس، واستماع لنغمات CW واقعية أو تصدير بصيغة WAV.",
+        dirTextToMorse: "نص ← مورس",
+        dirMorseToText: "مورس ← نص",
+        optAlphabetLatin: "Latin / Turkish / English",
+        optAlphabetCyrillic: "Русский (Cyrillic)",
+        optAlphabetArabic: "العربية (Arabic)",
+        optSepSlash: "الفاصل: /",
+        optSepPipe: "الفاصل: |",
+        optSepHash: "الفاصل: #",
+        optSepStar: "الفاصل: *",
         clear: "مسح",
         copy: "نسخ",
+        copied: "تم النسخ إلى الحافظة!",
+        lblPlainText: "النص العادي",
+        lblMorseCode: "شفرة مورس",
+        statsChars: "أحرف",
+        statsSymbols: "رموز",
+        placeholderInputText: "اكتب الرسالة المراد تحويلها هنا...",
+        placeholderInputMorse: "اكتب شفرة مورس هنا (مثال: ... --- ...)...",
+        placeholderOutputMorse: "مخرجات شفرة مورس ستظهر هنا...",
+        placeholderOutputText: "النص المفكوك تشفيره سيظهر هنا...",
+        btnPlay: "▶ استماع",
+        btnStop: "■ إيقاف",
+        btnWav: "💾 تحميل WAV",
+        btnSpeakText: "🗣️ نطق النص (TTS)",
+        statusReady: "جاهز",
+        lblWpm: "السرعة (WPM)",
+        lblPitch: "التردد (هرتز)",
+        practiceKeyer: "مفتاح مورس للتدريب (CW Practice Keyer)",
+        practiceDesc: "اضغط مطولاً على الزر أدناه أو استخدم زر المسافة (Space) على لوحة المفاتيح لتطوير إيقاع مورس.",
+        keyerBtn: "مفتاح مورس (اضغط مطولاً أو Space)",
+        keyerReset: "إعادة ضبط",
+        keyerMonitorReady: "جاهز...",
+        keyerDecodedPrefix: "تم فك التشفير: ",
         speechTitle: "🎙️ تحويل الكلام إلى مورس (مباشر وملف صوتي)",
-        speechDesc: "تحدث في الميكروفون باللغات التركية أو الإنجليزية أو الروسية أو العربية لتحويل الكلام إلى مورس في الوقت الفعلي.",
-        spokenHeader: "نص الكلام المتعرف عليه",
-        morseOutputHeader: "شفرة مورس الناتجة",
+        speechDesc: "تحدث في الميكروفون باللغات العربية أو الإنجليزية أو التركية أو الروسية لتحويل الكلام إلى مورس في الوقت الفعلي.",
         speechLangLbl: "لغة التعرف:",
+        startSpeechBtn: "🎙️ بدء الاستماع",
+        stopSpeechBtn: "⏹️ إيقاف الاستماع",
+        speechFileLabel: "📁 اختيار ملف صوتي (.wav/.mp3)",
+        spokenHeader: "نص الكلام المتعرف عليه",
+        speechTextPlaceholder: "تحدث في الميكروفون أو اختر ملفاً صوتياً...",
+        morseOutputHeader: "شفرة مورس الناتجة",
+        btnPlaySpeechMorse: "🔊 تشغيل مورس",
+        btnStopSpeechMorse: "⏹️ إيقاف",
+        btnDownloadSpeechWav: "💾 تحميل مورس WAV",
+        btnCopySpeechMorse: "📋 نسخ مورس",
+        btnCopySpeechText: "📋 نسخ النص",
+        btnClearSpeech: "🧹 مسح",
         m2sTitle: "🗣️ تحويل مورس إلى كلام (نص وملف صوتي)",
-        m2sDesc: "فك تشفير شفرة مورس بالنص أو ملف صوتي باللغات التركية أو الإنجليزية أو الروسية أو العربية واستمع إليها بصوت طبيعي.",
+        m2sDesc: "فك تشفير شفرة مورس بالنص أو ملف صوتي باللغات العربية أو الإنجليزية أو التركية أو الروسية واستمع إليها بصوت طبيعي.",
         m2sLangLbl: "لغة النطق:",
+        m2sFileLabel: "📁 رفع ملف نغمات مورس (.wav)",
+        btnSpeakMorseDecodedText: "🔊 استماع للنطق",
+        btnStopMorseSpeech: "⏹️ إيقاف",
+        btnLiveCw: "📻 استماع مباشر لنغمات مورس (CW DSP)",
+        btnStopLiveCw: "⏹️ إيقاف استماع CW",
+        btnPlayM2sMorseAudio: "🔊 تشغيل نغمة مورس",
+        btnDownloadM2sMorseWav: "💾 تحميل مورس WAV",
         m2sMorseHeader: "إدخال شفرة مورس",
+        m2sMorsePlaceholder: "... --- ... (أو ارفع ملف صوتي .wav)",
         m2sDecodedHeader: "النص المفكوك تشفيره",
-        guideTitle: "📖 دليل الاستخدام والميزات",
+        m2sDecodedPlaceholder: "سيظهر النص المفكوك هنا وسيتم نطقه صوتياً...",
+        btnCopyM2sText: "📋 نسخ النص",
+        btnCopyM2sMorse: "📋 نسخ مورس",
+        btnClearM2s: "🧹 مسح",
+        guideTitle: "📖 دليل الاستخدام والميزات الشامل (User Guide)",
         guideDesc: "دليل شامل لجميع إمكانيات مورس لاب (MorsLab) على الويب والحاسوب، وتكامل أجهزة اللاسلكي والشروحات.",
-        practiceKeyer: "مفتاح مورس للتدريب (CW Keyer)",
-        practiceDesc: "اضغط مطولاً على الزر أو استخدم زر المسافة (Space) على لوحة المفاتيح لتطوير مهارات وإيقاع مورس.",
+        guideSearchPlaceholder: "البحث في الدليل (مثال: نطق، لاسلكي، WAV، سرعة WPM، ميكروفون)...",
+        guideItems: [
+          {
+            title: "🔄 1. محول ثنائي الاتجاه (نص ↔ شفرة مورس)",
+            desc: "تحويل ثنائي الاتجاه بين النصوص وشفرة مورس وفق المعيار الدولي ITU-R M.1677-1، مع الاستماع لنغمات لاسلكية واقعية أو التصدير بصيغة WAV.",
+            bullets: [
+              "<strong>تبديل الاتجاه:</strong> اضغط على زر <code>نص ← مورس</code> أو <code>مورس ← نص</code> لتبديل اتجاه التحويل.",
+              "<strong>السرعة والتردد:</strong> اضبط سرعة الإرسال بمعدل WPM (5-60) وتردد النغمة (300-1200 هرتز).",
+              "<strong>تصدير الصوت:</strong> اضغط <code>💾 تحميل WAV</code> لحفظ ملف صوتي نقي بصيغة 16-bit PCM WAV."
+            ],
+            tip: "💡 ملاحظة: يُستخدم الفاصل المائل (<code>/</code>) أو المسافة المزدوجة للفصل القياسي بين الكلمات."
+          },
+          {
+            title: "🎙️ 2. تحويل الكلام إلى شفرة مورس (Speech-to-Morse)",
+            desc: "تحويل صوتك المنطوق باللغات العربية أو الإنجليزية أو التركية أو الروسية عبر الميكروفون أو الملفات الصوتية إلى شفرة مورس في الوقت الفعلي.",
+            bullets: [
+              "<strong>لغة التعرف:</strong> اختر <code>العربية (ar-SA)</code> أو <code>English (en-US)</code> أو <code>Türkçe (tr-TR)</code> أو <code>Русский (ru-RU)</code>.",
+              "<strong>ميكروفون مباشر:</strong> اضغط <code>🎙️ بدء الاستماع</code> وتحدث. سيتحول كلامك فورياً إلى نص وشفرة مورس.",
+              "<strong>ملف صوتي:</strong> يمكنك رفع ملف صوتي للكلام عبر زر <code>📁 اختيار ملف صوتي</code>.",
+              "<strong>تشغيل وتصدير:</strong> استمع لشفرة مورس الناتجة عبر <code>🔊 تشغيل مورس</code> أو حمّلها كملف <code>💾 تحميل مورس WAV</code>."
+            ],
+            tip: "💡 ملاحظة: للحصول على أعلى دقة في التعرف على الكلام، يوصى بمتصفحي Google Chrome أو Microsoft Edge."
+          },
+          {
+            title: "🗣️ 3. تحويل شفرة مورس إلى كلام منطوق (Morse-to-Speech / TTS)",
+            desc: "فك تشفير شفرة مورس من النصوص أو الملفات الصوتية بالعربية أو الإنجليزية أو التركية أو الروسية والاستماع إليها بصوت طبيعي بالذكاء الاصطناعي.",
+            bullets: [
+              "<strong>إدخال شفرة مورس:</strong> أدخل النقاط والشرطات (مثل: <code>... --- ...</code>) وسيتم فك التشفير إلى نص مفهوم فورياً.",
+              "<strong>النطق الصوتي:</strong> اضغط <code>🔊 استماع للنطق</code> لسماع الرسالة المفكوكة بصوت بشري طبيعي باللغة المحددة.",
+              "<strong>معالجة الإشارات DSP:</strong> حمّل ملفات نغمات مورس عبر <code>📁 رفع ملف نغمات مورس (.wav)</code> لفك تشفيرها مباشرة عبر خوارزميات Goertzel.",
+              "<strong>استماع حي لنغمات CW:</strong> شغّل <code>📻 استماع مباشر لنغمات مورس</code> لفك تشفير إشارات الراديو الملتقطة بالميكروفون."
+            ],
+            tip: "💡 ملاحظة: يوفر تطبيق الحاسوب نماذج عصبية Piper TTS تعمل دون اتصال بالإنترنت بدقة فائقة."
+          },
+          {
+            title: "🎯 4. تدريب مفتاح مورس اليدوي (CW Practice Keyer)",
+            desc: "مصمم لتطوير مهارات النقر اليدوي على مفتاح مورس، ودقة التوقيت بين النقاط والشرطات والحفاظ على الإيقاع.",
+            bullets: [
+              "<strong>الاستخدام:</strong> اضغط مطولاً على زر <code>مفتاح مورس</code> على الشاشة أو استخدم زر <strong>المسافة (Space)</strong> على لوحة المفاتيح.",
+              "<strong>قاعدة التوقيت:</strong> مدة الشرطة (Dah) = 3 نقاط (Dits). والفاصل بين عناصر الحرف نقطة واحدة، وبين الحروف 3 نقاط.",
+              "<strong>المراقبة المباشرة:</strong> يتم تحليل إيقاعك وتحويله إلى نقاط وشرطات وعرض الحروف المفكوكة على الشاشة فورياً."
+            ],
+            tip: "💡 ملاحظة: حافظ على استرخاء معصمك واستهدف الوصول إلى إيقاع PARIS القياسي."
+          },
+          {
+            title: "📻 5. ميزات تطبيق الحاسوب المتقدمة: ربط أجهزة اللاسلكي ومعالجة الإشارات DSP",
+            desc: "يوفر تطبيق الحاسوب (Windows و macOS و Linux) أدوات عتادية متطورة وميزات معالجة إشارات لهواة اللاسلكي:",
+            bullets: [
+              "<strong>مفتاح الإرسال التسلسلي (Rig Keyer):</strong> التحكم بمفاتيح أجهزة الإرسال والاستقبال HF/VHF مباشرة عبر منافذ USB-Serial وخطوط DTR/RTS.",
+              "<strong>مفكك تشفير DSP فوري:</strong> فك تشفير نغمات CW التناظرية القادمة من أجهزة الراديو باستخدام خوارزمية Goertzel.",
+              "<strong>بحث نداءات اللاسلكي وسجل الاتصالات (QSO):</strong> استعلام إشارات النداء عبر قاعدة بيانات DXCC/ITU وتصدير السجلات بتنسيق ADIF 3.1.4 القياسي."
+            ],
+            tip: "💡 ملاحظة: يمكنك تحميل الإصدار المحمول أو حزمة التثبيت أدناه من قسم 'تحميل تطبيق الحاسوب'."
+          }
+        ],
         prosigns: "أبجدية مورس ورموز الراديو (Q-Codes)",
         prosignsDesc: "معايير ITU-R M.1677-1 الدولية وإشارات تشغيل هواة اللاسلكي.",
-        downloads: "تحميل تطبيق الحاسوب",
-        downloadsDesc: "احصل على التطبيق الكامل للحاسوب مع نماذج صوتية ذكية بدون إنترنت، وفك تشفير الميكروفون وسجل اتصالات QSO.",
+        downloads: "تحميل تطبيق الحاسوب (Desktop App)",
+        downloadsDesc: "احصل على التطبيق الكامل للحاسوب مع نماذج صوتية ذكية بدون إنترنت (Piper TTS)، وفك تشفير الميكروفون وسجل اتصالات QSO.",
+        dlWinTitle: "🪟 Windows (x64)",
+        dlWinSub: "ملف تثبيت .exe أو نسخة محمولة .zip",
+        dlMacTitle: "🍏 macOS (Apple Silicon)",
+        dlMacSub: "حزمة arm64 .dmg الأصلية (M1/M2/M3/M4)",
+        dlLinTitle: "🐧 Linux (x64)",
+        dlLinSub: "حزم Ubuntu/Debian .deb، Pardus، Arch",
         creditsTitle: "🤝 شكر وتقدير والترخيص مفتوح المصدر",
         creditsDesc: "تم تطوير MorsLab بدعم من مجتمع البرمجيات مفتوحة المصدر ومعايير ITU ومشاريع أبحاث الذكاء الاصطناعي.",
-        creditsBody: "نتوجه بالشكر الجزيل لمطوري نماذج الذكاء الاصطناعي مفتوحة المصدر (Piper TTS و EMA Lightning) وخوارزميات معالجة الإشارات Goertzel ومجتمع هواة اللاسلكي حول العالم."
+        creditsCopyright: "MorsLab &copy; 2026 مصطفى ميرت أقجيلان &middot; <span id=\"t-creditsLicLbl\">مفتوح المصدر</span> <a href=\"https://github.com/mserman90/MorseCore/blob/main/LICENSE\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsLicLink\">رخصة Apache-2.0</a> &middot; <a href=\"https://github.com/mserman90/MorseCore\" target=\"_blank\" rel=\"noopener\" id=\"t-creditsRepoLink\">مستودع GitHub</a>",
+        creditsBody: "نتوجه بالشكر الجزيل لمطوري نماذج الذكاء الاصطناعي مفتوحة المصدر (Piper TTS و EMA Lightning) وخوارزميات معالجة الإشارات Goertzel ومجتمع هواة اللاسلكي حول العالم.",
+        linkGithub: "كود المصدر على GitHub",
+        linkLicense: "رخصة Apache-2.0",
+        linkPiper: "أصوات Piper العصبية",
+        linkItu: "معيار ITU-R M.1677-1",
+        footerBrand: "MorsLab",
+        footerCredits: "🤝 شكر وتقدير والترخيص",
+        footerRepo: "مستودع GitHub"
       }
     };
+
+    function renderOmniCards(lang) {
+      const container = document.getElementById('omniCardsContainer');
+      if (!container) return;
+      const t = I18N[lang] || I18N.en;
+      const cards = t.omniCards || [];
+      container.innerHTML = cards.map(c => `
+        <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:8px; padding:0.85rem; display:flex; flex-direction:column; gap:0.4rem;">
+          <div style="font-weight:700; color:var(--accent); font-size:0.95rem;">${c.title}</div>
+          <div style="font-size:0.8rem; color:var(--ink-muted);">${c.sub}</div>
+          <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.4;">${c.lines}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderGuideSections(lang) {
+      const container = document.getElementById('guideSectionsContainer');
+      if (!container) return;
+      const t = I18N[lang] || I18N.en;
+      const items = t.guideItems || [];
+      container.innerHTML = items.map(item => `
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">${item.title}</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">${item.desc}</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            ${item.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+          ${item.tip ? `<div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">${item.tip}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function renderCheatGrid(lang) {
+      const cheatGrid = document.getElementById('cheatGrid');
+      if (!cheatGrid) return;
+      cheatGrid.innerHTML = '';
+      for (const [letter, code] of Object.entries(MORSE_TABLE)) {
+        const item = document.createElement('div');
+        item.className = 'cheat-item';
+        item.innerHTML = `<strong>${letter}</strong><span>${code}</span>`;
+        cheatGrid.appendChild(item);
+      }
+      for (const p of PROSIGNS) {
+        const item = document.createElement('div');
+        item.className = 'cheat-item';
+        item.style.borderColor = 'var(--accent)';
+        const desc = (typeof p.desc === 'object') ? (p.desc[lang] || p.desc.en) : p.desc;
+        item.innerHTML = `<strong style="color:var(--accent);">${p.name}</strong><span>${p.code}</span><small style="font-size:0.75rem; color:var(--ink-muted); grid-column:span 2;">${desc}</small>`;
+        cheatGrid.appendChild(item);
+      }
+    }
 
     function changeLanguage(lang) {
       try { 
@@ -1360,38 +1871,142 @@
 
       const navGuideBtn = document.getElementById('navGuideBtn');
       if (navGuideBtn) {
-        navGuideBtn.textContent = isRtl ? '📖 الدليل' : (lang === 'ru' ? '📖 Справочник' : (lang === 'tr' ? '📖 Rehber' : '📖 Guide'));
+        navGuideBtn.textContent = t.navGuideBtn || (isRtl ? '📖 الدليل' : (lang === 'ru' ? '📖 Справочник' : (lang === 'tr' ? '📖 Rehber' : '📖 Guide')));
       }
 
       if (document.getElementById('tabBtnTools')) document.getElementById('tabBtnTools').textContent = t.tabTools;
       if (document.getElementById('tabBtnGuide')) document.getElementById('tabBtnGuide').textContent = t.tabGuide;
       if (document.getElementById('t-omniTitle')) document.getElementById('t-omniTitle').textContent = t.omniTitle;
-      if (document.getElementById('t-omniDesc')) document.getElementById('t-omniDesc').textContent = t.omniDesc;
-      document.getElementById('t-converter').textContent = t.converter;
-      document.getElementById('t-converterDesc').textContent = t.converterDesc;
-      document.getElementById('t-clear').textContent = t.clear;
-      document.getElementById('t-copy').textContent = t.copy;
+      if (document.getElementById('t-omniBadge')) document.getElementById('t-omniBadge').textContent = t.omniBadge;
+      if (document.getElementById('t-omniDesc')) document.getElementById('t-omniDesc').innerHTML = t.omniDesc;
+
+      if (document.getElementById('t-converter')) document.getElementById('t-converter').textContent = t.converter;
+      if (document.getElementById('t-converterDesc')) document.getElementById('t-converterDesc').textContent = t.converterDesc;
+
+      const btnDir = document.getElementById('btnDirection');
+      if (btnDir) btnDir.textContent = isDecoding ? t.dirMorseToText : t.dirTextToMorse;
+
+      const alphaSel = document.getElementById('alphabetSelect');
+      if (alphaSel && alphaSel.options && alphaSel.options.length >= 3) {
+        alphaSel.options[0].textContent = t.optAlphabetLatin;
+        alphaSel.options[1].textContent = t.optAlphabetCyrillic;
+        alphaSel.options[2].textContent = t.optAlphabetArabic;
+      }
+      const sepSel = document.getElementById('separatorSelect');
+      if (sepSel && sepSel.options && sepSel.options.length >= 4) {
+        sepSel.options[0].textContent = t.optSepSlash;
+        sepSel.options[1].textContent = t.optSepPipe;
+        sepSel.options[2].textContent = t.optSepHash;
+        sepSel.options[3].textContent = t.optSepStar;
+      }
+
+      if (document.getElementById('t-clear')) document.getElementById('t-clear').textContent = t.clear;
+      if (document.getElementById('t-copy')) document.getElementById('t-copy').textContent = t.copy;
+
+      const inLbl = document.getElementById('inputLabel');
+      if (inLbl) inLbl.textContent = isDecoding ? t.lblMorseCode : t.lblPlainText;
+      const outLbl = document.getElementById('outputLabel');
+      if (outLbl) outLbl.textContent = isDecoding ? t.lblPlainText : t.lblMorseCode;
+
+      const inText = document.getElementById('inputText');
+      if (inText) inText.placeholder = isDecoding ? t.placeholderInputMorse : t.placeholderInputText;
+      const outText = document.getElementById('outputText');
+      if (outText) outText.placeholder = isDecoding ? t.placeholderOutputText : t.placeholderOutputMorse;
+
+      if (document.getElementById('btnPlay')) document.getElementById('btnPlay').textContent = t.btnPlay;
+      if (document.getElementById('btnStop')) document.getElementById('btnStop').textContent = t.btnStop;
+      if (document.getElementById('btnWav')) document.getElementById('btnWav').textContent = t.btnWav;
+      if (document.getElementById('btnSpeakText')) document.getElementById('btnSpeakText').textContent = t.btnSpeakText;
+      if (document.getElementById('t-wpmLbl')) document.getElementById('t-wpmLbl').textContent = t.lblWpm;
+      if (document.getElementById('t-pitchLbl')) document.getElementById('t-pitchLbl').textContent = t.lblPitch;
+      if (document.getElementById('audioStatus')) document.getElementById('audioStatus').textContent = t.statusReady;
+
+      if (document.getElementById('t-practiceKeyer')) document.getElementById('t-practiceKeyer').textContent = t.practiceKeyer;
+      if (document.getElementById('t-practiceDesc')) document.getElementById('t-practiceDesc').textContent = t.practiceDesc;
+      if (document.getElementById('keyerBtn')) document.getElementById('keyerBtn').textContent = t.keyerBtn;
+      if (document.getElementById('t-keyerReset')) document.getElementById('t-keyerReset').textContent = t.keyerReset;
+      if (document.getElementById('keyerMonitor')) document.getElementById('keyerMonitor').textContent = t.keyerMonitorReady;
+      if (document.getElementById('keyerDecoded')) document.getElementById('keyerDecoded').textContent = t.keyerDecodedPrefix + '-';
+
       if (document.getElementById('t-speechTitle')) document.getElementById('t-speechTitle').textContent = t.speechTitle;
       if (document.getElementById('t-speechDesc')) document.getElementById('t-speechDesc').textContent = t.speechDesc;
-      if (document.getElementById('t-spokenHeader')) document.getElementById('t-spokenHeader').textContent = t.spokenHeader;
-      if (document.getElementById('t-morseOutputHeader')) document.getElementById('t-morseOutputHeader').textContent = t.morseOutputHeader;
       if (document.getElementById('t-speechLangLbl')) document.getElementById('t-speechLangLbl').textContent = t.speechLangLbl;
+
+      const startSpBtn = document.getElementById('startSpeechBtn');
+      if (startSpBtn) startSpBtn.textContent = isSpeechListening ? t.stopSpeechBtn : t.startSpeechBtn;
+      const spFileLbl = document.getElementById('t-speechFileLabel');
+      if (spFileLbl) {
+        const span = spFileLbl.querySelector('span');
+        if (span) span.textContent = t.speechFileLabel;
+      }
+      if (document.getElementById('t-spokenHeader')) document.getElementById('t-spokenHeader').textContent = t.spokenHeader;
+      if (document.getElementById('speechTextOutput')) document.getElementById('speechTextOutput').placeholder = t.speechTextPlaceholder;
+      if (document.getElementById('t-morseOutputHeader')) document.getElementById('t-morseOutputHeader').textContent = t.morseOutputHeader;
+      if (document.getElementById('btnPlaySpeechMorse')) document.getElementById('btnPlaySpeechMorse').textContent = t.btnPlaySpeechMorse;
+      if (document.getElementById('btnStopSpeechMorse')) document.getElementById('btnStopSpeechMorse').textContent = t.btnStopSpeechMorse;
+      if (document.getElementById('btnDownloadSpeechWav')) document.getElementById('btnDownloadSpeechWav').textContent = t.btnDownloadSpeechWav;
+      if (document.getElementById('btnCopySpeechMorse')) document.getElementById('btnCopySpeechMorse').textContent = t.btnCopySpeechMorse;
+      if (document.getElementById('btnCopySpeechText')) document.getElementById('btnCopySpeechText').textContent = t.btnCopySpeechText;
+      if (document.getElementById('btnClearSpeech')) document.getElementById('btnClearSpeech').textContent = t.btnClearSpeech;
+      if (document.getElementById('speechStatus')) document.getElementById('speechStatus').textContent = t.statusReady;
+
       if (document.getElementById('t-m2sTitle')) document.getElementById('t-m2sTitle').textContent = t.m2sTitle;
       if (document.getElementById('t-m2sDesc')) document.getElementById('t-m2sDesc').textContent = t.m2sDesc;
       if (document.getElementById('t-m2sLangLbl')) document.getElementById('t-m2sLangLbl').textContent = t.m2sLangLbl;
+
+      const m2sFileLbl = document.getElementById('t-m2sFileLabel');
+      if (m2sFileLbl) {
+        const span = m2sFileLbl.querySelector('span');
+        if (span) span.textContent = t.m2sFileLabel;
+      }
+      if (document.getElementById('btnSpeakMorseDecodedText')) document.getElementById('btnSpeakMorseDecodedText').textContent = t.btnSpeakMorseDecodedText;
+      if (document.getElementById('btnStopMorseSpeech')) document.getElementById('btnStopMorseSpeech').textContent = t.btnStopMorseSpeech;
+      const btnLiveCw = document.getElementById('btnLiveCw');
+      if (btnLiveCw) btnLiveCw.textContent = liveCwActive ? t.btnStopLiveCw : t.btnLiveCw;
+      if (document.getElementById('btnPlayM2sMorseAudio')) document.getElementById('btnPlayM2sMorseAudio').textContent = t.btnPlayM2sMorseAudio;
+      if (document.getElementById('btnDownloadM2sMorseWav')) document.getElementById('btnDownloadM2sMorseWav').textContent = t.btnDownloadM2sMorseWav;
       if (document.getElementById('t-m2sMorseHeader')) document.getElementById('t-m2sMorseHeader').textContent = t.m2sMorseHeader;
+      if (document.getElementById('m2sMorseInput')) document.getElementById('m2sMorseInput').placeholder = t.m2sMorsePlaceholder;
       if (document.getElementById('t-m2sDecodedHeader')) document.getElementById('t-m2sDecodedHeader').textContent = t.m2sDecodedHeader;
+      if (document.getElementById('m2sDecodedOutput')) document.getElementById('m2sDecodedOutput').placeholder = t.m2sDecodedPlaceholder;
+      if (document.getElementById('btnCopyM2sText')) document.getElementById('btnCopyM2sText').textContent = t.btnCopyM2sText;
+      if (document.getElementById('btnCopyM2sMorse')) document.getElementById('btnCopyM2sMorse').textContent = t.btnCopyM2sMorse;
+      if (document.getElementById('btnClearM2s')) document.getElementById('btnClearM2s').textContent = t.btnClearM2s;
+      if (document.getElementById('m2sStatus')) document.getElementById('m2sStatus').textContent = t.statusReady;
+
       if (document.getElementById('t-guideTitle')) document.getElementById('t-guideTitle').textContent = t.guideTitle;
       if (document.getElementById('t-guideDesc')) document.getElementById('t-guideDesc').textContent = t.guideDesc;
-      document.getElementById('t-practiceKeyer').textContent = t.practiceKeyer;
-      document.getElementById('t-practiceDesc').textContent = t.practiceDesc;
-      document.getElementById('t-prosigns').textContent = t.prosigns;
-      document.getElementById('t-prosignsDesc').textContent = t.prosignsDesc;
-      document.getElementById('t-downloads').textContent = t.downloads;
-      document.getElementById('t-downloadsDesc').textContent = t.downloadsDesc;
+      if (document.getElementById('guideSearchInput')) document.getElementById('guideSearchInput').placeholder = t.guideSearchPlaceholder;
+
+      if (document.getElementById('t-prosigns')) document.getElementById('t-prosigns').textContent = t.prosigns;
+      if (document.getElementById('t-prosignsDesc')) document.getElementById('t-prosignsDesc').textContent = t.prosignsDesc;
+      if (document.getElementById('t-downloads')) document.getElementById('t-downloads').textContent = t.downloads;
+      if (document.getElementById('t-downloadsDesc')) document.getElementById('t-downloadsDesc').textContent = t.downloadsDesc;
+
+      if (document.getElementById('t-dlWinTitle')) document.getElementById('t-dlWinTitle').textContent = t.dlWinTitle;
+      if (document.getElementById('t-dlWinSub')) document.getElementById('t-dlWinSub').textContent = t.dlWinSub;
+      if (document.getElementById('t-dlMacTitle')) document.getElementById('t-dlMacTitle').textContent = t.dlMacTitle;
+      if (document.getElementById('t-dlMacSub')) document.getElementById('t-dlMacSub').textContent = t.dlMacSub;
+      if (document.getElementById('t-dlLinTitle')) document.getElementById('t-dlLinTitle').textContent = t.dlLinTitle;
+      if (document.getElementById('t-dlLinSub')) document.getElementById('t-dlLinSub').textContent = t.dlLinSub;
+
       if (document.getElementById('t-creditsTitle')) document.getElementById('t-creditsTitle').textContent = t.creditsTitle;
       if (document.getElementById('t-creditsDesc')) document.getElementById('t-creditsDesc').textContent = t.creditsDesc;
+      if (document.getElementById('t-creditsCopyright')) document.getElementById('t-creditsCopyright').innerHTML = t.creditsCopyright;
       if (document.getElementById('t-creditsBody')) document.getElementById('t-creditsBody').textContent = t.creditsBody;
+
+      if (document.getElementById('t-linkGithub')) document.getElementById('t-linkGithub').textContent = t.linkGithub;
+      if (document.getElementById('t-linkLicense')) document.getElementById('t-linkLicense').textContent = t.linkLicense;
+      if (document.getElementById('t-linkPiper')) document.getElementById('t-linkPiper').textContent = t.linkPiper;
+      if (document.getElementById('t-linkItu')) document.getElementById('t-linkItu').textContent = t.linkItu;
+
+      if (document.getElementById('t-footerCredits')) document.getElementById('t-footerCredits').textContent = t.footerCredits;
+      if (document.getElementById('t-footerRepo')) document.getElementById('t-footerRepo').textContent = t.footerRepo;
+
+      renderOmniCards(lang);
+      renderGuideSections(lang);
+      renderCheatGrid(lang);
+      convertNow();
     }
 
     // Speech to Morse Implementation (Live & File)
@@ -1450,9 +2065,11 @@
       if (isSpeechListening) {
         if (recognitionInstance) recognitionInstance.stop();
         isSpeechListening = false;
-        btn.textContent = '🎙️ Dinlemeyi Başlat';
+        const curLang = getCurrentLang();
+        const t = I18N[curLang] || I18N.en;
+        btn.textContent = t.startSpeechBtn;
         btn.classList.add('btn-primary');
-        status.textContent = 'Durduruldu';
+        status.textContent = t.statusReady;
         return;
       }
 
@@ -1465,7 +2082,9 @@
 
       recognitionInstance.onstart = () => {
         isSpeechListening = true;
-        btn.textContent = '⏹️ Dinlemeyi Durdur';
+        const curLang = getCurrentLang();
+        const t = I18N[curLang] || I18N.en;
+        btn.textContent = t.stopSpeechBtn;
         btn.classList.remove('btn-primary');
         status.textContent = lang === 'ar-SA' ? 'جارٍ الاستماع (العربية)...' :
                              lang === 'ru-RU' ? 'Прослушивание (Русский)...' :
@@ -1488,11 +2107,13 @@
 
       recognitionInstance.onend = () => {
         isSpeechListening = false;
-        btn.textContent = '🎙️ Dinlemeyi Başlat';
+        const curLang = getCurrentLang();
+        const t = I18N[curLang] || I18N.en;
+        btn.textContent = t.startSpeechBtn;
         btn.classList.add('btn-primary');
         if (status.textContent.startsWith('Dinleniyor') || status.textContent.startsWith('Listening') ||
             status.textContent.startsWith('Прослушивание') || status.textContent.startsWith('جارٍ')) {
-          status.textContent = 'Hazır';
+          status.textContent = t.statusReady;
         }
       };
 
@@ -1845,11 +2466,14 @@
     function toggleLiveCwListening() {
       const btn = document.getElementById('btnLiveCw');
       const status = document.getElementById('m2sStatus');
+      const curLang = getCurrentLang();
+      const t = I18N[curLang] || I18N.en;
+
       if (liveCwActive) {
         stopLiveCwListening();
-        btn.textContent = '📻 Canlı Mors Sesi Dinle (Mikrofon CW DSP)';
+        btn.textContent = t.btnLiveCw;
         btn.classList.remove('btn-primary');
-        status.textContent = 'CW Dinleme durduruldu.';
+        status.textContent = t.statusReady;
         return;
       }
 
@@ -1869,9 +2493,11 @@
         liveCwActive = true;
         liveCwState = false;
         liveCwStateStart = Date.now();
-        btn.textContent = '⏹️ CW Dinlemeyi Durdur';
+        btn.textContent = t.btnStopLiveCw;
         btn.classList.add('btn-primary');
-        status.textContent = 'Canlı CW Mors Sinyali Dinleniyor (Gerçek Zamanlı DSP)...';
+        status.textContent = curLang === 'ar' ? 'جارٍ الاستماع لنغمات مورس الحية (CW DSP)...' :
+                             curLang === 'ru' ? 'Прослушивание тонов Морзе в реальном времени (CW DSP)...' :
+                             curLang === 'tr' ? 'Canlı CW Mors Sinyali Dinleniyor (Gerçek Zamanlı DSP)...' : 'Listening to live CW Morse signals (Real-time DSP)...';
 
         const pcmData = new Float32Array(liveCwAnalyser.fftSize);
         liveCwInterval = setInterval(() => {
