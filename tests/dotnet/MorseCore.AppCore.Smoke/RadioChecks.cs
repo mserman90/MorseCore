@@ -115,6 +115,15 @@ internal static class RadioChecks
         Check(!Directory.EnumerateFiles(home,"*.tmp",SearchOption.AllDirectories).Any(),"No export or profile temporary file leaks");
         File.WriteAllText(Path.Combine(home,"logs","corrupt.json"),"{");
         Reject(()=>storage.Recent(true),"Corrupt log was silently ignored");
+
+        var lookup = await CallsignLookupService.LookupAsync("TA1PDM");
+        Check(lookup.CountryId == "TR" && lookup.CallSign == "TA1PDM", "Callsign lookup resolved country");
+        Check(lookup.Qth != null && lookup.Qth.Contains("Tekirdağ", StringComparison.Ordinal), "Callsign lookup resolved region");
+
+        var ports = SerialPortKeyer.GetAvailablePorts();
+        Check(ports != null, "Serial ports listed successfully");
+        var keyer = new SerialPortKeyer(new("COM99", UseDtr: true, UseRts: false));
+        Check(!keyer.IsOpen, "Serial keyer initially closed");
         Console.WriteLine($"Radio and education: {checks} checks passed."); return checks;
     }
 }
