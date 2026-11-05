@@ -10,6 +10,10 @@ public sealed record DecoderResult(string Text, string Morse, double FrequencyHz
 /// <summary>Offline narrow-band CW decoder for a single clean keyed tone, not voice or arbitrary radio mixtures.</summary>
 public static class MorseDecoder
 {
+    /// <summary>Creates a stateful real-time streaming decoder instance.</summary>
+    public static StreamingMorseDecoder CreateStream(DecoderOptions? options = null, int sampleRate = WaveAudio.AnalysisRate) =>
+        new(options, sampleRate);
+
     public static Task<DecoderResult> DecodeFileAsync(string path, DecoderOptions? options = null, CancellationToken cancellationToken = default) =>
         Task.Run(() => Decode(WaveAudio.Read(path, cancellationToken), options, cancellationToken), cancellationToken);
 

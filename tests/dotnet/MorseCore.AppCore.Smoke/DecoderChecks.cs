@@ -112,6 +112,19 @@ internal static class DecoderChecks
             catch (ArgumentOutOfRangeException) { check(true, "WAV decoder tone bounds"); }
             var unusual = new WaveAudio(Marks([60, 125, 180]), 8000);
             check(MorseDecoder.Decode(unusual, new(700, 20)).UncertainCharacters > 0, "WAV irregular mark is explicitly uncertain");
+
+            var streaming = new StreamingMorseDecoder(new(733, 20));
+            var emittedSymbols = new List<string>();
+            streaming.CharacterDecoded += (ch, _) => emittedSymbols.Add(ch);
+            const int chunkSize = 256;
+            for (int offset = 0; offset < original.Samples.Length; offset += chunkSize)
+            {
+                int count = Math.Min(chunkSize, original.Samples.Length - offset);
+                streaming.ProcessSamples(original.Samples.AsSpan(offset, count));
+            }
+            streaming.Flush();
+            check(streaming.DecodedText.Trim() == "SOS TEST", $"Streaming decoder decoded text: {streaming.DecodedText}");
+            check(emittedSymbols.Count > 0, "Streaming decoder progressive character events fired");
         }
         finally { Directory.Delete(directory, true); }
         void Reject(Action action, string label)
