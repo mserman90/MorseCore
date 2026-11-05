@@ -265,5 +265,12 @@
   "lookupCall": "Rufzeichen suchen",
   "sendRig": "An Funkgerät senden (Seriell)",
   "decoderLiveStream": "Live-Streaming-Decodierung",
-  "noSerialPorts": "Keine seriellen COM-Anschlüsse gefunden."
+  "noSerialPorts": "Keine seriellen COM-Anschlüsse gefunden.",
+  "speechToMorse": "Sprache zu Morse",
+  "speechToMorseDesc": "Live-Sprache oder Audiodatei auf Türkisch und Englisch anhören und sofort in Morsecode umwandeln.",
+  "startListening": "Zuhören starten",
+  "stopListening": "Zuhören beenden",
+  "chooseAudioSpeech": "Audiodatei auswählen (.wav/.mp3)",
+  "speechLanguagePrompt": "Sprachauswahl (Türkisch / Englisch)",
+  "spokenText": "Erkannte Sprache"
 }

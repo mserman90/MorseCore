@@ -85,14 +85,15 @@ public sealed partial class MainPage
     private void BuildAudio()
     {
         Heading(T("audio"));
-        int[] sections=[0,3,1,2];
-        var workspace=WorkspaceTabs("AudioWorkspace",["uxMorseAudio","speech","workspaceDecode","workspaceVoices"],Array.IndexOf(sections,audioWorkspace),selected=>
+        int[] sections=[0,3,4,1,2];
+        var workspace=WorkspaceTabs("AudioWorkspace",["uxMorseAudio","speech","speechToMorse","workspaceDecode","workspaceVoices"],Array.IndexOf(sections,audioWorkspace),selected=>
         {
             int index=sections[selected];
             if(audioWorkspace==index) return;
             StopPlayback(); audioWorkspace=index; BuildPage();
         });
         PageContent.Children.Add(workspace);
+        if(audioWorkspace==4) { BuildSpeechToMorseSection(); return; }
         if(audioWorkspace==1) { BuildAudioDecoderSection(); return; }
         if(audioWorkspace==2) { BuildVoicePacksPage(); return; }
         var stack=new StackPanel { Spacing=18 };

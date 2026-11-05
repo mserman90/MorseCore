@@ -265,5 +265,12 @@
   "lookupCall": "Çağrıyı Sorgula",
   "sendRig": "Telsize Gönder (Seri)",
   "decoderLiveStream": "Canlı Akış Çözümü",
-  "noSerialPorts": "Kullanılabilir seri COM portu bulunamadı."
+  "noSerialPorts": "Kullanılabilir seri COM portu bulunamadı.",
+  "speechToMorse": "Konuşmayı Mors'a Çevir",
+  "speechToMorseDesc": "Türkçe ve İngilizce canlı konuşmayı veya ses dosyasını dinleyip anında Mors koduna dönüştürün.",
+  "startListening": "Dinlemeyi Başlat",
+  "stopListening": "Dinlemeyi Durdur",
+  "chooseAudioSpeech": "Konuşma Ses Dosyası Seç (.wav/.mp3)",
+  "speechLanguagePrompt": "Konuşma Dili (Türkçe / English)",
+  "spokenText": "Algılanan Konuşma"
 }

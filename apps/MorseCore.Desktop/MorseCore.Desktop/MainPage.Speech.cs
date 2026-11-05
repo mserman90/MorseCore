@@ -88,4 +88,208 @@ public sealed partial class MainPage
         catch(IOException) { SetStatus(T("speechError")); }
         finally { speechRequest=null; speaking=false; UpdateSpeechActions(); }
     }
+
+    private SpeechToMorseService? speechToMorseService;
+    private bool speechToMorseListening;
+    private string speechToMorseLang = "tr-TR";
+
+    private void BuildSpeechToMorseSection()
+    {
+        var stack = new StackPanel { Spacing = 16 };
+        var heading = Row();
+        heading.Children.Add(new FontIcon { Glyph = "\uE720", FontSize = 20, Foreground = Brush("AccentInkBrush") });
+        heading.Children.Add(Label(T("speechToMorseTitle"), 18));
+        heading.Children.Add(Label(T("speechToMorseIntro"), 12, true));
+        stack.Children.Add(heading);
+
+        speechToMorseService ??= new SpeechToMorseService();
+
+        var configRow = Row();
+        configRow.Spacing = 16;
+        var langChoices = new[] { "Türkçe (tr-TR)", "English (en-US)" };
+        var langValues = new[] { "tr-TR", "en-US" };
+        var langSelect = Choice(T("speechLanguage"), langChoices, Array.IndexOf(langValues, speechToMorseLang), i =>
+        {
+            if (i >= 0 && i < langValues.Length) speechToMorseLang = langValues[i];
+        });
+        configRow.Children.Add(langSelect);
+        stack.Children.Add(configRow);
+
+        var spokenBox = new TextBox
+        {
+            Header = T("spokenTextHeader"),
+            PlaceholderText = T("spokenTextPlaceholder"),
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap,
+            Height = 110,
+            FontSize = 16
+        };
+
+        var morseBox = new TextBox
+        {
+            Header = T("speechMorseOutputHeader"),
+            PlaceholderText = "... --- ...",
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap,
+            Height = 110,
+            FontFamily = MonoFont,
+            FontSize = 18
+        };
+
+        var statusInfo = Label(T("speechStatusReady"), 12, true);
+
+        void UpdateTranscription(string text)
+        {
+            _ = DispatcherQueue.TryEnqueue(() =>
+            {
+                spokenBox.Text = text;
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    morseBox.Text = MorseEngine.Encode(text, preferences.Alphabet, preferences.Separator).Text;
+                }
+                else
+                {
+                    morseBox.Text = "";
+                }
+            });
+        }
+
+        spokenBox.TextChanged += (_, _) =>
+        {
+            if (!speechToMorseListening && !string.IsNullOrWhiteSpace(spokenBox.Text))
+            {
+                morseBox.Text = MorseEngine.Encode(spokenBox.Text, preferences.Alphabet, preferences.Separator).Text;
+            }
+        };
+
+        Button? startLiveBtn = null;
+        Button? stopLiveBtn = null;
+
+        startLiveBtn = Action("startLiveSpeech", async () =>
+        {
+            if (speechToMorseListening) return;
+            speechToMorseListening = true;
+            startLiveBtn!.IsEnabled = false;
+            stopLiveBtn!.IsEnabled = true;
+            statusInfo.Text = T("speechStatusListening");
+            SetStatus(T("speechStatusListening"));
+
+            try
+            {
+                await speechToMorseService.StartLiveListeningAsync(
+                    speechToMorseLang,
+                    onPartialResult: partial => UpdateTranscription(partial),
+                    onFinalResult: final => UpdateTranscription(final),
+                    onError: err =>
+                    {
+                        _ = DispatcherQueue.TryEnqueue(() =>
+                        {
+                            statusInfo.Text = err;
+                            SetStatus(err);
+                        });
+                    },
+                    cancellationToken: lifetime.Token);
+            }
+            catch (Exception ex)
+            {
+                statusInfo.Text = ex.Message;
+            }
+        }, "\uE720", true);
+
+        stopLiveBtn = Action("stopLiveSpeech", async () =>
+        {
+            if (!speechToMorseListening) return;
+            await speechToMorseService.StopLiveListeningAsync();
+            speechToMorseListening = false;
+            startLiveBtn!.IsEnabled = true;
+            stopLiveBtn!.IsEnabled = false;
+            statusInfo.Text = T("speechStatusStopped");
+            SetStatus(T("speechStatusStopped"));
+        }, "\uE71A");
+        stopLiveBtn.IsEnabled = false;
+
+        var pickFileBtn = Action("transcribeFile", async () =>
+        {
+            if (speechToMorseListening) return;
+            string? filePath = await PickOpenPath(["wav", "mp3", "m4a", "wma"]);
+            if (filePath == null) return;
+
+            statusInfo.Text = T("transcribingFile");
+            SetStatus(T("transcribingFile"));
+            try
+            {
+                string transcribed = await speechToMorseService.TranscribeAudioFileAsync(
+                    filePath,
+                    speechToMorseLang,
+                    lifetime.Token);
+
+                UpdateTranscription(transcribed);
+                statusInfo.Text = T("transcriptionComplete");
+                SetStatus(T("transcriptionComplete"));
+            }
+            catch (Exception ex)
+            {
+                statusInfo.Text = ex.Message;
+                SetStatus(ex.Message);
+            }
+        }, "\uE8B7");
+
+        var playMorseBtn = Action("playMorseFromSpeech", () =>
+        {
+            if (!string.IsNullOrWhiteSpace(morseBox.Text))
+            {
+                PlayMorse(morseBox.Text);
+            }
+            return Task.CompletedTask;
+        }, "\uE768");
+
+        var copyMorseBtn = Action("copy", () =>
+        {
+            if (!string.IsNullOrWhiteSpace(morseBox.Text))
+            {
+                ClipboardSet(morseBox.Text);
+                SetStatus(T("copied"));
+            }
+            return Task.CompletedTask;
+        }, "\uE8C8");
+
+        var copyTextBtn = Action("copySpokenText", () =>
+        {
+            if (!string.IsNullOrWhiteSpace(spokenBox.Text))
+            {
+                ClipboardSet(spokenBox.Text);
+                SetStatus(T("copied"));
+            }
+            return Task.CompletedTask;
+        }, "\uE8C8");
+
+        var rigTransmitBtn = Action("transmitToRig", async () =>
+        {
+            if (string.IsNullOrWhiteSpace(morseBox.Text)) return;
+            if (serialKeyer == null || !serialKeyer.IsOpen)
+            {
+                SetStatus(T("rigNotConnected"));
+                return;
+            }
+            SetStatus(T("rigTransmitting"));
+            await serialKeyer.TransmitMorseAsync(morseBox.Text, (int)preferences.Wpm, lifetime.Token);
+            SetStatus(T("ready"));
+        }, "\uE710");
+
+        var buttonBar = Row();
+        buttonBar.Children.Add(startLiveBtn);
+        buttonBar.Children.Add(stopLiveBtn);
+        buttonBar.Children.Add(pickFileBtn);
+        buttonBar.Children.Add(playMorseBtn);
+        buttonBar.Children.Add(copyMorseBtn);
+        buttonBar.Children.Add(copyTextBtn);
+        buttonBar.Children.Add(rigTransmitBtn);
+
+        stack.Children.Add(buttonBar);
+        stack.Children.Add(spokenBox);
+        stack.Children.Add(morseBox);
+        stack.Children.Add(statusInfo);
+
+        PageContent.Children.Add(Card(stack));
+    }
 }
