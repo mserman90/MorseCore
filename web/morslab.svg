@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Zemin -->
+  <rect width="1024" height="1024" rx="220" fill="#0B1220"/>
+
+  <!-- Şişe -->
+  <path d="M 467 190 H 557 V 340 L 710 690
+           Q 726 730 682 730 H 342
+           Q 298 730 314 690 L 467 340 Z"
+        fill="#0F172A"
+        stroke="#22D3EE"
+        stroke-width="36"
+        stroke-linejoin="round"/>
+
+  <!-- Şişenin içi: Mors kodu (duvarlara değmeden) -->
+  <g font-family="'JetBrains Mono','SF Mono',ui-monospace,Consolas,'Courier New',monospace"
+     font-weight="800"
+     fill="#F8FAFC"
+     stroke="#22D3EE"
+     stroke-width="1.5"
+     paint-order="stroke"
+     text-anchor="middle"
+     lengthAdjust="spacingAndGlyphs">
+
+    <!-- M -->
+    <text x="512" y="415" font-size="52" textLength="64">--</text>
+
+    <!-- o r -->
+    <text x="512" y="510" font-size="40" textLength="156">--- .-.</text>
+
+    <!-- s L -->
+    <text x="512" y="605" font-size="46" textLength="212">... .-..</text>
+
+    <!-- a b -->
+    <text x="512" y="685" font-size="52" textLength="222">.- -...</text>
+  </g>
+</svg>
