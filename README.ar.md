@@ -1,71 +1,72 @@
-<div dir="rtl">
+﻿<div dir="rtl">
 
 <div align="center">
 
 ![MorseCore](docs/media/morsecore.gif)
 
-**اكتب رسالتك. استمع إلى مورس. تعلّم بالممارسة.**
+**Ø§ÙƒØªØ¨ Ø±Ø³Ø§Ù„ØªÙƒ. Ø§Ø³ØªÙ…Ø¹ Ø¥Ù„Ù‰ Ù…ÙˆØ±Ø³. ØªØ¹Ù„Ù‘Ù… Ø¨Ø§Ù„Ù…Ù…Ø§Ø±Ø³Ø©.**
 
-[![تنزيل Windows](https://img.shields.io/badge/%D8%AA%D9%86%D8%B2%D9%8A%D9%84-Windows-5e6a42?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Setup.exe)
-[![تنزيل macOS](https://img.shields.io/badge/macOS-Apple_Silicon-5e6a42?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg)
-[![تنزيل Linux](https://img.shields.io/badge/Linux-x64-5e6a42?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
-[![1.0.1](https://img.shields.io/badge/v1.0.1-%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-c58c59?style=for-the-badge)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
+[![ØªÙ†Ø²ÙŠÙ„ Windows](https://img.shields.io/badge/%D8%AA%D9%86%D8%B2%D9%8A%D9%84-Windows-5e6a42?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Setup.exe)
+[![ØªÙ†Ø²ÙŠÙ„ macOS](https://img.shields.io/badge/macOS-Apple_Silicon-5e6a42?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg)
+[![ØªÙ†Ø²ÙŠÙ„ Linux](https://img.shields.io/badge/Linux-x64-5e6a42?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/mserman90/MorsLab/releases/tag/v1.0.1)
+[![1.0.1](https://img.shields.io/badge/v1.0.1-%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-c58c59?style=for-the-badge)](https://github.com/mserman90/MorsLab/releases/tag/v1.0.1)
 
-[English](README.md) · [Türkçe](README.tr.md) · [Deutsch](README.de.md) · [Русский](README.ru.md) · **العربية**
+[English](README.md) Â· [TÃ¼rkÃ§e](README.tr.md) Â· [Deutsch](README.de.md) Â· [Ğ ÑƒÑÑĞºĞ¸Ğ¹](README.ru.md) Â· **Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©**
 
-[**Wiki (EN/TR)**](https://github.com/mustafamertakceylan/MorseCore/wiki/Home)
+[**Wiki (EN/TR)**](https://github.com/mserman90/MorsLab/wiki/Home)
 
 </div>
 
-MorseCore تطبيق مجاني لويندوز وmacOS وLinux لتحويل النص إلى شفرة مورس والاستماع والتدريب. تبقى رسائلك على جهازك.
+MorseCore ØªØ·Ø¨ÙŠÙ‚ Ù…Ø¬Ø§Ù†ÙŠ Ù„ÙˆÙŠÙ†Ø¯ÙˆØ² ÙˆmacOS ÙˆLinux Ù„ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù†Øµ Ø¥Ù„Ù‰ Ø´ÙØ±Ø© Ù…ÙˆØ±Ø³ ÙˆØ§Ù„Ø§Ø³ØªÙ…Ø§Ø¹ ÙˆØ§Ù„ØªØ¯Ø±ÙŠØ¨. ØªØ¨Ù‚Ù‰ Ø±Ø³Ø§Ø¦Ù„Ùƒ Ø¹Ù„Ù‰ Ø¬Ù‡Ø§Ø²Ùƒ.
 
-![واجهة MorseCore العربية: النص وشفرة مورس مع قائمة على اليمين](docs/media/converter.ar.png)
+![ÙˆØ§Ø¬Ù‡Ø© MorseCore Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©: Ø§Ù„Ù†Øµ ÙˆØ´ÙØ±Ø© Ù…ÙˆØ±Ø³ Ù…Ø¹ Ù‚Ø§Ø¦Ù…Ø© Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†](docs/media/converter.ar.png)
 
-**macOS:** افتح [ملف DMG](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg) واسحب MorseCore إلى التطبيقات. هذه النسخة غير موثّقة لدى Apple؛ قد تحتاج للسماح بفتحها في الخصوصية والأمان. [تثبيت Mac بالإنجليزية والتركية](docs/macos.md).
+**macOS:** Ø§ÙØªØ­ [Ù…Ù„Ù DMG](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg) ÙˆØ§Ø³Ø­Ø¨ MorseCore Ø¥Ù„Ù‰ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª. Ù‡Ø°Ù‡ Ø§Ù„Ù†Ø³Ø®Ø© ØºÙŠØ± Ù…ÙˆØ«Ù‘Ù‚Ø© Ù„Ø¯Ù‰ AppleØ› Ù‚Ø¯ ØªØ­ØªØ§Ø¬ Ù„Ù„Ø³Ù…Ø§Ø­ Ø¨ÙØªØ­Ù‡Ø§ ÙÙŠ Ø§Ù„Ø®ØµÙˆØµÙŠØ© ÙˆØ§Ù„Ø£Ù…Ø§Ù†. [ØªØ«Ø¨ÙŠØª Mac Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ© ÙˆØ§Ù„ØªØ±ÙƒÙŠØ©](docs/macos.md).
 
-**Linux:** استخدم `.deb` مع Ubuntu وDebian وPardus، أو الأرشيف المحمول و`PKGBUILD` مع Arch. [تثبيت Linux بالإنجليزية](docs/linux.md).
+**Linux:** Ø§Ø³ØªØ®Ø¯Ù… `.deb` Ù…Ø¹ Ubuntu ÙˆDebian ÙˆPardusØŒ Ø£Ùˆ Ø§Ù„Ø£Ø±Ø´ÙŠÙ Ø§Ù„Ù…Ø­Ù…ÙˆÙ„ Ùˆ`PKGBUILD` Ù…Ø¹ Arch. [ØªØ«Ø¨ÙŠØª Linux Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©](docs/linux.md).
 
-### ابدأ الاستخدام
+### Ø§Ø¨Ø¯Ø£ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…
 
-1. على ويندوز: **شغّل Setup** ثم افتح MorseCore من قائمة ابدأ.
-2. اكتب رسالتك في **المحوّل** ثم حوّلها. افتح قسم **الصوت** للاستماع.
-3. افتح **التعلّم** للأبجدية والتمارين واختصارات هواة اللاسلكي.
+1. Ø¹Ù„Ù‰ ÙˆÙŠÙ†Ø¯ÙˆØ²: **Ø´ØºÙ‘Ù„ Setup** Ø«Ù… Ø§ÙØªØ­ MorseCore Ù…Ù† Ù‚Ø§Ø¦Ù…Ø© Ø§Ø¨Ø¯Ø£.
+2. Ø§ÙƒØªØ¨ Ø±Ø³Ø§Ù„ØªÙƒ ÙÙŠ **Ø§Ù„Ù…Ø­ÙˆÙ‘Ù„** Ø«Ù… Ø­ÙˆÙ‘Ù„Ù‡Ø§. Ø§ÙØªØ­ Ù‚Ø³Ù… **Ø§Ù„ØµÙˆØª** Ù„Ù„Ø§Ø³ØªÙ…Ø§Ø¹.
+3. Ø§ÙØªØ­ **Ø§Ù„ØªØ¹Ù„Ù‘Ù…** Ù„Ù„Ø£Ø¨Ø¬Ø¯ÙŠØ© ÙˆØ§Ù„ØªÙ…Ø§Ø±ÙŠÙ† ÙˆØ§Ø®ØªØµØ§Ø±Ø§Øª Ù‡ÙˆØ§Ø© Ø§Ù„Ù„Ø§Ø³Ù„ÙƒÙŠ.
 
-تفضّل الاستخدام دون تثبيت؟ فك ضغط [ملف ZIP المحمول](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Desktop.zip) وافتح **MorseCore.Desktop.exe**. هذه نسخة ويندوز غير موقّعة؛ قد يعرض ويندوز تحذيراً بشأن الناشر.
+ØªÙØ¶Ù‘Ù„ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø¯ÙˆÙ† ØªØ«Ø¨ÙŠØªØŸ ÙÙƒ Ø¶ØºØ· [Ù…Ù„Ù ZIP Ø§Ù„Ù…Ø­Ù…ÙˆÙ„](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Desktop.zip) ÙˆØ§ÙØªØ­ **MorseCore.Desktop.exe**. Ù‡Ø°Ù‡ Ù†Ø³Ø®Ø© ÙˆÙŠÙ†Ø¯ÙˆØ² ØºÙŠØ± Ù…ÙˆÙ‚Ù‘Ø¹Ø©Ø› Ù‚Ø¯ ÙŠØ¹Ø±Ø¶ ÙˆÙŠÙ†Ø¯ÙˆØ² ØªØ­Ø°ÙŠØ±Ø§Ù‹ Ø¨Ø´Ø£Ù† Ø§Ù„Ù†Ø§Ø´Ø±.
 
-### ماذا يمكنك أن تفعل؟
+### Ù…Ø§Ø°Ø§ ÙŠÙ…ÙƒÙ†Ùƒ Ø£Ù† ØªÙØ¹Ù„ØŸ
 
-- تحويل النصوص والملفات النصية في الاتجاهين، ملفاً واحداً أو مجموعة ملفات.
-- الاستماع إلى مورس وحفظ ملفات WAV والتدرّب على إيقاع الإرسال.
-- فك إشارات مورس النظيفة ذات النغمة الواحدة من ملفات WAV أو من الميكروفون.
-- إدارة المحطات وتجهيز الرسائل وحفظ سجل اتصالات QSO مع استيراد ADIF وخريطة دون اتصال ضمن **هواة اللاسلكي**. ربط الأجهزة مخطّط له؛ التطبيق لا يبث إشارات راديوية.
-- قراءة النص بصوت محلي عبر EMA Lightning وAntalia-2 Mini وPiper. ثبّت الصوت أول مرة عبر الإنترنت، ثم استمع دون اتصال.
+- ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù†ØµÙˆØµ ÙˆØ§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù†ØµÙŠØ© ÙÙŠ Ø§Ù„Ø§ØªØ¬Ø§Ù‡ÙŠÙ†ØŒ Ù…Ù„ÙØ§Ù‹ ÙˆØ§Ø­Ø¯Ø§Ù‹ Ø£Ùˆ Ù…Ø¬Ù…ÙˆØ¹Ø© Ù…Ù„ÙØ§Øª.
+- Ø§Ù„Ø§Ø³ØªÙ…Ø§Ø¹ Ø¥Ù„Ù‰ Ù…ÙˆØ±Ø³ ÙˆØ­ÙØ¸ Ù…Ù„ÙØ§Øª WAV ÙˆØ§Ù„ØªØ¯Ø±Ù‘Ø¨ Ø¹Ù„Ù‰ Ø¥ÙŠÙ‚Ø§Ø¹ Ø§Ù„Ø¥Ø±Ø³Ø§Ù„.
+- ÙÙƒ Ø¥Ø´Ø§Ø±Ø§Øª Ù…ÙˆØ±Ø³ Ø§Ù„Ù†Ø¸ÙŠÙØ© Ø°Ø§Øª Ø§Ù„Ù†ØºÙ…Ø© Ø§Ù„ÙˆØ§Ø­Ø¯Ø© Ù…Ù† Ù…Ù„ÙØ§Øª WAV Ø£Ùˆ Ù…Ù† Ø§Ù„Ù…ÙŠÙƒØ±ÙˆÙÙˆÙ†.
+- Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø­Ø·Ø§Øª ÙˆØªØ¬Ù‡ÙŠØ² Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ ÙˆØ­ÙØ¸ Ø³Ø¬Ù„ Ø§ØªØµØ§Ù„Ø§Øª QSO Ù…Ø¹ Ø§Ø³ØªÙŠØ±Ø§Ø¯ ADIF ÙˆØ®Ø±ÙŠØ·Ø© Ø¯ÙˆÙ† Ø§ØªØµØ§Ù„ Ø¶Ù…Ù† **Ù‡ÙˆØ§Ø© Ø§Ù„Ù„Ø§Ø³Ù„ÙƒÙŠ**. Ø±Ø¨Ø· Ø§Ù„Ø£Ø¬Ù‡Ø²Ø© Ù…Ø®Ø·Ù‘Ø· Ù„Ù‡Ø› Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù„Ø§ ÙŠØ¨Ø« Ø¥Ø´Ø§Ø±Ø§Øª Ø±Ø§Ø¯ÙŠÙˆÙŠØ©.
+- Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„Ù†Øµ Ø¨ØµÙˆØª Ù…Ø­Ù„ÙŠ Ø¹Ø¨Ø± EMA Lightning ÙˆAntalia-2 Mini ÙˆPiper. Ø«Ø¨Ù‘Øª Ø§Ù„ØµÙˆØª Ø£ÙˆÙ„ Ù…Ø±Ø© Ø¹Ø¨Ø± Ø§Ù„Ø¥Ù†ØªØ±Ù†ØªØŒ Ø«Ù… Ø§Ø³ØªÙ…Ø¹ Ø¯ÙˆÙ† Ø§ØªØµØ§Ù„.
 
-### لغتك ومظهرك
+### Ù„ØºØªÙƒ ÙˆÙ…Ø¸Ù‡Ø±Ùƒ
 
-**Türkçe · English · Deutsch · Русский · العربية**
+**TÃ¼rkÃ§e Â· English Â· Deutsch Â· Ğ ÑƒÑÑĞºĞ¸Ğ¹ Â· Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©**
 
-تتوفر القوائم وأصوات اختيارية باللغات الخمس. يدعم تحويل النص الأبجدية اللاتينية/التركية والروسية والعربية. تكون القائمة العربية على اليمين، وتبقى شفرة مورس من اليسار إلى اليمين.
+ØªØªÙˆÙØ± Ø§Ù„Ù‚ÙˆØ§Ø¦Ù… ÙˆØ£ØµÙˆØ§Øª Ø§Ø®ØªÙŠØ§Ø±ÙŠØ© Ø¨Ø§Ù„Ù„ØºØ§Øª Ø§Ù„Ø®Ù…Ø³. ÙŠØ¯Ø¹Ù… ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù†Øµ Ø§Ù„Ø£Ø¨Ø¬Ø¯ÙŠØ© Ø§Ù„Ù„Ø§ØªÙŠÙ†ÙŠØ©/Ø§Ù„ØªØ±ÙƒÙŠØ© ÙˆØ§Ù„Ø±ÙˆØ³ÙŠØ© ÙˆØ§Ù„Ø¹Ø±Ø¨ÙŠØ©. ØªÙƒÙˆÙ† Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†ØŒ ÙˆØªØ¨Ù‚Ù‰ Ø´ÙØ±Ø© Ù…ÙˆØ±Ø³ Ù…Ù† Ø§Ù„ÙŠØ³Ø§Ø± Ø¥Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†.
 
-اختر المظهر الكريمي الفاتح أو الأخضر الداكن من الإعدادات. تتوقف حركة الخلفية الهادئة عندما تكون النافذة غير نشطة، ويمكن إيقافها بخيار تقليل الحركة.
+Ø§Ø®ØªØ± Ø§Ù„Ù…Ø¸Ù‡Ø± Ø§Ù„ÙƒØ±ÙŠÙ…ÙŠ Ø§Ù„ÙØ§ØªØ­ Ø£Ùˆ Ø§Ù„Ø£Ø®Ø¶Ø± Ø§Ù„Ø¯Ø§ÙƒÙ† Ù…Ù† Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª. ØªØªÙˆÙ‚Ù Ø­Ø±ÙƒØ© Ø§Ù„Ø®Ù„ÙÙŠØ© Ø§Ù„Ù‡Ø§Ø¯Ø¦Ø© Ø¹Ù†Ø¯Ù…Ø§ ØªÙƒÙˆÙ† Ø§Ù„Ù†Ø§ÙØ°Ø© ØºÙŠØ± Ù†Ø´Ø·Ø©ØŒ ÙˆÙŠÙ…ÙƒÙ† Ø¥ÙŠÙ‚Ø§ÙÙ‡Ø§ Ø¨Ø®ÙŠØ§Ø± ØªÙ‚Ù„ÙŠÙ„ Ø§Ù„Ø­Ø±ÙƒØ©.
 
 <details>
-<summary><b>عرض المظهر الداكن وخريطة الاتصالات</b></summary>
+<summary><b>Ø¹Ø±Ø¶ Ø§Ù„Ù…Ø¸Ù‡Ø± Ø§Ù„Ø¯Ø§ÙƒÙ† ÙˆØ®Ø±ÙŠØ·Ø© Ø§Ù„Ø§ØªØµØ§Ù„Ø§Øª</b></summary>
 
-![الواجهة العربية بالمظهر الأخضر الداكن](docs/media/dark.ar.png)
+![Ø§Ù„ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© Ø¨Ø§Ù„Ù…Ø¸Ù‡Ø± Ø§Ù„Ø£Ø®Ø¶Ø± Ø§Ù„Ø¯Ø§ÙƒÙ†](docs/media/dark.ar.png)
 
-![سجل الاتصالات العربي مع خريطة دون اتصال](docs/media/map.ar.png)
+![Ø³Ø¬Ù„ Ø§Ù„Ø§ØªØµØ§Ù„Ø§Øª Ø§Ù„Ø¹Ø±Ø¨ÙŠ Ù…Ø¹ Ø®Ø±ÙŠØ·Ø© Ø¯ÙˆÙ† Ø§ØªØµØ§Ù„](docs/media/map.ar.png)
 
 </details>
 
-**متاح لويندوز x64 وmacOS Apple Silicon (M1 فأحدث) وLinux x64.** [تثبيت Linux بالإنجليزية](docs/linux.md) لتوزيعات Ubuntu وDebian وArch وPardus.
+**Ù…ØªØ§Ø­ Ù„ÙˆÙŠÙ†Ø¯ÙˆØ² x64 ÙˆmacOS Apple Silicon (M1 ÙØ£Ø­Ø¯Ø«) ÙˆLinux x64.** [ØªØ«Ø¨ÙŠØª Linux Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©](docs/linux.md) Ù„ØªÙˆØ²ÙŠØ¹Ø§Øª Ubuntu ÙˆDebian ÙˆArch ÙˆPardus.
 
-### الشكر والترخيص
+### Ø§Ù„Ø´ÙƒØ± ÙˆØ§Ù„ØªØ±Ø®ÙŠØµ
 
-شكراً لـ **Canberk Aslan** على [EMA Lightning](https://github.com/canberk7/ema-lightning)، ولفريق **PatientDesk AI** على [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini)، وللمساهمين في **Piper** على دعم القراءة الصوتية دون اتصال.
+Ø´ÙƒØ±Ø§Ù‹ Ù„Ù€ **Canberk Aslan** Ø¹Ù„Ù‰ [EMA Lightning](https://github.com/canberk7/ema-lightning)ØŒ ÙˆÙ„ÙØ±ÙŠÙ‚ **PatientDesk AI** Ø¹Ù„Ù‰ [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini)ØŒ ÙˆÙ„Ù„Ù…Ø³Ø§Ù‡Ù…ÙŠÙ† ÙÙŠ **Piper** Ø¹Ù„Ù‰ Ø¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØµÙˆØªÙŠØ© Ø¯ÙˆÙ† Ø§ØªØµØ§Ù„.
 
-[Apache 2.0](LICENSE) · [الشكر وتراخيص المكوّنات](NOTICE) · [سجل التغييرات](CHANGELOG.md) · [إعداد الأصوات بالإنجليزية](docs/offline-speech.md) · [البناء من المصدر بالإنجليزية](docs/desktop.md)
+[Apache 2.0](LICENSE) Â· [Ø§Ù„Ø´ÙƒØ± ÙˆØªØ±Ø§Ø®ÙŠØµ Ø§Ù„Ù…ÙƒÙˆÙ‘Ù†Ø§Øª](NOTICE) Â· [Ø³Ø¬Ù„ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª](CHANGELOG.md) Â· [Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ø£ØµÙˆØ§Øª Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©](docs/offline-speech.md) Â· [Ø§Ù„Ø¨Ù†Ø§Ø¡ Ù…Ù† Ø§Ù„Ù…ØµØ¯Ø± Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©](docs/desktop.md)
 
 </div>
 
-[المساهمة](.github/CONTRIBUTING.md) · [إمكانية الوصول](.github/ACCESSIBILITY.md)
+[Ø§Ù„Ù…Ø³Ø§Ù‡Ù…Ø©](.github/CONTRIBUTING.md) Â· [Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„](.github/ACCESSIBILITY.md)
+

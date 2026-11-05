@@ -1,67 +1,68 @@
-<div align="center">
+﻿<div align="center">
 
 ![MorseCore](docs/media/morsecore.gif)
 
-**Напиши сообщение. Послушай Морзе. Учись на практике.**
+**ĞĞ°Ğ¿Ğ¸ÑˆĞ¸ ÑĞ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ğµ. ĞŸĞ¾ÑĞ»ÑƒÑˆĞ°Ğ¹ ĞœĞ¾Ñ€Ğ·Ğµ. Ğ£Ñ‡Ğ¸ÑÑŒ Ğ½Ğ° Ğ¿Ñ€Ğ°ĞºÑ‚Ğ¸ĞºĞµ.**
 
-[![Скачать Windows](https://img.shields.io/badge/%D0%A1%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-Windows-5e6a42?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Setup.exe)
-[![Скачать macOS](https://img.shields.io/badge/macOS-Apple_Silicon-5e6a42?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg)
-[![Скачать Linux](https://img.shields.io/badge/Linux-x64-5e6a42?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
-[![1.0.1](https://img.shields.io/badge/v1.0.1-%D0%A0%D0%B5%D0%BB%D0%B8%D0%B7-c58c59?style=for-the-badge)](https://github.com/mustafamertakceylan/MorseCore/releases/tag/v1.0.1)
+[![Ğ¡ĞºĞ°Ñ‡Ğ°Ñ‚ÑŒ Windows](https://img.shields.io/badge/%D0%A1%D0%BA%D0%B0%D1%87%D0%B0%D1%82%D1%8C-Windows-5e6a42?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Setup.exe)
+[![Ğ¡ĞºĞ°Ñ‡Ğ°Ñ‚ÑŒ macOS](https://img.shields.io/badge/macOS-Apple_Silicon-5e6a42?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg)
+[![Ğ¡ĞºĞ°Ñ‡Ğ°Ñ‚ÑŒ Linux](https://img.shields.io/badge/Linux-x64-5e6a42?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/mserman90/MorsLab/releases/tag/v1.0.1)
+[![1.0.1](https://img.shields.io/badge/v1.0.1-%D0%A0%D0%B5%D0%BB%D0%B8%D0%B7-c58c59?style=for-the-badge)](https://github.com/mserman90/MorsLab/releases/tag/v1.0.1)
 
-[English](README.md) · [Türkçe](README.tr.md) · [Deutsch](README.de.md) · **Русский** · [العربية](README.ar.md)
+[English](README.md) Â· [TÃ¼rkÃ§e](README.tr.md) Â· [Deutsch](README.de.md) Â· **Ğ ÑƒÑÑĞºĞ¸Ğ¹** Â· [Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©](README.ar.md)
 
-[**Wiki (EN/TR)**](https://github.com/mustafamertakceylan/MorseCore/wiki/Home)
+[**Wiki (EN/TR)**](https://github.com/mserman90/MorsLab/wiki/Home)
 
 </div>
 
-MorseCore — бесплатное приложение для Windows, macOS и Linux: преобразуй текст в код Морзе, слушай сигналы и тренируйся. Твои сообщения остаются на твоём компьютере.
+MorseCore â€” Ğ±ĞµÑĞ¿Ğ»Ğ°Ñ‚Ğ½Ğ¾Ğµ Ğ¿Ñ€Ğ¸Ğ»Ğ¾Ğ¶ĞµĞ½Ğ¸Ğµ Ğ´Ğ»Ñ Windows, macOS Ğ¸ Linux: Ğ¿Ñ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·ÑƒĞ¹ Ñ‚ĞµĞºÑÑ‚ Ğ² ĞºĞ¾Ğ´ ĞœĞ¾Ñ€Ğ·Ğµ, ÑĞ»ÑƒÑˆĞ°Ğ¹ ÑĞ¸Ğ³Ğ½Ğ°Ğ»Ñ‹ Ğ¸ Ñ‚Ñ€ĞµĞ½Ğ¸Ñ€ÑƒĞ¹ÑÑ. Ğ¢Ğ²Ğ¾Ğ¸ ÑĞ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ñ Ğ¾ÑÑ‚Ğ°ÑÑ‚ÑÑ Ğ½Ğ° Ñ‚Ğ²Ğ¾Ñ‘Ğ¼ ĞºĞ¾Ğ¼Ğ¿ÑŒÑÑ‚ĞµÑ€Ğµ.
 
-![MorseCore на русском: текст слева, код Морзе справа](docs/media/converter.ru.png)
+![MorseCore Ğ½Ğ° Ñ€ÑƒÑÑĞºĞ¾Ğ¼: Ñ‚ĞµĞºÑÑ‚ ÑĞ»ĞµĞ²Ğ°, ĞºĞ¾Ğ´ ĞœĞ¾Ñ€Ğ·Ğµ ÑĞ¿Ñ€Ğ°Ğ²Ğ°](docs/media/converter.ru.png)
 
-**macOS:** открой [DMG](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg) и перетащи MorseCore в «Программы». Эта версия не нотарифицирована Apple; может потребоваться разрешение в разделе «Конфиденциальность и безопасность». [Установка на Mac (EN/TR)](docs/macos.md).
+**macOS:** Ğ¾Ñ‚ĞºÑ€Ğ¾Ğ¹ [DMG](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-macOS-arm64.dmg) Ğ¸ Ğ¿ĞµÑ€ĞµÑ‚Ğ°Ñ‰Ğ¸ MorseCore Ğ² Â«ĞŸÑ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ¼Ñ‹Â». Ğ­Ñ‚Ğ° Ğ²ĞµÑ€ÑĞ¸Ñ Ğ½Ğµ Ğ½Ğ¾Ñ‚Ğ°Ñ€Ğ¸Ñ„Ğ¸Ñ†Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ° Apple; Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ¿Ğ¾Ñ‚Ñ€ĞµĞ±Ğ¾Ğ²Ğ°Ñ‚ÑŒÑÑ Ñ€Ğ°Ğ·Ñ€ĞµÑˆĞµĞ½Ğ¸Ğµ Ğ² Ñ€Ğ°Ğ·Ğ´ĞµĞ»Ğµ Â«ĞšĞ¾Ğ½Ñ„Ğ¸Ğ´ĞµĞ½Ñ†Ğ¸Ğ°Ğ»ÑŒĞ½Ğ¾ÑÑ‚ÑŒ Ğ¸ Ğ±ĞµĞ·Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾ÑÑ‚ÑŒÂ». [Ğ£ÑÑ‚Ğ°Ğ½Ğ¾Ğ²ĞºĞ° Ğ½Ğ° Mac (EN/TR)](docs/macos.md).
 
-**Linux:** `.deb` для Ubuntu, Debian и Pardus; переносной архив и `PKGBUILD` для Arch. [Установка Linux (EN)](docs/linux.md).
+**Linux:** `.deb` Ğ´Ğ»Ñ Ubuntu, Debian Ğ¸ Pardus; Ğ¿ĞµÑ€ĞµĞ½Ğ¾ÑĞ½Ğ¾Ğ¹ Ğ°Ñ€Ñ…Ğ¸Ğ² Ğ¸ `PKGBUILD` Ğ´Ğ»Ñ Arch. [Ğ£ÑÑ‚Ğ°Ğ½Ğ¾Ğ²ĞºĞ° Linux (EN)](docs/linux.md).
 
-### Начало работы
+### ĞĞ°Ñ‡Ğ°Ğ»Ğ¾ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ñ‹
 
-1. В Windows: **Запусти Setup**, затем открой MorseCore через меню «Пуск».
-2. Введи сообщение в **Конвертере** и запусти преобразование. Для прослушивания открой **Звук**.
-3. В разделе **Обучение** находятся алфавит, упражнения и радиолюбительские сокращения.
+1. Ğ’ Windows: **Ğ—Ğ°Ğ¿ÑƒÑÑ‚Ğ¸ Setup**, Ğ·Ğ°Ñ‚ĞµĞ¼ Ğ¾Ñ‚ĞºÑ€Ğ¾Ğ¹ MorseCore Ñ‡ĞµÑ€ĞµĞ· Ğ¼ĞµĞ½Ñ Â«ĞŸÑƒÑĞºÂ».
+2. Ğ’Ğ²ĞµĞ´Ğ¸ ÑĞ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ğµ Ğ² **ĞšĞ¾Ğ½Ğ²ĞµÑ€Ñ‚ĞµÑ€Ğµ** Ğ¸ Ğ·Ğ°Ğ¿ÑƒÑÑ‚Ğ¸ Ğ¿Ñ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ. Ğ”Ğ»Ñ Ğ¿Ñ€Ğ¾ÑĞ»ÑƒÑˆĞ¸Ğ²Ğ°Ğ½Ğ¸Ñ Ğ¾Ñ‚ĞºÑ€Ğ¾Ğ¹ **Ğ—Ğ²ÑƒĞº**.
+3. Ğ’ Ñ€Ğ°Ğ·Ğ´ĞµĞ»Ğµ **ĞĞ±ÑƒÑ‡ĞµĞ½Ğ¸Ğµ** Ğ½Ğ°Ñ…Ğ¾Ğ´ÑÑ‚ÑÑ Ğ°Ğ»Ñ„Ğ°Ğ²Ğ¸Ñ‚, ÑƒĞ¿Ñ€Ğ°Ğ¶Ğ½ĞµĞ½Ğ¸Ñ Ğ¸ Ñ€Ğ°Ğ´Ğ¸Ğ¾Ğ»ÑĞ±Ğ¸Ñ‚ĞµĞ»ÑŒÑĞºĞ¸Ğµ ÑĞ¾ĞºÑ€Ğ°Ñ‰ĞµĞ½Ğ¸Ñ.
 
-Без установки? Распакуй [переносной ZIP](https://github.com/mustafamertakceylan/MorseCore/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Desktop.zip) и открой **MorseCore.Desktop.exe**. Эта сборка для Windows не подписана; Windows может показать предупреждение об издателе.
+Ğ‘ĞµĞ· ÑƒÑÑ‚Ğ°Ğ½Ğ¾Ğ²ĞºĞ¸? Ğ Ğ°ÑĞ¿Ğ°ĞºÑƒĞ¹ [Ğ¿ĞµÑ€ĞµĞ½Ğ¾ÑĞ½Ğ¾Ğ¹ ZIP](https://github.com/mserman90/MorsLab/releases/download/v1.0.1/MorseCore-1.0.1-Windows-x64-Desktop.zip) Ğ¸ Ğ¾Ñ‚ĞºÑ€Ğ¾Ğ¹ **MorseCore.Desktop.exe**. Ğ­Ñ‚Ğ° ÑĞ±Ğ¾Ñ€ĞºĞ° Ğ´Ğ»Ñ Windows Ğ½Ğµ Ğ¿Ğ¾Ğ´Ğ¿Ğ¸ÑĞ°Ğ½Ğ°; Windows Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ¿Ğ¾ĞºĞ°Ğ·Ğ°Ñ‚ÑŒ Ğ¿Ñ€ĞµĞ´ÑƒĞ¿Ñ€ĞµĞ¶Ğ´ĞµĞ½Ğ¸Ğµ Ğ¾Ğ± Ğ¸Ğ·Ğ´Ğ°Ñ‚ĞµĞ»Ğµ.
 
-### Что можно делать?
+### Ğ§Ñ‚Ğ¾ Ğ¼Ğ¾Ğ¶Ğ½Ğ¾ Ğ´ĞµĞ»Ğ°Ñ‚ÑŒ?
 
-- Преобразовывать текст и текстовые файлы в обе стороны, в том числе пакетами.
-- Слушать Морзе, сохранять WAV и тренировать собственный ритм передачи.
-- Распознавать чистые однотональные сигналы Морзе из WAV-файла или микрофона.
-- В разделе **Любительское радио** управлять станциями, готовить сообщения и вести журнал QSO с импортом ADIF и офлайн-картой. Подключение оборудования запланировано; приложение не передаёт радиосигнал.
-- Озвучивать текст офлайн с EMA Lightning, Antalia-2 Mini и Piper. Голос один раз скачивается через интернет, затем работает локально.
+- ĞŸÑ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·Ğ¾Ğ²Ñ‹Ğ²Ğ°Ñ‚ÑŒ Ñ‚ĞµĞºÑÑ‚ Ğ¸ Ñ‚ĞµĞºÑÑ‚Ğ¾Ğ²Ñ‹Ğµ Ñ„Ğ°Ğ¹Ğ»Ñ‹ Ğ² Ğ¾Ğ±Ğµ ÑÑ‚Ğ¾Ñ€Ğ¾Ğ½Ñ‹, Ğ² Ñ‚Ğ¾Ğ¼ Ñ‡Ğ¸ÑĞ»Ğµ Ğ¿Ğ°ĞºĞµÑ‚Ğ°Ğ¼Ğ¸.
+- Ğ¡Ğ»ÑƒÑˆĞ°Ñ‚ÑŒ ĞœĞ¾Ñ€Ğ·Ğµ, ÑĞ¾Ñ…Ñ€Ğ°Ğ½ÑÑ‚ÑŒ WAV Ğ¸ Ñ‚Ñ€ĞµĞ½Ğ¸Ñ€Ğ¾Ğ²Ğ°Ñ‚ÑŒ ÑĞ¾Ğ±ÑÑ‚Ğ²ĞµĞ½Ğ½Ñ‹Ğ¹ Ñ€Ğ¸Ñ‚Ğ¼ Ğ¿ĞµÑ€ĞµĞ´Ğ°Ñ‡Ğ¸.
+- Ğ Ğ°ÑĞ¿Ğ¾Ğ·Ğ½Ğ°Ğ²Ğ°Ñ‚ÑŒ Ñ‡Ğ¸ÑÑ‚Ñ‹Ğµ Ğ¾Ğ´Ğ½Ğ¾Ñ‚Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ñ‹Ğµ ÑĞ¸Ğ³Ğ½Ğ°Ğ»Ñ‹ ĞœĞ¾Ñ€Ğ·Ğµ Ğ¸Ğ· WAV-Ñ„Ğ°Ğ¹Ğ»Ğ° Ğ¸Ğ»Ğ¸ Ğ¼Ğ¸ĞºÑ€Ğ¾Ñ„Ğ¾Ğ½Ğ°.
+- Ğ’ Ñ€Ğ°Ğ·Ğ´ĞµĞ»Ğµ **Ğ›ÑĞ±Ğ¸Ñ‚ĞµĞ»ÑŒÑĞºĞ¾Ğµ Ñ€Ğ°Ğ´Ğ¸Ğ¾** ÑƒĞ¿Ñ€Ğ°Ğ²Ğ»ÑÑ‚ÑŒ ÑÑ‚Ğ°Ğ½Ñ†Ğ¸ÑĞ¼Ğ¸, Ğ³Ğ¾Ñ‚Ğ¾Ğ²Ğ¸Ñ‚ÑŒ ÑĞ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ñ Ğ¸ Ğ²ĞµÑÑ‚Ğ¸ Ğ¶ÑƒÑ€Ğ½Ğ°Ğ» QSO Ñ Ğ¸Ğ¼Ğ¿Ğ¾Ñ€Ñ‚Ğ¾Ğ¼ ADIF Ğ¸ Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½-ĞºĞ°Ñ€Ñ‚Ğ¾Ğ¹. ĞŸĞ¾Ğ´ĞºĞ»ÑÑ‡ĞµĞ½Ğ¸Ğµ Ğ¾Ğ±Ğ¾Ñ€ÑƒĞ´Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ Ğ·Ğ°Ğ¿Ğ»Ğ°Ğ½Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¾; Ğ¿Ñ€Ğ¸Ğ»Ğ¾Ğ¶ĞµĞ½Ğ¸Ğµ Ğ½Ğµ Ğ¿ĞµÑ€ĞµĞ´Ğ°Ñ‘Ñ‚ Ñ€Ğ°Ğ´Ğ¸Ğ¾ÑĞ¸Ğ³Ğ½Ğ°Ğ».
+- ĞĞ·Ğ²ÑƒÑ‡Ğ¸Ğ²Ğ°Ñ‚ÑŒ Ñ‚ĞµĞºÑÑ‚ Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½ Ñ EMA Lightning, Antalia-2 Mini Ğ¸ Piper. Ğ“Ğ¾Ğ»Ğ¾Ñ Ğ¾Ğ´Ğ¸Ğ½ Ñ€Ğ°Ğ· ÑĞºĞ°Ñ‡Ğ¸Ğ²Ğ°ĞµÑ‚ÑÑ Ñ‡ĞµÑ€ĞµĞ· Ğ¸Ğ½Ñ‚ĞµÑ€Ğ½ĞµÑ‚, Ğ·Ğ°Ñ‚ĞµĞ¼ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ°ĞµÑ‚ Ğ»Ğ¾ĞºĞ°Ğ»ÑŒĞ½Ğ¾.
 
-### Твой язык, твоя тема
+### Ğ¢Ğ²Ğ¾Ğ¹ ÑĞ·Ñ‹Ğº, Ñ‚Ğ²Ğ¾Ñ Ñ‚ĞµĞ¼Ğ°
 
-**Türkçe · English · Deutsch · Русский · العربية**
+**TÃ¼rkÃ§e Â· English Â· Deutsch Â· Ğ ÑƒÑÑĞºĞ¸Ğ¹ Â· Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©**
 
-Меню и дополнительные голоса доступны на всех пяти языках. Преобразование текста поддерживает латиницу/турецкий, русский и арабский алфавиты. В арабском интерфейсе меню зеркальное; Морзе остаётся слева направо.
+ĞœĞµĞ½Ñ Ğ¸ Ğ´Ğ¾Ğ¿Ğ¾Ğ»Ğ½Ğ¸Ñ‚ĞµĞ»ÑŒĞ½Ñ‹Ğµ Ğ³Ğ¾Ğ»Ğ¾ÑĞ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿Ğ½Ñ‹ Ğ½Ğ° Ğ²ÑĞµÑ… Ğ¿ÑÑ‚Ğ¸ ÑĞ·Ñ‹ĞºĞ°Ñ…. ĞŸÑ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ Ñ‚ĞµĞºÑÑ‚Ğ° Ğ¿Ğ¾Ğ´Ğ´ĞµÑ€Ğ¶Ğ¸Ğ²Ğ°ĞµÑ‚ Ğ»Ğ°Ñ‚Ğ¸Ğ½Ğ¸Ñ†Ñƒ/Ñ‚ÑƒÑ€ĞµÑ†ĞºĞ¸Ğ¹, Ñ€ÑƒÑÑĞºĞ¸Ğ¹ Ğ¸ Ğ°Ñ€Ğ°Ğ±ÑĞºĞ¸Ğ¹ Ğ°Ğ»Ñ„Ğ°Ğ²Ğ¸Ñ‚Ñ‹. Ğ’ Ğ°Ñ€Ğ°Ğ±ÑĞºĞ¾Ğ¼ Ğ¸Ğ½Ñ‚ĞµÑ€Ñ„ĞµĞ¹ÑĞµ Ğ¼ĞµĞ½Ñ Ğ·ĞµÑ€ĞºĞ°Ğ»ÑŒĞ½Ğ¾Ğµ; ĞœĞ¾Ñ€Ğ·Ğµ Ğ¾ÑÑ‚Ğ°Ñ‘Ñ‚ÑÑ ÑĞ»ĞµĞ²Ğ° Ğ½Ğ°Ğ¿Ñ€Ğ°Ğ²Ğ¾.
 
-В настройках можно выбрать светлую кремовую или тёмную зелёную тему. Плавное движение фона останавливается в неактивном окне и отключается настройкой уменьшения анимации.
+Ğ’ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ°Ñ… Ğ¼Ğ¾Ğ¶Ğ½Ğ¾ Ğ²Ñ‹Ğ±Ñ€Ğ°Ñ‚ÑŒ ÑĞ²ĞµÑ‚Ğ»ÑƒÑ ĞºÑ€ĞµĞ¼Ğ¾Ğ²ÑƒÑ Ğ¸Ğ»Ğ¸ Ñ‚Ñ‘Ğ¼Ğ½ÑƒÑ Ğ·ĞµĞ»Ñ‘Ğ½ÑƒÑ Ñ‚ĞµĞ¼Ñƒ. ĞŸĞ»Ğ°Ğ²Ğ½Ğ¾Ğµ Ğ´Ğ²Ğ¸Ğ¶ĞµĞ½Ğ¸Ğµ Ñ„Ğ¾Ğ½Ğ° Ğ¾ÑÑ‚Ğ°Ğ½Ğ°Ğ²Ğ»Ğ¸Ğ²Ğ°ĞµÑ‚ÑÑ Ğ² Ğ½ĞµĞ°ĞºÑ‚Ğ¸Ğ²Ğ½Ğ¾Ğ¼ Ğ¾ĞºĞ½Ğµ Ğ¸ Ğ¾Ñ‚ĞºĞ»ÑÑ‡Ğ°ĞµÑ‚ÑÑ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¾Ğ¹ ÑƒĞ¼ĞµĞ½ÑŒÑˆĞµĞ½Ğ¸Ñ Ğ°Ğ½Ğ¸Ğ¼Ğ°Ñ†Ğ¸Ğ¸.
 
 <details>
-<summary><b>Тёмная тема и карта связей</b></summary>
+<summary><b>Ğ¢Ñ‘Ğ¼Ğ½Ğ°Ñ Ñ‚ĞµĞ¼Ğ° Ğ¸ ĞºĞ°Ñ€Ñ‚Ğ° ÑĞ²ÑĞ·ĞµĞ¹</b></summary>
 
-![Русский интерфейс в тёмной зелёной теме](docs/media/dark.ru.png)
+![Ğ ÑƒÑÑĞºĞ¸Ğ¹ Ğ¸Ğ½Ñ‚ĞµÑ€Ñ„ĞµĞ¹Ñ Ğ² Ñ‚Ñ‘Ğ¼Ğ½Ğ¾Ğ¹ Ğ·ĞµĞ»Ñ‘Ğ½Ğ¾Ğ¹ Ñ‚ĞµĞ¼Ğµ](docs/media/dark.ru.png)
 
-![Русский журнал QSO и офлайн-карта](docs/media/map.ru.png)
+![Ğ ÑƒÑÑĞºĞ¸Ğ¹ Ğ¶ÑƒÑ€Ğ½Ğ°Ğ» QSO Ğ¸ Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½-ĞºĞ°Ñ€Ñ‚Ğ°](docs/media/map.ru.png)
 
 </details>
 
-**Доступно для Windows x64, macOS Apple Silicon (M1 и новее) и Linux x64.** [Установка Linux (EN)](docs/linux.md): Ubuntu, Debian, Arch и Pardus.
+**Ğ”Ğ¾ÑÑ‚ÑƒĞ¿Ğ½Ğ¾ Ğ´Ğ»Ñ Windows x64, macOS Apple Silicon (M1 Ğ¸ Ğ½Ğ¾Ğ²ĞµĞµ) Ğ¸ Linux x64.** [Ğ£ÑÑ‚Ğ°Ğ½Ğ¾Ğ²ĞºĞ° Linux (EN)](docs/linux.md): Ubuntu, Debian, Arch Ğ¸ Pardus.
 
-### Благодарности и лицензия
+### Ğ‘Ğ»Ğ°Ğ³Ğ¾Ğ´Ğ°Ñ€Ğ½Ğ¾ÑÑ‚Ğ¸ Ğ¸ Ğ»Ğ¸Ñ†ĞµĞ½Ğ·Ğ¸Ñ
 
-Спасибо **Canberk Aslan** за [EMA Lightning](https://github.com/canberk7/ema-lightning), **PatientDesk AI** за [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini) и участникам **Piper** за офлайн-озвучивание.
+Ğ¡Ğ¿Ğ°ÑĞ¸Ğ±Ğ¾ **Canberk Aslan** Ğ·Ğ° [EMA Lightning](https://github.com/canberk7/ema-lightning), **PatientDesk AI** Ğ·Ğ° [Antalia-2 Mini](https://huggingface.co/cloud0day3/antalia-mini) Ğ¸ ÑƒÑ‡Ğ°ÑÑ‚Ğ½Ğ¸ĞºĞ°Ğ¼ **Piper** Ğ·Ğ° Ğ¾Ñ„Ğ»Ğ°Ğ¹Ğ½-Ğ¾Ğ·Ğ²ÑƒÑ‡Ğ¸Ğ²Ğ°Ğ½Ğ¸Ğµ.
 
-[Apache 2.0](LICENSE) · [Благодарности и лицензии](NOTICE) · [Изменения](CHANGELOG.md) · [Настройка голосов (EN)](docs/offline-speech.md) · [Сборка из исходников (EN)](docs/desktop.md)
+[Apache 2.0](LICENSE) Â· [Ğ‘Ğ»Ğ°Ğ³Ğ¾Ğ´Ğ°Ñ€Ğ½Ğ¾ÑÑ‚Ğ¸ Ğ¸ Ğ»Ğ¸Ñ†ĞµĞ½Ğ·Ğ¸Ğ¸](NOTICE) Â· [Ğ˜Ğ·Ğ¼ĞµĞ½ĞµĞ½Ğ¸Ñ](CHANGELOG.md) Â· [ĞĞ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ° Ğ³Ğ¾Ğ»Ğ¾ÑĞ¾Ğ² (EN)](docs/offline-speech.md) Â· [Ğ¡Ğ±Ğ¾Ñ€ĞºĞ° Ğ¸Ğ· Ğ¸ÑÑ…Ğ¾Ğ´Ğ½Ğ¸ĞºĞ¾Ğ² (EN)](docs/desktop.md)
 
-[Участие](.github/CONTRIBUTING.md) · [Доступность](.github/ACCESSIBILITY.md)
+[Ğ£Ñ‡Ğ°ÑÑ‚Ğ¸Ğµ](.github/CONTRIBUTING.md) Â· [Ğ”Ğ¾ÑÑ‚ÑƒĞ¿Ğ½Ğ¾ÑÑ‚ÑŒ](.github/ACCESSIBILITY.md)
+

@@ -7,12 +7,12 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Standards: ITU-R M.1677-1](https://img.shields.io/badge/Standard-ITU--R%20M.1677--1-007ACC?style=for-the-badge)](https://www.itu.int/rec/R-REC-M.1677)
 [![ADIF: 3.1.4 Compliant](https://img.shields.io/badge/ADIF-3.1.4%20Compliant-success?style=for-the-badge)](https://adif.org/)
-[![Live Web Application](https://img.shields.io/badge/Live_Deployment-GitHub_Pages-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://mserman90.github.io/MorseCore/)
+[![Live Web Application](https://img.shields.io/badge/Live_Deployment-GitHub_Pages-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://mserman90.github.io/MorsLab/)
 [![Platforms](https://img.shields.io/badge/Platforms-Web%20|%20Windows%20|%20macOS%20|%20Linux-brightgreen?style=for-the-badge)](#system-architecture)
 
 **English** · [Türkçe](README.tr.md) · [Deutsch](README.de.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
 
-[**🌐 Live Web Application**](https://mserman90.github.io/MorseCore/) &middot; [**📖 User Guide & Wiki**](https://github.com/mustafamertakceylan/MorseCore/wiki/Getting-Started) &middot; [**💻 Desktop Downloads**](#binary-releases--installation)
+[**🌐 Live Web Application**](https://mserman90.github.io/MorsLab/) &middot; [**📖 User Guide & Wiki**](https://github.com/mserman90/MorsLab/wiki/Getting-Started) &middot; [**💻 Desktop Downloads**](#binary-releases--installation)
 
 </div>
 
@@ -237,10 +237,10 @@ where $R_{\oplus} \approx 6371.0 \text{ km}$.
 
 ### Web Application (Zero Installation)
 Access the live, client-side web application directly in any modern web browser (Chrome, Edge, Firefox, Safari):
-👉 **[https://mserman90.github.io/MorseCore/](https://mserman90.github.io/MorseCore/)**
+👉 **[https://mserman90.github.io/MorsLab/](https://mserman90.github.io/MorsLab/)**
 
 ### Desktop Precompiled Binaries
-Compiled binaries and installation packages for major desktop operating systems are available via [GitHub Releases](https://github.com/mustafamertakceylan/MorseCore/releases/latest):
+Compiled binaries and installation packages for major desktop operating systems are available via [GitHub Releases](https://github.com/mserman90/MorsLab/releases/latest):
 
 * **Windows (x64):**
   * `MorseCore-1.0.1-Windows-x64-Setup.exe` (Full installer)
@@ -264,8 +264,8 @@ Compiled binaries and installation packages for major desktop operating systems 
 ### Build Instructions
 ```bash
 # Clone the repository
-git clone https://github.com/mserman90/MorseCore.git
-cd MorseCore
+git clone https://github.com/mserman90/MorsLab.git
+cd MorsLab
 
 # Build the native DSP core
 cmake -B build -DCMAKE_BUILD_TYPE=Release
@@ -303,7 +303,7 @@ If you utilize MorsLab in academic research, educational coursework, amateur rad
   year         = {2026},
   publisher    = {GitHub},
   version      = {1.0.1},
-  url          = {https://github.com/mserman90/MorseCore},
+  url          = {https://github.com/mserman90/MorsLab},
   license      = {Apache-2.0}
 }
 ```
@@ -312,7 +312,7 @@ If you utilize MorsLab in academic research, educational coursework, amateur rad
 
 ## 🤝 10. Teşekkür & Açık Kaynak Lisans (Acknowledgments & License)
 
-**MorseCore © 2026 Mustafa Mert Akceylan · Açık Kaynak [Apache-2.0 Lisansı](https://github.com/mserman90/MorseCore/blob/main/LICENSE) · [GitHub Deposu](https://github.com/mserman90/MorseCore)**
+**MorsLab © 2026 Mustafa Mert Akceylan · Açık Kaynak [Apache-2.0 Lisansı](https://github.com/mserman90/MorsLab/blob/main/LICENSE) · [GitHub Deposu](https://github.com/mserman90/MorsLab)**
 
 We express our sincere gratitude to the open-source community, amateur radio operators, and scientific researchers whose work made this platform possible:
 * **Canberk Aslan** for [EMA Lightning](https://github.com/canberk7/ema-lightning) lightweight speech synthesis.

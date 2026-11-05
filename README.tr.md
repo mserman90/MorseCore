@@ -7,12 +7,12 @@
 [![Lisans: Apache 2.0](https://img.shields.io/badge/Lisans-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Standart: ITU-R M.1677-1](https://img.shields.io/badge/Standart-ITU--R%20M.1677--1-007ACC?style=for-the-badge)](https://www.itu.int/rec/R-REC-M.1677)
 [![ADIF: 3.1.4 Uyumlu](https://img.shields.io/badge/ADIF-3.1.4%20Uyumlu-success?style=for-the-badge)](https://adif.org/)
-[![Canlı Dağıtım](https://img.shields.io/badge/Canl%C4%B1_Uygulama-GitHub_Pages-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://mserman90.github.io/MorseCore/)
+[![Canlı Dağıtım](https://img.shields.io/badge/Canl%C4%B1_Uygulama-GitHub_Pages-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://mserman90.github.io/MorsLab/)
 [![Platformlar](https://img.shields.io/badge/Platformlar-Web%20|%20Windows%20|%20macOS%20|%20Linux-brightgreen?style=for-the-badge)](#sistem-mimarisi)
 
 [English](README.md) · **Türkçe** · [Deutsch](README.de.md) · [Русский](README.ru.md) · [العربية](README.ar.md)
 
-[**🌐 Canlı Web Uygulaması**](https://mserman90.github.io/MorseCore/) &middot; [**📖 Kullanım Kılavuzu & Wiki**](https://github.com/mustafamertakceylan/MorseCore/wiki/Baslangic) &middot; [**💻 Masaüstü Sürümleri**](#ikili-surumler-ve-kurulum)
+[**🌐 Canlı Web Uygulaması**](https://mserman90.github.io/MorsLab/) &middot; [**📖 Kullanım Kılavuzu & Wiki**](https://github.com/mserman90/MorsLab/wiki/Baslangic) &middot; [**💻 Masaüstü Sürümleri**](#ikili-surumler-ve-kurulum)
 
 </div>
 
@@ -206,10 +206,10 @@ $$d = 2 R_{\oplus} \arcsin \left( \sqrt{ \sin^2\left(\frac{\Delta \phi}{2}\right
 
 ### Web Sürümü (Kurulum Gerektirmez)
 Tüm modern tarayıcılardan doğrudan çalıştırılabilir:
-👉 **[https://mserman90.github.io/MorseCore/](https://mserman90.github.io/MorseCore/)**
+👉 **[https://mserman90.github.io/MorsLab/](https://mserman90.github.io/MorsLab/)**
 
 ### Masaüstü Kurulum Paketleri
-İşletim sisteminize uygun derlenmiş sürümleri [GitHub Releases](https://github.com/mustafamertakceylan/MorseCore/releases/latest) üzerinden temin edebilirsiniz:
+İşletim sisteminize uygun derlenmiş sürümleri [GitHub Releases](https://github.com/mserman90/MorsLab/releases/latest) üzerinden temin edebilirsiniz:
 * **Windows (x64):** `MorseCore-1.0.1-Windows-x64-Setup.exe` veya taşınabilir `.zip`
 * **macOS (Apple Silicon M1/M2/M3/M4):** `MorseCore-1.0.1-macOS-arm64.dmg`
 * **Linux (x64):** Ubuntu/Debian/Pardus için `.deb`, Arch Linux için `PKGBUILD`
@@ -227,7 +227,7 @@ MorsLab'i bilimsel araştırmalarınızda, lisans/lisansüstü çalışmaların�
   year         = {2026},
   publisher    = {GitHub},
   version      = {1.0.1},
-  url          = {https://github.com/mserman90/MorseCore},
+  url          = {https://github.com/mserman90/MorsLab},
   license      = {Apache-2.0}
 }
 ```
@@ -236,7 +236,7 @@ MorsLab'i bilimsel araştırmalarınızda, lisans/lisansüstü çalışmaların�
 
 ## 🤝 8. Teşekkür & Açık Kaynak Lisans
 
-**MorseCore © 2026 Mustafa Mert Akceylan · Açık Kaynak [Apache-2.0 Lisansı](https://github.com/mserman90/MorseCore/blob/main/LICENSE) · [GitHub Deposu](https://github.com/mserman90/MorseCore)**
+**MorsLab © 2026 Mustafa Mert Akceylan · Açık Kaynak [Apache-2.0 Lisansı](https://github.com/mserman90/MorsLab/blob/main/LICENSE) · [GitHub Deposu](https://github.com/mserman90/MorsLab)**
 
 Bu projenin hayata geçmesine katkı sağlayan açık kaynak projelerine, telsiz operatörlerine ve araştırmacılara teşekkürlerimizi sunarız:
 * **Canberk Aslan** – [EMA Lightning](https://github.com/canberk7/ema-lightning) hafif ses sentezi modeli.
