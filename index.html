@@ -354,6 +354,7 @@
         <span>MorseCore Web</span>
       </a>
       <div class="nav-tools">
+        <button onclick="scrollToUserGuide()" id="navGuideBtn" style="font-weight:600;">📖 Rehber / Guide</button>
         <select id="langSelect" onchange="changeLanguage(this.value)">
           <option value="tr">Türkçe</option>
           <option value="en" selected>English</option>
@@ -547,6 +548,77 @@
       <h2 class="card-title" id="t-prosigns">Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)</h2>
       <p class="card-desc" id="t-prosignsDesc">Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.</p>
       <div class="cheat-grid" id="cheatGrid"></div>
+    </section>
+
+    <!-- Comprehensive User Guide & Features Manual -->
+    <section class="card" id="userGuideCard">
+      <h2 class="card-title" id="t-guideTitle">📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)</h2>
+      <p class="card-desc" id="t-guideDesc">MorseCore web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.</p>
+
+      <div class="controls-bar" style="margin-bottom: 1.25rem;">
+        <input type="text" id="guideSearchInput" placeholder="Rehberde ara (örn: konuşma, telsiz, WAV, WPM, mikrofon)..." oninput="filterWebGuide(this.value)" style="width: 100%; max-width: 450px;">
+      </div>
+
+      <div id="guideSectionsContainer" style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Guide Item 1 -->
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🔄 1. Çift Yönlü Çevirici (Metin ↔ Mors Kodu)</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Uluslararası ITU-R M.1677-1 standardı ile metin ve Mors kodunu iki yönlü çevirin, otantik CW tonlarıyla dinleyin veya WAV olarak indirin.</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            <li><strong>Yön Değiştirme:</strong> <code>Metin → Mors</code> veya <code>Mors → Metin</code> butonuna basarak çeviri yönünü değiştirin.</li>
+            <li><strong>Hız ve Ton:</strong> WPM (5-60) kaydırıcısı ile gönderme hızını, Pitch (300-1200 Hz) ile ton frekansını ayarlayın.</li>
+            <li><strong>Ses Dışa Aktarma:</strong> <code>💾 WAV İndir</code> butonuna basarak Mors kodunu standart PCM WAV ses dosyası olarak cihazınıza kaydedin.</li>
+          </ul>
+          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: Kelime ayrımları için standart olarak eğik çizgi (<code>/</code>) veya çift boşluk kullanılır.</div>
+        </div>
+
+        <!-- Guide Item 2 -->
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🎙️ 2. Konuşmayı Mors Koduna Dönüştür (Speech-to-Morse)</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Mikrofona konuşulan Türkçe veya İngilizce sözcükleri ya da yüklenen ses dosyalarını gerçek zamanlı olarak Mors koduna dönüştürün.</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            <li><strong>Tanıma Dili:</strong> Açılır menüden <code>Türkçe (tr-TR)</code> veya <code>English (en-US)</code> seçin.</li>
+            <li><strong>Canlı Mikrofon:</strong> <code>🎙️ Dinlemeyi Başlat</code> butonuna basın ve mikrofona konuşun. Söyledikleriniz hem metin hem de anında Mors kodu olarak belirecektir.</li>
+            <li><strong>Ses Dosyası:</strong> <code>📁 Ses Dosyası Seç</code> butonuyla konuşma içeren bir ses dosyasını yükleyebilirsiniz.</li>
+            <li><strong>Oynat & Kopyala:</strong> Oluşan Mors kodunu <code>🔊 Mors Oynat</code> ile dinleyebilir veya <code>📋 Mors Kopyala</code> ile panoya kopyalayabilirsiniz.</li>
+          </ul>
+          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: En yüksek tanıma doğruluğu için Google Chrome veya Microsoft Edge tarayıcısı önerilir.</div>
+        </div>
+
+        <!-- Guide Item 3 -->
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🗣️ 3. Mors Kodundan Konuşmaya (Morse-to-Speech / TTS)</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Metin olarak yazılan veya ses dosyası olarak yüklenen Mors kodunu çözerek Türkçe veya İngilizce yapay zeka ses senteziyle sesli olarak okutun.</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            <li><strong>Mors Girişi:</strong> Mors kodu alanına noktalar ve çizgiler yazın (örn: <code>... --- ...</code>). Metin anında deşifre edilir.</li>
+            <li><strong>Seslendirme:</strong> <code>🔊 Konuşmayı Dinle</code> butonuna basıldığında çözülen mesaj seçilen dilde doğal insan sesiyle okunur.</li>
+            <li><strong>Mors Dosyası:</strong> <code>📁 Mors Ses Dosyası Seç (.wav)</code> butonuyla CW ses dosyası önizlenebilir.</li>
+          </ul>
+          <div style="font-size: 0.82rem; color: var(--accent); font-weight: 500;">💡 İpucu: Masaüstü sürümünde Windows yerel konuşma motoru ve ek offline ses paketleriyle internet bağlantısı olmadan da seslendirme yapılabilir.</div>
+        </div>
+
+        <!-- Guide Item 4 -->
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">🎯 4. CW Manevra Alıştırması (Practice Keyer)</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Mors el manevrası (Straight Key) yeteneğinizi, dit/dah zamanlama dengesini ve ritminizi geliştirmek için tasarlanmıştır.</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            <li><strong>Kullanım:</strong> Ekrandaki <code>MORS TUŞU</code> butonuna basılı tutun veya klavyenizden <strong>Boşluk (Spacebar)</strong> tuşuna basılı tutarak manevra yapın.</li>
+            <li><strong>Zamanlama Kuralı:</strong> 1 Dah süresi = 3 Dit süresidir. Harf içi dit/dah aralığı 1 Dit, harfler arası boşluk 3 Dit süresidir.</li>
+            <li><strong>Anlık İzleme:</strong> Bastığınız ritim anlık olarak nokta ve çizgilere dönüştürülüp çözümlenen harfler ekranda gösterilir.</li>
+          </ul>
+        </div>
+
+        <!-- Guide Item 5 -->
+        <div class="guide-item" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.15rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem;">📻 5. Masaüstü Gelişmiş Özellikleri: Telsiz & Gerçek Zamanlı DSP</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--ink);">Masaüstü sürümümüz (Windows, macOS, Linux) amatör telsizciler ve profesyonel CW operatörleri için gelişmiş donanım ve DSP araçları sunar:</p>
+          <ul style="font-size: 0.85rem; padding-left: 1.25rem; line-height: 1.6; margin-bottom: 0.6rem;">
+            <li><strong>Seri Port Telsiz Anahtarlama (Rig Keyer):</strong> USB-Seri dönüştürücüler (FTDI/CH340) üzerinden DTR/RTS pinleriyle HF/VHF telsizinizi doğrudan anahtarlar.</li>
+            <li><strong>Gerçek Zamanlı DSP Çözücü:</strong> Telsizden gelen analog CW sesini Goertzel algoritması ve adaptif zamanlamayla anında deşifre eder.</li>
+            <li><strong>Çağrı İşareti & QSO Günlüğü:</strong> DXCC/ITU önek veritabanıyla çağrı işaretlerini sorgular, ADIF formatında görüşme günlüğü tutar.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- Desktop Downloads -->
@@ -949,6 +1021,8 @@
         m2sLangLbl: "Speech Language:",
         m2sMorseHeader: "Morse Code Input",
         m2sDecodedHeader: "Decoded Speech Text",
+        guideTitle: "📖 User Guide & Features Manual",
+        guideDesc: "Comprehensive guide to all MorseCore web and desktop capabilities, radio integration and step-by-step tutorials.",
         practiceKeyer: "CW Practice Keyer",
         practiceDesc: "Hold the key button or press Spacebar on your keyboard to practice timing and sending Morse.",
         prosigns: "Morse Alphabet & Amateur Radio Reference",
@@ -971,6 +1045,8 @@
         m2sLangLbl: "Konuşma Dili:",
         m2sMorseHeader: "Mors Kodu Girişi",
         m2sDecodedHeader: "Çözülen Konuşma Metni",
+        guideTitle: "📖 Kullanım Kılavuzu & Özellik Rehberi (User Guide)",
+        guideDesc: "MorseCore web ve masaüstü uygulamasının tüm yetenekleri, telsiz entegrasyonu ve adım adım kullanım rehberi.",
         practiceKeyer: "Mors Manevrası Alıştırması (CW Practice Keyer)",
         practiceDesc: "Aşağıdaki manevra tuşuna basılı tutun veya klavyeden Boşluk (Spacebar) tuşuna basarak Mors ritminizi geliştirin.",
         prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
@@ -993,6 +1069,8 @@
         m2sLangLbl: "Sprache:",
         m2sMorseHeader: "Morsecode-Eingabe",
         m2sDecodedHeader: "Dekodierter Sprachtext",
+        guideTitle: "📖 Benutzerhandbuch & Funktionsübersicht",
+        guideDesc: "Umfassender Leitfaden zu allen Web- und Desktop-Funktionen von MorseCore, Funkintegration und Anleitungen.",
         practiceKeyer: "CW-Übungstaste (Keyer)",
         practiceDesc: "Halten Sie die Taste gedrückt oder nutzen Sie die Leertaste, um Ihren Morserhythmus zu üben.",
         prosigns: "Morse-Alphabet & Funkbetriebszeichen",
@@ -1018,6 +1096,8 @@
       if (document.getElementById('t-m2sLangLbl')) document.getElementById('t-m2sLangLbl').textContent = t.m2sLangLbl;
       if (document.getElementById('t-m2sMorseHeader')) document.getElementById('t-m2sMorseHeader').textContent = t.m2sMorseHeader;
       if (document.getElementById('t-m2sDecodedHeader')) document.getElementById('t-m2sDecodedHeader').textContent = t.m2sDecodedHeader;
+      if (document.getElementById('t-guideTitle')) document.getElementById('t-guideTitle').textContent = t.guideTitle;
+      if (document.getElementById('t-guideDesc')) document.getElementById('t-guideDesc').textContent = t.guideDesc;
       document.getElementById('t-practiceKeyer').textContent = t.practiceKeyer;
       document.getElementById('t-practiceDesc').textContent = t.practiceDesc;
       document.getElementById('t-prosigns').textContent = t.prosigns;
@@ -1302,6 +1382,24 @@
       document.getElementById('m2sMorseInput').value = '';
       document.getElementById('m2sDecodedOutput').value = '';
       document.getElementById('m2sStatus').textContent = 'Temizlendi';
+    }
+
+    function scrollToUserGuide() {
+      const el = document.getElementById('userGuideCard');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterWebGuide(query) {
+      const q = (query || '').toLowerCase().trim();
+      const items = document.querySelectorAll('#guideSectionsContainer .guide-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
     }
 
     // Default to EN
