@@ -391,7 +391,8 @@
         <select id="langSelect" onchange="changeLanguage(this.value)">
           <option value="tr">Türkçe</option>
           <option value="en" selected>English</option>
-          <option value="de">Deutsch</option>
+          <option value="ar">العربية</option>
+          <option value="ru">Русский</option>
         </select>
         <button onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">🌓</button>
         <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">
@@ -1158,11 +1159,76 @@
         prosignsDesc: "Internationale ITU-R M.1677-1 Standardzeichen und Verkehrszeichen.",
         downloads: "Desktop-App herunterladen",
         downloadsDesc: "Holen Sie sich die vollständige Desktop-Anwendung mit Offline-Sprachmodellen, Mikrofon-Decodierung und Logbuch."
+      },
+      ru: {
+        tabTools: "⚡ Конвертер и аудиоинструменты",
+        tabGuide: "📖 Справочник и руководство",
+        converter: "Конвертер азбуки Морзе и аудиоплеер",
+        converterDesc: "Двусторонняя конвертация текста и азбуки Морзе, воспроизведение аутентичных тонов CW или экспорт в WAV.",
+        clear: "Очистить",
+        copy: "Копировать",
+        speechTitle: "🎙️ Речь в азбуку Морзе (Микрофон и аудиофайл)",
+        speechDesc: "Слушайте микрофон или аудиофайл на турецком, английском, русском или арабском языке и мгновенно конвертируйте в азбуку Морзе.",
+        spokenHeader: "Распознанный текст речи",
+        morseOutputHeader: "Сгенерированная азбука Морзе",
+        speechLangLbl: "Язык распознавания:",
+        m2sTitle: "🗣️ Азбука Морзе в речь (Текст и аудиофайл)",
+        m2sDesc: "Декодируйте азбуку Морзе на турецком, английском, русском или арабском языке из текста или аудио и слушайте синтез речи.",
+        m2sLangLbl: "Язык речи:",
+        m2sMorseHeader: "Ввод азбуки Морзе" ,
+        m2sDecodedHeader: "Декодированный текст речи",
+        guideTitle: "📖 Руководство пользователя и функции",
+        guideDesc: "Полное руководство по веб- и десктопным возможностям MorseCore, радиоинтеграции и пошаговым урокам.",
+        practiceKeyer: "Практический ключ CW (Keyer)",
+        practiceDesc: "Удерживайте клавишу или используйте Пробел на клавиатуре для тренировки ритма Морзе.",
+        prosigns: "Азбука Морзе и радиокоды (Q-коды)",
+        prosignsDesc: "Международные стандарты ITU-R M.1677-1 и радиолюбительские служебные знаки.",
+        downloads: "Скачать приложение для ПК",
+        downloadsDesc: "Получите настольную версию с офлайн-голосами ИИ (Piper, EMA Lightning), декодером микрофона и журналом QSO."
+      },
+      ar: {
+        tabTools: "⚡ أدوات التحويل والصوت",
+        tabGuide: "📖 الدليل والمراجع",
+        converter: "محول شفرة مورس ومشغل الصوت",
+        converterDesc: "تحويل ثنائي الاتجاه بين النص وشفرة مورس، واستماع لنغمات CW واقعية أو تصدير بصيغة WAV.",
+        clear: "مسح",
+        copy: "نسخ",
+        speechTitle: "🎙️ تحويل الكلام إلى مورس (مباشر وملف صوتي)",
+        speechDesc: "تحدث في الميكروفون باللغات التركية أو الإنجليزية أو الروسية أو العربية لتحويل الكلام إلى مورس في الوقت الفعلي.",
+        spokenHeader: "نص الكلام المتعرف عليه",
+        morseOutputHeader: "شفرة مورس الناتجة",
+        speechLangLbl: "لغة التعرف:",
+        m2sTitle: "🗣️ تحويل مورس إلى كلام (نص وملف صوتي)",
+        m2sDesc: "فك تشفير شفرة مورس بالنص أو ملف صوتي باللغات التركية أو الإنجليزية أو الروسية أو العربية واستمع إليها بصوت طبيعي.",
+        m2sLangLbl: "لغة النطق:",
+        m2sMorseHeader: "إدخال شفرة مورس",
+        m2sDecodedHeader: "النص المفكوك تشفيره",
+        guideTitle: "📖 دليل الاستخدام والميزات",
+        guideDesc: "دليل شامل لجميع إمكانيات مورس كور على الويب والحاسوب، وتكامل أجهزة اللاسلكي والشروحات.",
+        practiceKeyer: "مفتاح مورس للتدريب (CW Keyer)",
+        practiceDesc: "اضغط مطولاً على الزر أو استخدم زر المسافة (Space) على لوحة المفاتيح لتطوير مهارات وإيقاع مورس.",
+        prosigns: "أبجدية مورس ورموز الراديو (Q-Codes)",
+        prosignsDesc: "معايير ITU-R M.1677-1 الدولية وإشارات تشغيل هواة اللاسلكي.",
+        downloads: "تحميل تطبيق الحاسوب",
+        downloadsDesc: "احصل على التطبيق الكامل للحاسوب مع نماذج صوتية ذكية بدون إنترنت، وفك تشفير الميكروفون وسجل اتصالات QSO."
       }
     };
 
     function changeLanguage(lang) {
+      try { localStorage.setItem('morsecore_lang', lang); } catch(e){}
+      const sel = document.getElementById('langSelect');
+      if (sel && sel.value !== lang) sel.value = lang;
+
       const t = I18N[lang] || I18N.en;
+      const isRtl = lang === 'ar';
+      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+
+      const navGuideBtn = document.getElementById('navGuideBtn');
+      if (navGuideBtn) {
+        navGuideBtn.textContent = isRtl ? '📖 الدليل' : (lang === 'ru' ? '📖 Справочник' : (lang === 'tr' ? '📖 Rehber' : '📖 Guide'));
+      }
+
       if (document.getElementById('tabBtnTools')) document.getElementById('tabBtnTools').textContent = t.tabTools;
       if (document.getElementById('tabBtnGuide')) document.getElementById('tabBtnGuide').textContent = t.tabGuide;
       document.getElementById('t-converter').textContent = t.converter;
@@ -1561,8 +1627,9 @@
       });
     }
 
-    // Default to EN
-    changeLanguage('en');
+    // Default / saved language
+    const savedLang = localStorage.getItem('morsecore_lang') || 'tr';
+    changeLanguage(savedLang);
     document.getElementById('inputText').value = 'SOS MorseCore';
     convertNow();
   </script>
