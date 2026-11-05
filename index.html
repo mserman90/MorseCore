@@ -671,7 +671,7 @@
     </section>
 
     <!-- Desktop Downloads -->
-    <section class="card">
+    <section class="card" id="downloadsCard">
       <h2 class="card-title" id="t-downloads">Masaüstü Uygulamasını İndirin</h2>
       <p class="card-desc" id="t-downloadsDesc">Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin.</p>
       <div class="downloads-grid">
@@ -689,11 +689,32 @@
         </a>
       </div>
     </section>
+
+    <!-- Teşekkür & Açık Kaynak Lisans (Credits & Acknowledgments) -->
+    <section class="card" id="creditsCard">
+      <h2 class="card-title" id="t-creditsTitle">🤝 Teşekkür & Açık Kaynak Lisans</h2>
+      <p class="card-desc" id="t-creditsDesc">MorsLab, açık kaynaklı yazılım topluluğunun, ITU standartlarının ve yapay zeka araştırma projelerinin desteğiyle geliştirilmektedir.</p>
+      
+      <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+        <p style="font-weight: 600; color: var(--accent); margin-bottom: 0.6rem;">
+          MorseCore &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a>
+        </p>
+        <p style="font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 0.75rem;" id="t-creditsBody">
+          Çevrimdışı ve web tabanlı konuşma/Mors işleme teknolojilerini mümkün kılan açık kaynak modellerin (Piper TTS, EMA Lightning), Goertzel DSP algoritmalarının ve amatör telsiz topluluğunun katkılarına içtenlikle teşekkür ederiz.
+        </p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.82rem;">
+          <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 600; text-decoration: underline;">GitHub Kaynak Kodu</a> &middot;
+          <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Apache-2.0 Lisansı</a> &middot;
+          <a href="https://huggingface.co/rhasspy/piper-voices" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Piper Neural Voices</a> &middot;
+          <a href="https://www.itu.int/rec/R-REC-M.1677" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">ITU-R M.1677-1 Standardı</a>
+        </div>
+      </div>
+    </section>
     </div>
   </main>
 
   <footer>
-    <p>MorsLab &copy; 2026 Mustafa Mert Akceylan &middot; Açık Kaynak <a href="https://github.com/mserman90/MorseCore/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 Lisansı</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
+    <p>MorsLab &middot; <a href="javascript:void(0)" onclick="switchMainTab('guide'); document.getElementById('creditsCard').scrollIntoView({behavior:'smooth'});">🤝 Teşekkür & Lisans / Credits</a> &middot; <a href="https://github.com/mserman90/MorseCore" target="_blank" rel="noopener">GitHub Deposu</a></p>
   </footer>
 
   <script>
@@ -1106,7 +1127,10 @@
         prosigns: "Morse Alphabet & Amateur Radio Reference",
         prosignsDesc: "International ITU-R M.1677-1 standard characters and prosigns.",
         downloads: "Download Desktop Application",
-        downloadsDesc: "Get the full desktop app with offline AI neural voices (Piper, EMA Lightning), microphone decoding and QSO logbook."
+        downloadsDesc: "Get the full desktop app with offline AI neural voices (Piper, EMA Lightning), microphone decoding and QSO logbook.",
+        creditsTitle: "🤝 Acknowledgments & Open Source License",
+        creditsDesc: "MorsLab is developed with the support of the open-source software community, ITU standards, and AI research projects.",
+        creditsBody: "Special thanks to the authors and contributors of open-source neural speech models (Piper TTS, EMA Lightning), Goertzel DSP implementations, and the amateur radio community worldwide."
       },
       tr: {
         tabTools: "⚡ Çevirici & Ses Araçları",
@@ -1132,7 +1156,10 @@
         prosigns: "Mors Alfabesi ve Telsiz Kısaltmaları (Q-Kodları)",
         prosignsDesc: "Uluslararası ITU-R M.1677-1 standardı ve amatör telsizcilikte yaygın kullanılan işletme işaretleri.",
         downloads: "Masaüstü Uygulamasını İndirin",
-        downloadsDesc: "Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin."
+        downloadsDesc: "Çevrimdışı yapay zeka seslendirme modelleri (Piper, EMA Lightning), mikrofon dinleme ve ADIF QSO Logbook için masaüstü sürümünü edinin.",
+        creditsTitle: "🤝 Teşekkür & Açık Kaynak Lisans",
+        creditsDesc: "MorsLab, açık kaynaklı yazılım topluluğunun, ITU standartlarının ve yapay zeka araştırma projelerinin desteğiyle geliştirilmektedir.",
+        creditsBody: "Çevrimdışı ve web tabanlı konuşma/Mors işleme teknolojilerini mümkün kılan açık kaynak modellerin (Piper TTS, EMA Lightning), Goertzel DSP algoritmalarının ve amatör telsiz topluluğunun katkılarına içtenlikle teşekkür ederiz."
       },
       de: {
         tabTools: "⚡ Konverter & Audiotools",
@@ -1158,7 +1185,10 @@
         prosigns: "Morse-Alphabet & Funkbetriebszeichen",
         prosignsDesc: "Internationale ITU-R M.1677-1 Standardzeichen und Verkehrszeichen.",
         downloads: "Desktop-App herunterladen",
-        downloadsDesc: "Holen Sie sich die vollständige Desktop-Anwendung mit Offline-Sprachmodellen, Mikrofon-Decodierung und Logbuch."
+        downloadsDesc: "Holen Sie sich die vollständige Desktop-Anwendung mit Offline-Sprachmodellen, Mikrofon-Decodierung und Logbuch.",
+        creditsTitle: "🤝 Danksagung & Open-Source-Lizenz",
+        creditsDesc: "MorsLab wird mit Unterstützung der Open-Source-Community, ITU-Standards und KI-Forschungsprojekten entwickelt.",
+        creditsBody: "Herzlichen Dank an die Entwickler von Open-Source-Sprachmodellen (Piper TTS, EMA Lightning), Goertzel-DSP-Algorithmen und die weltweite Amateurfunkgemeinschaft."
       },
       ru: {
         tabTools: "⚡ Конвертер и аудиоинструменты",
@@ -1184,7 +1214,10 @@
         prosigns: "Азбука Морзе и радиокоды (Q-коды)",
         prosignsDesc: "Международные стандарты ITU-R M.1677-1 и радиолюбительские служебные знаки.",
         downloads: "Скачать приложение для ПК",
-        downloadsDesc: "Получите настольную версию с офлайн-голосами ИИ (Piper, EMA Lightning), декодером микрофона и журналом QSO."
+        downloadsDesc: "Получите настольную версию с офлайн-голосами ИИ (Piper, EMA Lightning), декодером микрофона и журналом QSO.",
+        creditsTitle: "🤝 Благодарности и открытая лицензия",
+        creditsDesc: "MorsLab разработан при поддержке сообщества свободного ПО, стандартов ITU и исследовательских проектов в сфере ИИ.",
+        creditsBody: "Искренне благодарим разработчиков открытых нейросетевых моделей (Piper TTS, EMA Lightning), алгоритмов цифровой обработки сигналов (DSP Goertzel) и мировое радиолюбительское сообщество."
       },
       ar: {
         tabTools: "⚡ أدوات التحويل والصوت",
@@ -1210,7 +1243,10 @@
         prosigns: "أبجدية مورس ورموز الراديو (Q-Codes)",
         prosignsDesc: "معايير ITU-R M.1677-1 الدولية وإشارات تشغيل هواة اللاسلكي.",
         downloads: "تحميل تطبيق الحاسوب",
-        downloadsDesc: "احصل على التطبيق الكامل للحاسوب مع نماذج صوتية ذكية بدون إنترنت، وفك تشفير الميكروفون وسجل اتصالات QSO."
+        downloadsDesc: "احصل على التطبيق الكامل للحاسوب مع نماذج صوتية ذكية بدون إنترنت، وفك تشفير الميكروفون وسجل اتصالات QSO.",
+        creditsTitle: "🤝 شكر وتقدير والترخيص مفتوح المصدر",
+        creditsDesc: "تم تطوير MorsLab بدعم من مجتمع البرمجيات مفتوحة المصدر ومعايير ITU ومشاريع أبحاث الذكاء الاصطناعي.",
+        creditsBody: "نتوجه بالشكر الجزيل لمطوري نماذج الذكاء الاصطناعي مفتوحة المصدر (Piper TTS و EMA Lightning) وخوارزميات معالجة الإشارات Goertzel ومجتمع هواة اللاسلكي حول العالم."
       }
     };
 
@@ -1256,6 +1292,9 @@
       document.getElementById('t-prosignsDesc').textContent = t.prosignsDesc;
       document.getElementById('t-downloads').textContent = t.downloads;
       document.getElementById('t-downloadsDesc').textContent = t.downloadsDesc;
+      if (document.getElementById('t-creditsTitle')) document.getElementById('t-creditsTitle').textContent = t.creditsTitle;
+      if (document.getElementById('t-creditsDesc')) document.getElementById('t-creditsDesc').textContent = t.creditsDesc;
+      if (document.getElementById('t-creditsBody')) document.getElementById('t-creditsBody').textContent = t.creditsBody;
     }
 
     // Speech to Morse Implementation (Live & File)
